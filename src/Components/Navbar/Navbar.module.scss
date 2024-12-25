@@ -1,0 +1,208 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    background: #dfd3c3;
+    box-shadow: 1px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+    position: relative;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    p {
+        font-weight: 600;
+    }
+}
+
+.add-task {
+    width: 100%;
+    height: 50px;
+    margin-top: 20px;
+    button {
+        width: 100%;
+        height: 100%;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        font-size: 15px;
+        font-weight: 500;
+        background: rgba(208, 184, 168, 0.6);
+        border: none;
+        span {
+            background: #dfd3c3;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.task-list {
+    margin-top: 25px;
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            list-style: none;
+            span {
+                font-weight: 500;
+            }
+        }
+    }
+}
+
+.bottom {
+    width: 100%;
+    height: 5px;
+    border-radius: 20px;
+    background: rgba(208, 184, 168, 0.6);
+    margin-top: 20px;
+}
+
+.actions {
+    margin-top: 10px;
+    .header-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        button {
+            background: none;
+            border: none;
+            font-size: 18px;
+        }
+    }
+}
+
+.actions-2 {
+    position: absolute;
+    bottom: 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    button {
+        background: rgba(208, 184, 168, 0.6);
+        border-radius: 10px;
+        border: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        justify-content: center;
+        height: 35px;
+        font-weight: 600;
+    }
+}
+
+$list-task-height: 35vh;
+$hover-color: #f1f1f1;
+$bg-color: #f8ede3;
+$white-bg: #fff;
+$slide-duration: 0.5s;
+
+.list-task {
+    height: $list-task-height;
+    overflow: scroll;
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    li {
+        list-style: none;
+        width: 100%;
+        border-radius: 5px;
+        background: $bg-color;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 40px;
+        padding: 0px 5px;
+        position: relative;
+
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 85%;
+            h4 {
+                font-weight: 600;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    }
+
+    .actions-list {
+        position: absolute;
+        top: 0;
+        right: -100%; /* Start off-screen to the right */
+        background-color: $white-bg;
+        display: flex;
+        height: 100%;
+        width: 100%;
+        border-radius: 10px;
+        justify-content: space-around;
+        transition: transform $slide-duration ease-in-out;
+
+        /* Animation for showing and hiding */
+        &.slide-in {
+            transform: translateX(-100%); /* Move in from the right */
+        }
+
+        &.slide-out {
+            transform: translateX(100%); /* Move out to the right */
+        }
+
+        button {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    }
+}
+
+#name {
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 600;
+    outline: none;
+    width: 80%;
+}
+
+#active {
+    border: 5px solid #ccc;
+    transition: 0.3s;
+}
