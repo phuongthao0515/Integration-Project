@@ -1,8 +1,8 @@
 from fastapi import FastAPI 
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
-from db.main import init_db
-from db.auth.routes import auth_router
+from .db.main import init_db
+from .db.auth.routes import auth_router
 
 @asynccontextmanager
 async def life_span(app:FastAPI):
@@ -14,7 +14,7 @@ async def life_span(app:FastAPI):
 
 version = "v1"
 app = FastAPI(
-    title="Hospital",
+    title="NoteFlow",
     version=version,
     lifespan=life_span
 )
