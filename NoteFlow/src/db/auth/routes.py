@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter, Depends, status
-from src.db.auth.schemas import UserLoginModel
+from src.db.auth.schemas import UserLoginModel, UserSignupModel
 from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.main import get_session
 from .service import LoginService
@@ -35,5 +35,13 @@ async def logout(token_details: dict = Depends(AccessTokenBearer())):
         return JSONResponse(content={"message": "Logged out successfully"},status_code=status.HTTP_200_OK)
 
 
-
+@auth_router.post('/signup')
+async def signup(user:UserSignupModel,session:AsyncSession = Depends(get_session),status_code=status.HTTP_201_CREATED):
+     try:
+          new_user = await login_helper.create_new_user(user,session)
+          return {'user_id':new_user}
+     except Exception as e: 
+          return e
+    
+     
 
