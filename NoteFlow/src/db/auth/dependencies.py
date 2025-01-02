@@ -39,7 +39,15 @@ class AccessTokenBearer(TokenBearer):
                 status_code=status.HTTP_403_FORBIDDEN, 
                 detail="Please provide access token"
             )
-
+        if 'user' not in token_data or 'user_id' not in token_data['user']:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail="Access token does not contain user_id"
+            )
+        
+        user_id = token_data['user']['user_id']
+        print(f"Extracted user_id: {user_id}") 
+        return user_id
 
 class RefreshTokenBearer(TokenBearer):
     def verify_token_data(self,token_data:dict)->None:
