@@ -11,31 +11,38 @@ from .schemas import (
 )
 
 
+
 class PlanService:
     async def get_plan(self, plan_id: int, user_id: int, session: AsyncSession):
         try:
+            print('hi')  # Ensure this print is placed before query execution
             query = text("SELECT * FROM plan WHERE planid = :plan_id")
+
             result = await session.execute(query, {"plan_id": plan_id})
+
             plan = result.fetchone()
 
-            if not plan:
+            if plan:
+                plan = dict(plan) if isinstance(plan, tuple) else plan
+
+
+                if plan.userid != user_id:
+                    raise HTTPException(status_code=401, detail='UnAuthorized')
+                
+                return( {
+                    "planId": plan.planid,
+                    "createDate": plan.createddate,
+                    "dueDate": plan.duedate,
+                    "content": plan.content,
+                }
+                )
+
+            else:
                 raise HTTPException(status_code=404, detail="Plan not found")
-
-            plan = dict(plan) if isinstance(plan, tuple) else plan
-
-            if plan["userid"] != user_id:
-                raise HTTPException(status_code=401, detail="Unauthorized access to plan")
-
-            return {
-                "planId": plan["planid"],
-                "createDate": plan["createddate"],
-                "dueDate": plan["duedate"],
-                "content": plan["content"],
-            }
         except Exception as e:
             print(f"Error in get_plan: {e}")
             raise e
-
+        
     async def get_plans_by_specific_week(
         self, user_id: int, year: int, month: int, week_number: int, session: AsyncSession
     ):
@@ -118,9 +125,10 @@ class PlanService:
         self, user_id: int, plan_data: PlanCreateModel, session: AsyncSession
     ):
         try:
+            plan_data.to_naive()
             new_plan = Plan(
                 userid=user_id,
-                createddate=plan_data.createDate,  
+                createddate=plan_data.createddate,  
                 duedate=plan_data.dueDate,
                 content=plan_data.content,
             )

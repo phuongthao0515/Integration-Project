@@ -15,6 +15,7 @@ class NoteService:
                 note = dict(note) if isinstance(note, tuple) else note
                 if note.userid != user_id:
                     raise HTTPException(status_code=401, detail='UnAuthorized')
+                
                 return {
                             'created_date': note.createddate,
                             'content': note.content,
@@ -36,13 +37,9 @@ class NoteService:
                 createddate=datetime.utcnow()
             )
             session.add(new_note)
-            print(f"Note added to session: {new_note}")
         
             await session.commit()
-            print("Session committed successfully.")
-        
             await session.refresh(new_note)
-            print(f"Note refreshed: {new_note}")
         
             return {"note_id": new_note.pageid}
         

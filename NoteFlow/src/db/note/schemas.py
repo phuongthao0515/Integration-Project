@@ -4,7 +4,7 @@ from sqlmodel import SQLModel, Field
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
 from pydantic import BaseModel
-
+from ..models import Users
 
 
 class Note(SQLModel, table=True): 
