@@ -59,6 +59,7 @@ $font-color: $n4-color;
     padding: 20px;
     position: relative;
     width: 60%;
+    text-align: center;
 }
 
 .close-button {
@@ -71,9 +72,14 @@ $font-color: $n4-color;
     top: 10px;
 }
 
+h2 {
+    margin-bottom: 20px;
+}
+
 .form-control {
     margin: 20px 0;
     position: relative;
+    text-align: left;
 
     input,
     textarea {
@@ -90,6 +96,20 @@ $font-color: $n4-color;
 
     textarea {
         height: 100px;
+    }
+}
+
+.expiration-container {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+        flex: 1;
+        margin-right: 10px;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 }
 
@@ -154,6 +174,8 @@ input:checked+.slider::before {
     cursor: pointer;
     padding: 10px 20px;
     transition: background 0.3s;
+    display: block;
+    margin: 0 auto;
 
     &:hover {
         background: $hover-color;

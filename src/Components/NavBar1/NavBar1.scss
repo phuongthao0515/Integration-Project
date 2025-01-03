@@ -5,13 +5,13 @@ $n2-color: #DFD3C3;
 $n3-color: #D0B8A8;
 $n4-color: #8D493A;
 $background-color: $n2-color;
-$box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+$box-shadow: 2px 0 5px rgb(0 0 0 / 10%);
 $font-family: "Roboto Flex",
 sans-serif;
 $profile-pic-size: 40px;
 $nav-icon-size: 20px;
-$add-task-box-bg: rgba(208, 184, 168, 0.6);
-$chat-box-bg: rgba(208, 184, 168, 0.6);
+$add-task-box-bg: rgb(208 184 168 / 60%);
+$chat-box-bg: rgb(208 184 168 / 60%);
 $link-color: black;
 $link-hover-color: $n4-color;
 
@@ -107,7 +107,6 @@ $link-hover-color: $n4-color;
         border-radius: 5px;
         display: flex;
         justify-content: center;
-        margin-top: 10px;
         padding: 10px;
         width: 150px;
         margin-top: auto;

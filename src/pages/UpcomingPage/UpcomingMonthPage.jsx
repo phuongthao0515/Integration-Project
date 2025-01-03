@@ -121,11 +121,11 @@ const UpcomingMonth = () => {
                 <div className="heading-container">
                     <h1 className="upcoming-heading">UPCOMING</h1>
                     <div className="month-nav-container">
-                        <button className="month-nav" onClick={handlePreviousMonth}>
+                        <button className="month-nav prev" onClick={handlePreviousMonth}>
                             &lt;
                         </button>
                         <h2 className="date-heading">{getFormattedDate()}</h2>
-                        <button className="month-nav" onClick={handleNextMonth}>
+                        <button className="month-nav next" onClick={handleNextMonth}>
                             &gt;
                         </button>
                     </div>
