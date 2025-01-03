@@ -1,26 +1,63 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 
+import iconLogin from '../../assets/images/iconlogin.png';
 import vector from '../../assets/images/vector.png';
+import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-                <h1>
+            <h1>
                     NoteFlow <img src={vector} alt="" />
                 </h1>
             </header>
-            <div className={cx('inner')}>
-                <h1>LOG IN</h1>
-                <div className={cx('form')}>
-                    <input type="text" placeholder="Your username" />
-                    <input type="password" placeholder="Your password" />
+            <div className={cx('body')}>
+                <div className={cx('left')}>
+                    <img src={iconLogin} alt="Login icon" />
                 </div>
-                <div className={cx('btn')}>
-                    <button>LOG IN</button>
+                <div className={cx('right')}>
+                    <h1 className={cx('title')}>LOGIN ACCOUNT</h1>
+                    <div className={cx('form')}>
+                        <label>
+                            Username
+                            <input type="text" placeholder="Username" />
+                        </label>
+                        <label>
+                            Password
+                            <div className={cx('password-wrapper')}>
+                                <input
+                                    id="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Password"
+                                />
+                                <button
+                                    type="button"
+                                    className={cx('toggle-password')}
+                                    onClick={togglePasswordVisibility}
+                                >
+                                    {showPassword ? '👁️‍🗨️' : '👁️'}
+                                </button>
+                            </div>
+                        </label>
+                        <div className={cx('options')}>
+                            <label>
+                                <input type="checkbox" />
+                                Remember your account
+                            </label>
+                            <a href="/forgot-password">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <button className={cx('login-button')}>LOG IN</button>
                 </div>
             </div>
         </div>
