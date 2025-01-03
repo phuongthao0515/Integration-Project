@@ -186,10 +186,10 @@ class PlanService:
             if plan["userid"] != user_id:
                 raise HTTPException(status_code=401, detail="Unauthorized access to plan")
 
+
             update_query = text("""
                 UPDATE plan
-                SET createddate = :createddate,
-                    duedate = :duedate,
+                SET duedate = :duedate,
                     content = :content
                 WHERE planid = :plan_id
             """)
@@ -197,7 +197,6 @@ class PlanService:
             await session.execute(
                 update_query,
                 {
-                    "createddate": plan_data.createDate,
                     "duedate": plan_data.dueDate,
                     "content": plan_data.content,
                     "plan_id": plan_id
@@ -206,6 +205,7 @@ class PlanService:
             await session.commit()
 
             return await self.get_plan(plan_id, user_id, session)
+
         except Exception as e:
             print(f"Error in update_plan: {e}")
             raise e

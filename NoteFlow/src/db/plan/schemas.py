@@ -38,8 +38,7 @@ class Plan(SQLModel, table=True):
 
 class PlanCreateModel(SQLModel):
     """
-    Used when creating a new plan (POST).
-    This is what the client sends to your endpoint.
+    This is what the client sends.
     
     Example JSON:
     {
