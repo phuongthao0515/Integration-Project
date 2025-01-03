@@ -9,5 +9,5 @@ export const publicRoutes = [
     { path: '/signup', component: <SignUp /> },
     { path: '/today', component: <TodayPage /> },
     { path: '/upcoming-day', component: <UpcomingDayPage /> },
-    { path: '/upcoming-month', component: <UpcomingMonthPage /> },
+    { path: '/upcoming', component: <UpcomingMonthPage /> },
 ];
