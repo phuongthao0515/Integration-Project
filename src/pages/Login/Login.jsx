@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './Login.module.scss';
 
-import iconLogin from '../../assets/images/iconlogin.png';
+import iconLogin from '../../assets/images/bg login.png';
 import vector from '../../assets/images/vector.png';
 import { useState } from 'react';
 
@@ -40,21 +40,22 @@ function Login({ userName, password, setUserName, setPassword, handleLogIn, erro
                         <label>
                             Password
                             <div className={cx('password-wrapper')}>
-                                <input
-                                    id="password"
-                                    type={showPassword ? 'text' : 'password'}
-                                    placeholder="Password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                                <button
-                                    type="button"
-                                    className={cx('toggle-password')}
-                                    onClick={togglePasswordVisibility}
-                                >
-                                    {showPassword ? '👁️‍🗨️' : '👁️'}
-                                </button>
-                            </div>
+    <input
+        id="password"
+        type={showPassword ? 'text' : 'password'}
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+    />
+    <button
+        type="button"
+        className={cx('toggle-password')}
+        onClick={togglePasswordVisibility}
+    >
+        {showPassword ? '👁️‍🗨️' : '👁️'}
+    </button>
+</div>
+
                         </label>
                         <div className={cx('options')}>
                             <label>

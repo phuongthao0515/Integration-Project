@@ -19,9 +19,9 @@ function SingUp() {
             <div className={cx('inner')}>
                 <h1>SIGN UP</h1>
                 <div className={cx('form')}>
-                    <input type="text" placeholder="Your username" />
-                    <input type="password" placeholder="Your password" />
-                    <input type="text" placeholder="Your email" />
+                    <input type="text" placeholder="Username" />
+                    <input type="password" placeholder="Password" />
+                    <input type="text" placeholder="Email" />
                 </div>
 
                 <div className={cx('checkbox')}>
