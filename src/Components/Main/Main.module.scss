@@ -1,6 +1,7 @@
 .menu-bar {
     display: flex;
     gap: 8px;
+
     button {
         display: flex;
         align-items: center;
@@ -9,6 +10,7 @@
         border-radius: 10px;
         background: #ceb6a0;
         padding: 7px;
+
         img {
             width: 20px;
             height: 20px;
