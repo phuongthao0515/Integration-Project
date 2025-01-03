@@ -68,3 +68,105 @@ class NoteService:
         except Exception as e:
             print(f"Error in delete notes: {e}")  
             raise e  
+    
+    async def share_note(self, user_id:int, note_id:int, session:AsyncSession, visibility: str):
+        try:
+            query = text('SELECT * FROM NOTE WHERE pageid = :note_id')
+            result = await session.execute(query, {'note_id'})
+            note =result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['userid'] != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to share this note.")
+            update_query = text("UPDATE NOTE SET Visibility = :visibility WHERE PageID = :note_id")
+            await session.execute(update_query, {'visibility': visibility, 'note_id': note_id})
+            await session.commit()
+            return {"message": f"Note {note_id} visibility updated to {visibility}."}
+            
+        except Exception as e:
+            print(f"Error in share note: {e}")
+            raise e
+        
+    async def get_share_note(self, note_id: int, session: AsyncSession):
+        try:
+            query = text("SELECT * FROM NOTE WHERE pageid = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['visibility'] != 'public':
+                raise HTTPException(status_code=403, detail="This note is not public.")
+            return {
+                "page_id": note['pageid'],
+                "title": note['title'],
+                "content": note['content'],
+                "document": note['document'],
+                "created_date": note['createddate'],
+                "updated_date": note.get('updateddate'),
+            }
+
+        except Exception as e:
+            print(f"Error in get_share_note: {e}")
+            raise e
+    
+    async def update_note_content(self, user_id: int, note_id: int, new_content: str, session:AsyncSession):
+        try:
+            query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['userid'] != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to update this note.")
+            update_query = text("""
+                UPDATE NOTE 
+                SET Content = :new_content, UpdatedDate = :updated_date
+                WHERE PageID = :note_id
+            """)
+            await session.execute(update_query, {
+                'new_content': new_content,
+                'updated_date': datetime.utcnow(),
+                'note_id': note_id,
+            })
+            await session.commit()
+            return {"message": f"Note {note_id} content updated successfully."}
+
+        except Exception as e:
+            print(f"Error in update_note_content: {e}")
+            raise e
+        
+    async def update_title(self, user_id: int, note_id: int, new_title: str, session: AsyncSession):
+        try:
+            # Fetch the note to ensure it exists and belongs to the user
+            query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['userid'] != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to update this note.")
+
+            # Update the title and updated_date
+            update_query = text("""
+                UPDATE NOTE 
+                SET Title = :new_title, UpdatedDate = :updated_date
+                WHERE PageID = :note_id
+            """)
+            await session.execute(update_query, {
+                'new_title': new_title,
+                'updated_date': datetime.utcnow(),
+                'note_id': note_id,
+            })
+            await session.commit()
+
+            return {"message": f"Note {note_id} title updated successfully."}
+        except Exception as e:
+            print(f"Error in update_title: {e}")
+            raise e
