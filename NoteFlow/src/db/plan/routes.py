@@ -3,7 +3,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.main import get_session
 from .service import PlanService
 from src.db.auth.dependencies import AccessTokenBearer
-from .schemas import PlanCreateModel
+from .schemas import PlanCreateModel, PlanUpdateModel
 
 plan_router = APIRouter()
 plan_helper = PlanService()
@@ -98,7 +98,7 @@ async def create_plan(
 @plan_router.put('/plans/{plan_id}', status_code=status.HTTP_200_OK)
 async def update_plan(
     plan_id: int,
-    plan_data: PlanCreateModel,
+    plan_data: PlanUpdateModel,
     session: AsyncSession = Depends(get_session),
     user_details = Depends(access_token_bearer)
 ):

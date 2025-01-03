@@ -182,6 +182,7 @@ class PlanService:
         self, plan_id: int, user_id: int, plan_data: PlanUpdateModel, session: AsyncSession
     ):
         try:
+            plan_data.to_naive()
             query = text("SELECT * FROM plan WHERE planid = :plan_id")
             result = await session.execute(query, {"plan_id": plan_id})
             plan = result.fetchone()
@@ -191,7 +192,7 @@ class PlanService:
 
             plan = dict(plan) if isinstance(plan, tuple) else plan
 
-            if plan["userid"] != user_id:
+            if plan.userid != user_id:
                 raise HTTPException(status_code=401, detail="Unauthorized access to plan")
 
 

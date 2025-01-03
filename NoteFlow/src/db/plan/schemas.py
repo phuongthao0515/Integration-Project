@@ -42,7 +42,9 @@ class PlanCreateModel(SQLModel):
 class PlanUpdateModel(SQLModel):
     dueDate: Optional[datetime]
     content: Optional[str]
-
+    def to_naive(self):
+        if self.dueDate:
+            self.dueDate = self.dueDate.replace(tzinfo=None) if self.dueDate.tzinfo else self.dueDate
 
 
 class PlanResponseModel(SQLModel):
