@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './UpcomingMonthPage.scss';
 
-import NavBar from '../../components/Navbar/Navbar';
+import NavBar from '../../Components/NavBar1/NavBar1';
 
 // Mock data for important and not important notes and plans
 const mockImportantNotes = [
