@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;700&display=swap');
+
+$n1-color: #F8EDE3;
+$n2-color: #DFD3C3;
+$n3-color: #D0B8A8;
+$n4-color: #8D493A;
+$font-size: 16px;
+$line-height: 1.6;
+$color: black;
+$background-color: rgba(208, 184, 168, 0.6);
+$border-color: $n4-color;
+$border-radius: 16px;
+$transition: 0.48s cubic-bezier(0.23, 1, 0.32, 1);
+$font-family: 'Roboto Flex',
+sans-serif;
+$font-color: $n4-color;
+
+.menu {
+    color: $color;
+    display: flex;
+    font-family: $font-family;
+    font-size: $font-size;
+    line-height: $line-height;
+    list-style: none;
+    width: fit-content;
+
+    a {
+        color: inherit;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        text-decoration: none;
+    }
+
+    .link {
+        align-items: center;
+        background-color: $background-color;
+        border-radius: $border-radius;
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 12px 36px;
+        position: relative;
+        transition: all $transition;
+
+        &::after {
+            background-color: $n2-color;
+            content: "";
+            height: 100%;
+            left: 0;
+            position: absolute;
+            top: 0;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform $transition;
+            width: 100%;
+            z-index: -1;
+        }
+
+        svg {
+            fill: $color;
+            height: 14px;
+            transition: all $transition;
+            width: 14px;
+        }
+
+        .create-icon {
+            height: 15px;
+            margin-right: 8px;
+            width: 15px;
+        }
+    }
+
+    .item {
+        position: relative;
+
+        .submenu {
+            align-items: center;
+            background-color: $background-color;
+            border-radius: 0 0 $border-radius $border-radius;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            left: 0;
+            list-style: none;
+            opacity: 0;
+            overflow: hidden;
+            pointer-events: none;
+            position: absolute;
+            top: 100%;
+            transform: translateY(-12px);
+            transition: all $transition;
+            visibility: hidden;
+            width: 100%;
+            z-index: 1;
+
+            .submenu-item {
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                transition: all $transition;
+                width: 100%;
+
+                .submenu-link {
+                    display: block;
+                    padding: 12px 24px;
+                    position: relative;
+                    text-align: center;
+                    transition: all $transition;
+                    width: 100%;
+
+                    &::before {
+                        background-color: $n2-color;
+                        content: "";
+                        height: 100%;
+                        left: 0;
+                        position: absolute;
+                        top: 0;
+                        transform: scaleX(0);
+                        transform-origin: left;
+                        transition: transform $transition;
+                        width: 100%;
+                        z-index: -1;
+                    }
+
+                    &:hover {
+                        color: $color;
+
+                        &::before {
+                            transform: scaleX(1);
+                            transform-origin: right;
+                        }
+                    }
+                }
+
+                &:last-child .submenu-link {
+                    border-bottom: none;
+                }
+            }
+        }
+
+        &:hover {
+            .submenu {
+                border-color: $background-color;
+                border-top: transparent;
+                opacity: 1;
+                pointer-events: auto;
+                transform: translateY(0);
+                visibility: visible;
+            }
+
+            .link {
+                border-radius: $border-radius $border-radius 0 0;
+                color: $color;
+
+                &::after {
+                    transform: scaleX(1);
+                    transform-origin: right;
+                }
+
+                svg {
+                    fill: $color;
+                    transform: rotate(-180deg);
+                }
+            }
+        }
+    }
+}
