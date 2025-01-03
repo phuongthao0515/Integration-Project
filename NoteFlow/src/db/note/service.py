@@ -3,6 +3,7 @@ from sqlmodel import text
 from fastapi import HTTPException
 from .schemas import NoteCreateModel, Note, NoteResponseModel
 from datetime import datetime
+from ..models import Users
 class NoteService: 
     async def get_note(self,note_id:int,user_id:int,session:AsyncSession):
         try:
@@ -35,8 +36,14 @@ class NoteService:
                 createddate=datetime.utcnow()
             )
             session.add(new_note)
+            print(f"Note added to session: {new_note}")
+        
             await session.commit()
+            print("Session committed successfully.")
+        
             await session.refresh(new_note)
+            print(f"Note refreshed: {new_note}")
+        
             return {"note_id": new_note.pageid}
         
         except Exception as e:

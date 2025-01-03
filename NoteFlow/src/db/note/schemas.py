@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 
 
-
 class Note(SQLModel, table=True): 
     pageid: int = Field(sa_column=Column(Integer, primary_key=True, autoincrement=True)) 
     createddate: datetime = Field(default_factory=datetime.utcnow, sa_column=Column(DateTime, nullable=False)) 
