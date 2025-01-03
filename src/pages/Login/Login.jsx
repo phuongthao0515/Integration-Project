@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Login() {
+function Login({ userName, password, setUserName, setPassword, handleLogIn, errorMessage }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -17,7 +17,7 @@ function Login() {
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-            <h1>
+                <h1>
                     NoteFlow <img src={vector} alt="" />
                 </h1>
             </header>
@@ -30,7 +30,12 @@ function Login() {
                     <div className={cx('form')}>
                         <label>
                             Username
-                            <input type="text" placeholder="Username" />
+                            <input
+                                type="text"
+                                placeholder="Username"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
                         </label>
                         <label>
                             Password
@@ -39,6 +44,8 @@ function Login() {
                                     id="password"
                                     type={showPassword ? 'text' : 'password'}
                                     placeholder="Password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
                                 />
                                 <button
                                     type="button"
@@ -56,8 +63,11 @@ function Login() {
                             </label>
                             <a href="/forgot-password">Forgot your password?</a>
                         </div>
+                        {errorMessage && <p className={cx('error')}>{errorMessage}</p>}
                     </div>
-                    <button className={cx('login-button')}>LOG IN</button>
+                    <button className={cx('login-button')} onClick={handleLogIn}>
+                        LOG IN
+                    </button>
                 </div>
             </div>
         </div>
