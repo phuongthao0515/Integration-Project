@@ -18,7 +18,7 @@ pwd_context = CryptContext(
 
 class LoginService: 
     async def login(self,userdata:UserLoginModel,session:AsyncSession): 
-        query = text('SELECT * FROM USERS WHERE EMAIL = :email')
+        query = text('SELECT * FROM public."users" WHERE EMAIL = :email')
         results = await session.execute(query,{'email':userdata.email})
         user = results.fetchone()
         if not user: 
