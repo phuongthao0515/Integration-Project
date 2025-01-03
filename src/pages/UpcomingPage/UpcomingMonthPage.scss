@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;700&display=swap');
+
+$n1-color: #F8EDE3;
+$n2-color: #DFD3C3;
+$n3-color: #D0B8A8;
+$n4-color: #8D493A;
+$background-color: $n1-color;
+$date-color: $n4-color;
+$line-color: $n3-color;
+
+.upcoming-month-container {
+    background-color: $background-color;
+    display: flex;
+    font-family: 'Roboto Flex', sans-serif;
+    height: 100vh;
+}
+
+.content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.heading-container {
+    align-items: center;
+    border-bottom: 2px solid $line-color;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.upcoming-heading {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-right: 1rem;
+}
+
+.date-heading {
+    color: $date-color;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.month-nav-container {
+    display: flex;
+    align-items: center;
+}
+
+.month-nav {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar-weekday {
+    font-weight: bold;
+    text-align: center;
+}
+
+.calendar-day {
+    background-color: $n2-color;
+    border-radius: 4px;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 120px;
+    height: 90px;
+    overflow: hidden;
+}
+
+.calendar-day.empty {
+    background-color: transparent;
+}
+
+.date {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.notes,
+.plans {
+    margin-bottom: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
+
+.note,
+.plan {
+    background-color: $n3-color;
+    border-radius: 4px;
+    padding: 3px;
+    margin-bottom: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.8rem;
+}
