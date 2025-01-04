@@ -33,17 +33,21 @@ $line-color: $n3-color;
     font-size: 2rem;
     font-weight: bold;
     margin-right: 1rem;
+    margin-bottom: 20px;
 }
 
 .date-heading {
     color: $date-color;
     font-size: 1rem;
     font-weight: normal;
+    margin: 0 10px;
 }
 
 .month-nav-container {
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    position: relative;
 }
 
 .month-nav {
@@ -51,6 +55,15 @@ $line-color: $n3-color;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    padding: 0 10px;
+}
+
+.month-nav.prev {
+    margin-right: 10px;
+}
+
+.date-heading {
+    text-align: left;
 }
 
 .calendar {
@@ -71,7 +84,7 @@ $line-color: $n3-color;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    width: 120px;
+    width: 140px;
     height: 90px;
     overflow: hidden;
 }

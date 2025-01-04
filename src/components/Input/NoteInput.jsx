@@ -1,8 +1,10 @@
-import React, { useState } from "react";
-import "./NoteInput.scss";
+import React, { useState } from 'react';
+import './NoteInput.scss';
 
 const NoteInput = ({ isOpen, onClose }) => {
     const [importance, setImportance] = useState(false);
+    const [expirationDate, setExpirationDate] = useState('');
+    const [expirationTime, setExpirationTime] = useState('');
 
     if (!isOpen) return null;
 
@@ -22,6 +24,26 @@ const NoteInput = ({ isOpen, onClose }) => {
                 <div className="form-control">
                     <input type="file" multiple required />
                 </div>
+                <div className="form-control expiration-container">
+                    <div>
+                        <label htmlFor="expiration-date">Expiration Date</label>
+                        <input
+                            type="date"
+                            id="expiration-date"
+                            value={expirationDate}
+                            onChange={(e) => setExpirationDate(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="expiration-time">Expiration Time</label>
+                        <input
+                            type="time"
+                            id="expiration-time"
+                            value={expirationTime}
+                            onChange={(e) => setExpirationTime(e.target.value)}
+                        />
+                    </div>
+                </div>
                 <div className="form-control">
                     <label htmlFor="importance-switch"></label>
                     <label className="switch">
@@ -33,9 +55,7 @@ const NoteInput = ({ isOpen, onClose }) => {
                         />
                         <span className="slider round"></span>
                     </label>
-                    <div className="importance-label">
-                        {importance ? "Important" : "Not Important"}
-                    </div>
+                    <div className="importance-label">{importance ? 'Important' : 'Not Important'}</div>
                 </div>
                 <button className="submit-button">Save Note</button>
             </div>
