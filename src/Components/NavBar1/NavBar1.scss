@@ -19,7 +19,7 @@ $link-hover-color: $n4-color;
     flex-direction: column;
     height: 100vh;
     width: 250px;
-    background-color: $n1-color;
+    background-color: $n2-color;
     box-shadow: $box-shadow;
     font-family: $font-family;
 }
@@ -30,6 +30,8 @@ $link-hover-color: $n4-color;
     align-items: flex-start;
     padding: 20px;
     background-color: $n2-color;
+    width: 100%;
+    flex-grow: 1;
 }
 
 .profile {
@@ -85,8 +87,10 @@ $link-hover-color: $n4-color;
     }
 }
 
-.spacer {
-    flex-grow: 1;
+.separator {
+    height: 2px;
+    background-color: $n5-color;
+    margin: 10px 0;
 }
 
 .chat-box {
@@ -97,8 +101,9 @@ $link-hover-color: $n4-color;
     transition: background-color 0.3s;
     background-color: $n5-color;
     border-radius: 8px;
-    margin-bottom: 10px;
     width: 100%;
+    margin-top: auto;
+    justify-content: center;
 
     &:hover {
         background-color: $n3-color;
