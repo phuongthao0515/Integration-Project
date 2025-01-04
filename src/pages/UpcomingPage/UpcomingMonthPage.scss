@@ -41,6 +41,7 @@ $line-color: $n3-color;
     font-size: 1rem;
     font-weight: normal;
     margin: 0 10px;
+    text-align: left;
 }
 
 .month-nav-container {
@@ -60,10 +61,6 @@ $line-color: $n3-color;
 
 .month-nav.prev {
     margin-right: 10px;
-}
-
-.date-heading {
-    text-align: left;
 }
 
 .calendar {

@@ -12,10 +12,12 @@ import chatPic from '../../assets/chat.png';
 import Dropdown from '../Dropdown/Dropdown';
 import NoteInput from '../Input/NoteInput';
 import PlanInput from '../Input/PlanInput';
+import Setting from '../Setting/Setting';
 
 const NavBar1 = () => {
     const [isNoteInputOpen, setIsNoteInputOpen] = useState(false);
     const [isPlanInputOpen, setIsPlanInputOpen] = useState(false);
+    const [isSettingOpen, setIsSettingOpen] = useState(false);
 
     const openNoteInput = () => {
         setIsNoteInputOpen(true);
@@ -33,10 +35,18 @@ const NavBar1 = () => {
         setIsPlanInputOpen(false);
     };
 
+    const openSetting = () => {
+        setIsSettingOpen(true);
+    };
+
+    const closeSetting = () => {
+        setIsSettingOpen(false);
+    };
+
     return (
         <div className="navbar-container">
             <header className="header">
-                <div className="profile">
+                <div className="profile" onClick={openSetting}>
                     <img src={profilePic} alt="Profile" className="profile-pic" />
                     <span className="profile-name">Phuc Tran</span>
                 </div>
@@ -71,6 +81,7 @@ const NavBar1 = () => {
             </header>
             <NoteInput isOpen={isNoteInputOpen} onClose={closeNoteInput} />
             <PlanInput isOpen={isPlanInputOpen} onClose={closePlanInput} />
+            <Setting isOpen={isSettingOpen} onClose={closeSetting} />
         </div>
     );
 };
