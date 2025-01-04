@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './UpcomingMonthPage.scss';
 
 import NavBar from '../../Components/NavBar1/NavBar1';
+import UpcomingDayPage from './UpcomingDayPage';
 
 // Mock data for important and not important notes and plans
 const mockImportantNotes = [
@@ -34,12 +35,14 @@ const mockNotImportantPlans = [
     },
 ];
 
-const UpcomingMonth = () => {
+const UpcomingMonthPage = () => {
     const [importantNotes, setImportantNotes] = useState([]);
     const [importantPlans, setImportantPlans] = useState([]);
     const [notImportantNotes, setNotImportantNotes] = useState([]);
     const [notImportantPlans, setNotImportantPlans] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [view, setView] = useState('month'); // State to switch between month and day view
+    const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
         setImportantNotes(mockImportantNotes);
@@ -59,6 +62,15 @@ const UpcomingMonth = () => {
 
     const handleNextMonth = () => {
         setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+    };
+
+    const handleDayClick = (date) => {
+        setSelectedDate(date);
+        setView('day');
+    };
+
+    const handleBackToMonth = () => {
+        setView('month');
     };
 
     const renderCalendar = () => {
@@ -82,7 +94,7 @@ const UpcomingMonth = () => {
                 .concat(notImportantPlans.filter((plan) => plan.dueDate === date));
 
             calendar.push(
-                <div key={date} className="calendar-day">
+                <div key={date} className="calendar-day" onClick={() => handleDayClick(date)}>
                     <div className="date">{day}</div>
                     <div className="notes">
                         {notes.map((note) => (
@@ -120,6 +132,9 @@ const UpcomingMonth = () => {
             <div className="content">
                 <div className="heading-container">
                     <h1 className="upcoming-heading">UPCOMING</h1>
+                    <button className="switch-button" onClick={() => setView(view === 'month' ? 'day' : 'month')}>
+                        {view === 'month' ? 'Switch to Day View' : 'Switch to Month View'}
+                    </button>
                     <div className="month-nav-container">
                         <button className="month-nav prev" onClick={handlePreviousMonth}>
                             &lt;
@@ -130,13 +145,17 @@ const UpcomingMonth = () => {
                         </button>
                     </div>
                 </div>
-                <div className="calendar">
-                    {renderWeekdays()}
-                    {renderCalendar()}
-                </div>
+                {view === 'month' ? (
+                    <div className="calendar">
+                        {renderWeekdays()}
+                        {renderCalendar()}
+                    </div>
+                ) : (
+                    <UpcomingDayPage date={selectedDate} onBack={handleBackToMonth} />
+                )}
             </div>
         </div>
     );
 };
 
-export default UpcomingMonth;
+export default UpcomingMonthPage;

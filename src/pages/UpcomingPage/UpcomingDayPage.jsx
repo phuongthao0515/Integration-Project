@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './UpcomingDayPage.scss';
 
-import NavBar from '../../Components/NavBar1/NavBar1';
-
 // Mock data for notes and plans
 const mockNotes = [
     { id: 1, content: 'Note 1', dueTime: '10:00 AM', date: '2027-10-01' },
@@ -17,7 +15,7 @@ const mockPlans = [
     { id: 2, content: 'Plan 2', dueTime: '3:00 PM', date: '2023-10-02' },
 ];
 
-const UpcomingDayPage = () => {
+const UpcomingDayPage = ({ date, onBack }) => {
     const [notes, setNotes] = useState([]);
     const [plans, setPlans] = useState([]);
     const [fadeOutNotes, setFadeOutNotes] = useState([]);
@@ -74,11 +72,7 @@ const UpcomingDayPage = () => {
 
     return (
         <div className="upcoming-day-page-container">
-            <NavBar />
             <div className="content">
-                <div className="heading-container">
-                    <h1 className="upcoming-heading">UPCOMING</h1>
-                </div>
                 {sortedDates.map((date) => (
                     <div key={date} className="date-section">
                         <h3>{getFormattedDate(date)}</h3>

@@ -4,9 +4,14 @@ $n1-color: #F8EDE3;
 $n2-color: #DFD3C3;
 $n3-color: #D0B8A8;
 $n4-color: #8D493A;
+$n5-color: #d2c2ac;
 $background-color: $n1-color;
 $date-color: $n4-color;
 $line-color: $n3-color;
+$switch-bg-color: $n1-color;
+$switch-text-color: black;
+$switch-hover-bg-color: $n5-color;
+$switch-hover-text-color: black;
 
 .upcoming-month-container {
     background-color: $background-color;
@@ -118,4 +123,20 @@ $line-color: $n3-color;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 0.8rem;
+}
+
+.switch-button {
+    background-color: $switch-bg-color;
+    border: none;
+    border-radius: 20px;
+    color: $switch-text-color;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 10px 20px;
+    transition: background-color 0.3s, color 0.3s;
+
+    &:hover {
+        background-color: $switch-hover-bg-color;
+        color: $switch-hover-text-color;
+    }
 }
