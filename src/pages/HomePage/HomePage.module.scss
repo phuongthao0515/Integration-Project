@@ -1,0 +1,80 @@
+.dashboard {
+    display: flex;
+    height: 100vh;
+    background: #f5efe9;
+    .main {
+        flex: 1;
+        padding: 20px;
+
+        .greeting {
+            text-align: center;
+            h1 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .recently-opened, .quick-access, .new-ideas {
+            margin-bottom: 30px;
+
+            h2 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .cards, .events, .pins, ul {
+                display: flex;
+                gap: 10px;
+
+                .card, .event-day, .pin, li {
+                    padding: 10px;
+                    background: #fff;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+            }
+        }
+        .upcoming-events {
+            .events {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px; /* Khoảng cách giữa các ngày */
+        
+                .event-day {
+                    flex: 1 1 calc(50% - 20px); /* Hiển thị 2 cột */
+                    background: #fff;
+                    border-radius: 10px;
+                    padding: 20px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        
+                    h3 {
+                        font-size: 18px;
+                        color: #555;
+                        margin-bottom: 10px;
+                    }
+        
+                    ul {
+                        list-style: none;
+                        padding: 0;
+        
+                        li {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 10px;
+        
+                            input[type='checkbox'] {
+                                margin-right: 10px;
+                            }
+        
+                            span {
+                                font-size: 16px;
+                                color: #666;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
