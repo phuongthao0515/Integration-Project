@@ -14,7 +14,7 @@ function Dashboard() {
             <NavBar />
             <main className={cx('main')}>
                 <header className={cx('greeting')}>
-                    <h1>Good morning, </h1>
+                    <h1>Good Morning, </h1>
                 </header>
                 <section className={cx('recently-opened')}>
                     <h2>Recently opened</h2>
@@ -29,34 +29,47 @@ function Dashboard() {
                             <p>SQL</p>
                             <span>12h ago</span>
                         </div>
+                        <div className={cx('card')}>
+                            <img src={sqlIcon} alt="SQL" />
+                            <p>SQL</p>
+                            <span>12h ago</span>
+                        </div>
                         {/* Add more cards as needed */}
                     </div>
                 </section>
                 <section className={cx('upcoming-events')}>
-                    <h2>Upcoming events</h2>
-                    <div className={cx('events')}>
-                        <div className={cx('event-day')}>
-                            <h3>May 10</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Peer review and design crit</span>
-                                </li>
-                                {/* Add more events */}
-                            </ul>
-                        </div>
-                        <div className={cx('event-day')}>
-                            <h3>May 11</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Read the case study and user interview report</span>
-                                </li>
-                                {/* Add more events */}
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+    <h2>Upcoming events</h2>
+    <div className={cx('events')}>
+        <div className={cx('event-day')}>
+            <h3>May 10</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" />
+                    <span>Meeting</span>
+                </li>
+                <li>
+                    <input type="checkbox" />
+                    <span>Read paper</span>
+                </li>
+            </ul>
+        </div>
+        <div className={cx('event-day')}>
+            <h3>May 11</h3>
+            <ul>
+                <li>
+                    <input type="checkbox" />
+                    <span>Write report</span>
+                </li>
+                <li>
+                    <input type="checkbox" />
+                    <span>Code FE, meeting</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+
                 <section className={cx('quick-access')}>
                     <h2>Pin to home for quickly access</h2>
                     <div className={cx('pins')}>
