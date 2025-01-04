@@ -32,6 +32,6 @@ app.add_middleware(
 )
 
 # include router 
-app.include_router(auth_router,prefix=f"/api/{version}/auth",tags=['account'])
-app.include_router(note_router,prefix=f"/api/{version}/note",tags=['account'])
-app.include_router(plan_router,prefix=f"/api/{version}/plan",tags=['account'])
+app.include_router(auth_router,prefix=f"/api/{version}/auth",tags=['auth'])
+app.include_router(note_router,prefix=f"/api/{version}/note",tags=['note'])
+app.include_router(plan_router,prefix=f"/api/{version}/plan",tags=['plan'])

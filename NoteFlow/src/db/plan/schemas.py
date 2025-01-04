@@ -65,17 +65,6 @@ class PlanUpdateModel(SQLModel):
             self.dueDate = self.dueDate.replace(tzinfo=None) if self.dueDate.tzinfo else self.dueDate
 
 class PlanResponseModel(SQLModel):
-    """
-    This is what the client receives as a response.
-    Example JSON:
-    {
-      "planId": 1,
-      "createDate": "2025-01-02T15:00:00",
-      "dueDate": "2025-01-03T10:00:00",
-      "content": "task_description.txt",
-      "importance": true
-    }
-    """
     planId: int
     createDate: datetime
     dueDate: Optional[datetime]
