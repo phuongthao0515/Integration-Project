@@ -19,11 +19,11 @@ const Dropdown = ({ onAddNote, onAddPlan }) => {
                     </svg>
                 </a>
                 <div className="submenu">
-                    <div className="submenu-item">
+                    {/* <div className="submenu-item">
                         <a href="#" className="submenu-link" onClick={onAddNote}>
                             Add note
                         </a>
-                    </div>
+                    </div> */}
                     <div className="submenu-item">
                         <a href="#" className="submenu-link" onClick={onAddPlan}>
                             Make plan

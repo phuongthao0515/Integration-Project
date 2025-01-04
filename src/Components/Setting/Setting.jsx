@@ -44,41 +44,43 @@ const Setting = ({ isOpen, onClose }) => {
                         </div>
                     </div>
                     <div className="setting-main">
-                        <h2>Settings</h2>
-                        <div className="form-control profile-pic-control">
-                            <label htmlFor="profile-pic">Change Profile Picture</label>
-                            <img
-                                src={profilePic}
-                                alt="Profile"
-                                className="setting-profile-pic"
-                                onClick={handleProfilePicClick}
-                            />
-                            <input
-                                type="file"
-                                id="profile-pic"
-                                onChange={handleProfilePicChange}
-                                style={{ display: 'none' }}
-                            />
-                        </div>
-                        <div className="form-control">
-                            <label htmlFor="name">Change Name</label>
-                            <input
-                                type="text"
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Enter new name"
-                            />
-                        </div>
-                        <div className="form-control">
-                            <label htmlFor="username">Change Username</label>
-                            <input
-                                type="text"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter new username"
-                            />
+                        <div>
+                            <h2>Settings</h2>
+                            <div className="form-control profile-pic-control">
+                                <label htmlFor="profile-pic">Change Profile Picture</label>
+                                <img
+                                    src={profilePic}
+                                    alt="Profile"
+                                    className="setting-profile-pic"
+                                    onClick={handleProfilePicClick}
+                                />
+                                <input
+                                    type="file"
+                                    id="profile-pic"
+                                    onChange={handleProfilePicChange}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                            <div className="form-control">
+                                <label htmlFor="name">Change Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                    placeholder="Enter new name"
+                                />
+                            </div>
+                            <div className="form-control">
+                                <label htmlFor="username">Change Username</label>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    placeholder="Enter new username"
+                                />
+                            </div>
                         </div>
                         <div className="button-container">
                             <button className="delete-button" onClick={handleDeleteAccount}>

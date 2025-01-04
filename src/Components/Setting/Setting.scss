@@ -76,6 +76,8 @@ $font-color: black;
 
 .setting-content {
     display: flex;
+    height: calc(100% - 40px);
+    /* Adjust height to account for padding */
 }
 
 .account-section {
@@ -85,6 +87,7 @@ $font-color: black;
     margin-right: 20px;
     padding-right: 20px;
     border-right: 1px solid $n2-color;
+    height: 100%;
 }
 
 .account-header {
@@ -126,6 +129,9 @@ $font-color: black;
 
 .setting-main {
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 h2 {
@@ -174,7 +180,8 @@ h2 {
 .button-container {
     display: flex;
     justify-content: flex-end;
-    margin-top: 20px;
+    margin-top: auto;
+    padding-top: 20px;
 }
 
 .delete-button {
