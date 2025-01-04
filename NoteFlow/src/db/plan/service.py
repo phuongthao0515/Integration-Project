@@ -10,8 +10,6 @@ from .schemas import (
     PlanResponseModel
 )
 
-
-
 class PlanService:
     async def get_plan(self, plan_id: int, user_id: int, session: AsyncSession):
         try:
@@ -25,17 +23,16 @@ class PlanService:
             if plan:
                 plan = dict(plan) if isinstance(plan, tuple) else plan
 
-
                 if plan.userid != user_id:
                     raise HTTPException(status_code=401, detail='UnAuthorized')
                 
-                return( {
+                return {
                     "planId": plan.planid,
                     "createDate": plan.createddate,
                     "dueDate": plan.duedate,
                     "content": plan.content,
+                    "importance": plan.importance
                 }
-                )
 
             else:
                 raise HTTPException(status_code=404, detail="Plan not found")
@@ -73,6 +70,7 @@ class PlanService:
                     createDate=row["createddate"],
                     dueDate=row["duedate"],
                     content=row["content"],
+                    importance=row["importance"]
                 )
                 for row in rows
             ]
@@ -111,6 +109,7 @@ class PlanService:
                     createDate=row["createddate"],
                     dueDate=row["duedate"],
                     content=row["content"],
+                    importance=row["importance"]
                 )
                 for row in rows
             ]
@@ -131,6 +130,7 @@ class PlanService:
                 createddate=plan_data.createddate,  
                 duedate=plan_data.dueDate,
                 content=plan_data.content,
+                importance=plan_data.importance
             )
             session.add(new_plan)
             await session.commit()
@@ -153,6 +153,7 @@ class PlanService:
                     createDate=row["createddate"],
                     dueDate=row["duedate"],
                     content=row["content"],
+                    importance=row["importance"]
                 )
                 for row in rows
             ]
@@ -199,7 +200,8 @@ class PlanService:
             update_query = text("""
                 UPDATE plan
                 SET duedate = :duedate,
-                    content = :content
+                    content = :content,
+                    importance = :importance
                 WHERE planid = :plan_id
             """)
 
@@ -208,6 +210,7 @@ class PlanService:
                 {
                     "duedate": plan_data.dueDate,
                     "content": plan_data.content,
+                    "importance": plan_data.importance,
                     "plan_id": plan_id
                 }
             )
