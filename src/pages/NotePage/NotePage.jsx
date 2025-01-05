@@ -10,6 +10,10 @@ import returnPic from '../../assets/return.png';
 
 const NotePage = () => {
     const [content, setContent] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
+    const [accessRight, setAccessRight] = useState('restricted');
+    const [email, setEmail] = useState('');
+    const [emails, setEmails] = useState([]);
 
     const editor = useEditor({
         extensions: [StarterKit, Image, ImageResize],
@@ -31,9 +35,33 @@ const NotePage = () => {
         editor.chain().focus().toggleBulletList().run();
     };
 
-    const shareNote = () => {
-        // Implement share functionality here
-        alert('Share functionality is not implemented yet.');
+    const handleShareClick = () => {
+        setShowPopup(true);
+    };
+
+    const handlePopupClose = () => {
+        setShowPopup(false);
+    };
+
+    const handleAccessRightChange = (event) => {
+        setAccessRight(event.target.value);
+    };
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    const handleAddEmail = () => {
+        if (email && !emails.includes(email)) {
+            setEmails([...emails, email]);
+            setEmail('');
+        }
+    };
+
+    const handleSave = () => {
+        // Implement save functionality here
+        alert('Settings saved.');
+        setShowPopup(false);
     };
 
     return (
@@ -56,11 +84,51 @@ const NotePage = () => {
                 <button onClick={addList} className="menu-button">
                     Add as List
                 </button>
-                <button onClick={shareNote} className="menu-button">
+                <button onClick={handleShareClick} className="menu-button">
                     Share
                 </button>
             </div>
             <EditorContent editor={editor} className="editor-content" />
+
+            {showPopup && (
+                <div className="popup">
+                    <div className="popup-content">
+                        <h2>Share Document</h2>
+                        <label>
+                            <strong>Access Rights</strong>
+                        </label>
+                        <div>
+                            <select value={accessRight} onChange={handleAccessRightChange}>
+                                <option value="restricted">Restricted</option>
+                                <option value="public">Public</option>
+                            </select>
+                        </div>
+
+                        {accessRight === 'restricted' && (
+                            <>
+                                <div className="popup-email">
+                                    <input
+                                        type="email"
+                                        placeholder="Enter email to share"
+                                        value={email}
+                                        onChange={handleEmailChange}
+                                    />
+                                    <button onClick={handleAddEmail}>Add</button>
+                                </div>
+                                <ul className="email-list">
+                                    {emails.map((email, index) => (
+                                        <li key={index}>{email}</li>
+                                    ))}
+                                </ul>
+                            </>
+                        )}
+                        <div className="popup-actions">
+                            <button onClick={handleSave}>Save</button>
+                            <button onClick={handlePopupClose}>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

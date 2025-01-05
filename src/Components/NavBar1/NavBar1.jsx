@@ -12,7 +12,7 @@ import Dropdown from '../Dropdown/Dropdown';
 import NoteInput from '../Input/NoteInput';
 import PlanInput from '../Input/PlanInput';
 import Setting from '../Setting/Setting';
-import NoteList from '../NoteList/NoteList'; // Import the new NoteList component
+import NoteList from '../NoteList/NoteList';
 
 const NavBar1 = () => {
     const [isNoteInputOpen, setIsNoteInputOpen] = useState(false);

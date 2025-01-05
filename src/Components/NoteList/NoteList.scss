@@ -112,6 +112,15 @@ $link-hover-color: $n4-color;
     font-size: 15px;
     font-weight: normal;
     font-family: 'Roboto Flex', sans-serif;
+    color: black;
+    /* Set link color to black */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.item .note-title:hover {
+    color: $link-hover-color;
+    /* Optional: Change color on hover */
 }
 
 .item input {
