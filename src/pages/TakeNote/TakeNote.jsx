@@ -10,7 +10,7 @@ import classNames from 'classnames/bind';
 import styles from './TakeNote.module.scss';
 
 import img1 from '../../assets/images/photo.png';
-import Navbar from '../../Components/NavBar/NavBar';
+import Navbar from '../../components/Navbar/Navbar';
 
 const cx = classNames.bind(styles);
 
@@ -22,13 +22,19 @@ function TakeNote() {
 
     // State riêng cho mỗi task để lưu todo list của task đó
     const [taskTodoItems, setTaskTodoItems] = useState({});
-    const [showPopup, setShowPopup] = useState(false); // State cho popup
-    const [accessRight, setAccessRight] = useState('private'); // Lưu giá trị của access right
-    const [email, setEmail] = useState(''); // Trường nhập email khi chọn public
-    const [role, setRole] = useState('view'); // Vai trò (edit/view)
+    const [showPopup, setShowPopup] = useState(false);  // State cho popup
+    const [accessRight, setAccessRight] = useState('private');  // Lưu giá trị của access right
+    const [email, setEmail] = useState('');  // Trường nhập email khi chọn public
+    const [role, setRole] = useState('view');  // Vai trò (edit/view)
 
     const editor = useEditor({
-        extensions: [StarterKit, TaskList, TaskItem.configure({ nested: true }), Image, ImageResize],
+        extensions: [
+            StarterKit,
+            TaskList,
+            TaskItem.configure({ nested: true }),
+            Image,
+            ImageResize,
+        ],
         content: content,
         onUpdate: ({ editor }) => {
             const html = editor.getHTML();
@@ -41,17 +47,17 @@ function TakeNote() {
                 saveContent(html);
             }, 500);
             setDebounceTimeout(newTimeout);
-        },
+        }
     });
 
     const addTodo = () => {
         const newTodo = {
             id: Date.now(),
-            content: 'New Task',
+            content: "New Task",
             completed: false,
         };
-
-        setTaskTodoItems((prevState) => {
+        
+        setTaskTodoItems(prevState => {
             const updatedTodoItems = { ...prevState };
             if (!updatedTodoItems[idTask]) {
                 updatedTodoItems[idTask] = [];
@@ -62,11 +68,11 @@ function TakeNote() {
     };
 
     const toggleTodo = (id) => {
-        setTaskTodoItems((prevState) => {
+        setTaskTodoItems(prevState => {
             const updatedTodoItems = { ...prevState };
             if (updatedTodoItems[idTask]) {
-                updatedTodoItems[idTask] = updatedTodoItems[idTask].map((todo) =>
-                    todo.id === id ? { ...todo, completed: !todo.completed } : todo,
+                updatedTodoItems[idTask] = updatedTodoItems[idTask].map(todo => 
+                    todo.id === id ? { ...todo, completed: !todo.completed } : todo
                 );
             }
             return updatedTodoItems;
@@ -74,10 +80,16 @@ function TakeNote() {
     };
 
     const renderTodoList = () => {
-        return taskTodoItems[idTask]?.map((todo) => (
+        return taskTodoItems[idTask]?.map(todo => (
             <li key={todo.id} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <input type="checkbox" checked={todo.completed} onChange={() => toggleTodo(todo.id)} />
-                <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>{todo.content}</span>
+                <input
+                    type="checkbox"
+                    checked={todo.completed}
+                    onChange={() => toggleTodo(todo.id)}
+                />
+                <span style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}>
+                    {todo.content}
+                </span>
             </li>
         ));
     };
@@ -122,6 +134,7 @@ function TakeNote() {
             <div className="sidebar">
                 <Navbar listTask={listTask} setListTask={setListTask} setIdTask={setIdTask} idTask={idTask} />
             </div>
+
             <div className={cx('wrapper')}>
                 {editor && (
                     <div>
@@ -167,7 +180,7 @@ function TakeNote() {
                                 <option value="public">Public</option>
                             </select>
                         </div>
-
+                        
                         {accessRight === 'public' && (
                             <>
                                 <div className={cx('popup-email')}>
