@@ -5,6 +5,7 @@ import closePic from '../../assets/close.png';
 import deletePic from '../../assets/delete.png';
 import morePic from '../../assets/more.png';
 import plusPic from '../../assets/add-task.png';
+import { Link } from 'react-router-dom';
 
 const NoteList = () => {
     const [notes, setNotes] = useState([]);
@@ -39,7 +40,9 @@ const NoteList = () => {
     return (
         <div className="note-list">
             <div className="add-note-container">
-                <span className="add-note-text">Notes</span>
+                <Link to="/note">
+                    <span className="add-note-text">Notes</span>
+                </Link>
                 <button className="add-note-button" onClick={addNote}>
                     <img src={plusPic} alt="Add" className="plus-icon" />
                 </button>

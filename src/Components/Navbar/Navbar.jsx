@@ -14,6 +14,7 @@ import img6 from '../../assets/images/image10.png';
 import img7 from '../../assets/images/image11.png';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -71,15 +72,21 @@ function Navbar({ listTask, setListTask, setIdTask, idTask }) {
                 <ul>
                     <li>
                         <img src={img1} />
-                        <span>Home</span>
+                        <Link to="/">
+                            <span>Home</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img2} />
-                        <span>Today</span>
+                        <Link to="/today">
+                            <span>Today</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img3} />
-                        <span>Upcoming</span>
+                        <Link to="/upcoming">
+                            <span>Upcoming</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img4} />
