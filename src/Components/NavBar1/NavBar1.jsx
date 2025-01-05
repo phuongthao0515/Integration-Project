@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar1.scss';
 
@@ -18,7 +18,7 @@ const NavBar1 = () => {
     const [isNoteInputOpen, setIsNoteInputOpen] = useState(false);
     const [isPlanInputOpen, setIsPlanInputOpen] = useState(false);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
-
+    const user = JSON.parse(localStorage.getItem('user'));
     const openNoteInput = () => {
         setIsNoteInputOpen(true);
     };
@@ -48,32 +48,43 @@ const NavBar1 = () => {
             <header className="header">
                 <div className="profile" onClick={openSetting}>
                     <img src={profilePic} alt="Profile" className="profile-pic" />
-                    <span className="profile-name">Phuc Tran</span>
+                    <span className="profile-name">{user.username}</span>
                 </div>
                 <nav className="navbar">
                     <Dropdown onAddNote={openNoteInput} onAddPlan={openPlanInput} />
+
                     <div className="nav-item">
-                        <img src={homePic} alt="Home" className="nav-icon" />
-                        <Link to="/">Home</Link>
+                        <Link to="/home">
+                            <img src={homePic} alt="Home" className="nav-icon" />
+                            <Link to="/home">Home</Link>
+                        </Link>
                     </div>
                     <div className="nav-item">
-                        <img src={todayPic} alt="Today" className="nav-icon" />
-                        <Link to="/today">Today</Link>
+                        <Link to="/today">
+                            <img src={todayPic} alt="Today" className="nav-icon" />
+                            <Link to="/today">Today</Link>
+                        </Link>
                     </div>
                     <div className="nav-item">
-                        <img src={upcomingPic} alt="Upcoming" className="nav-icon" />
-                        <Link to="/upcoming">Upcoming</Link>
+                        <Link to="/upcoming">
+                            <img src={upcomingPic} alt="Upcoming" className="nav-icon" />
+                            <Link to="/upcoming">Upcoming</Link>
+                        </Link>
                     </div>
                     <div className="nav-item">
-                        <img src={inboxPic} alt="Inbox" className="nav-icon" />
-                        <Link to="/inbox">Inbox</Link>
+                        <Link to="/inbox">
+                            <img src={inboxPic} alt="Inbox" className="nav-icon" />
+                            <Link to="/inbox">Inbox</Link>
+                        </Link>
                     </div>
                     <div className="separator"></div>
                     <NoteList />
                 </nav>
                 <div className="chat-box">
-                    <img src={chatPic} alt="Chat" className="nav-icon" />
-                    <Link to="/chat">Chat</Link>
+                    <Link to="/chat">
+                        <img src={chatPic} alt="Chat" className="nav-icon" />
+                        <Link to="/chat">Chat</Link>
+                    </Link>
                 </div>
             </header>
             <NoteInput isOpen={isNoteInputOpen} onClose={closeNoteInput} />

@@ -14,6 +14,7 @@ import img6 from '../../assets/images/image10.png';
 import img7 from '../../assets/images/image11.png';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -21,7 +22,7 @@ function Navbar({ listTask, setListTask, setIdTask, idTask }) {
     const [idModal, setIdModal] = useState(0);
     const [editTaskId, setEditTaskId] = useState(null); // Track which task is being edited
     const [newName, setNewName] = useState('');
-
+    const user = JSON.parse(localStorage.getItem('user'));
     console.log(listTask);
 
     const onNewPage = () => {
@@ -55,7 +56,7 @@ function Navbar({ listTask, setListTask, setIdTask, idTask }) {
         <div className={cx('wrapper')}>
             <div className={cx('header')}>
                 <img src={avatar} alt="" />
-                <p>Phuc Tran</p>
+                <p>{user.username}</p>
             </div>
 
             <div className={cx('add-task')}>
@@ -71,15 +72,21 @@ function Navbar({ listTask, setListTask, setIdTask, idTask }) {
                 <ul>
                     <li>
                         <img src={img1} />
-                        <span>Home</span>
+                        <Link to="/home">
+                            <span>Home</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img2} />
-                        <span>Today</span>
+                        <Link to="/today">
+                            <span>Today</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img3} />
-                        <span>Upcoming</span>
+                        <Link to="/upcoming">
+                            <span>Upcoming</span>
+                        </Link>
                     </li>
                     <li>
                         <img src={img4} />

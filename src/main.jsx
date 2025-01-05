@@ -1,9 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import App from './App.jsx';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { publicRoutes } from './router/index.jsx';
+import Notification from './Components/Notification.jsx';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 createRoot(document.getElementById('root')).render(
     <StrictMode>
@@ -14,5 +15,6 @@ createRoot(document.getElementById('root')).render(
                 ))}
             </Routes>
         </Router>
+        <Notification/>
     </StrictMode>,
 );

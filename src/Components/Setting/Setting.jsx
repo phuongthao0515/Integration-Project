@@ -3,9 +3,10 @@ import './Setting.scss';
 import userIcon from '../../assets/user.png';
 
 const Setting = ({ isOpen, onClose }) => {
+    const user = JSON.parse(localStorage.getItem('user'));
     const [profilePic, setProfilePic] = useState(userIcon);
-    const [name, setName] = useState('John Doe');
-    const [username, setUsername] = useState('chingchong');
+    const [name, setName] = useState(user.username);
+    const [username, setUsername] = useState('');
 
     if (!isOpen) return null;
 
