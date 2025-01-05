@@ -10,7 +10,7 @@ import classNames from 'classnames/bind';
 import styles from './TakeNote.module.scss';
 
 import img1 from '../../assets/images/photo.png';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../Components/NavBar/NavBar';
 
 const cx = classNames.bind(styles);
 
@@ -49,6 +49,14 @@ function TakeNote() {
             setDebounceTimeout(newTimeout);
         }
     });
+    const addLocalImage = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            // Tạo Blob URL để hiển thị ảnh
+            const imageUrl = URL.createObjectURL(file);
+            editor.chain().focus().setImage({ src: imageUrl }).run();
+        }
+    };
 
     const addTodo = () => {
         const newTodo = {
@@ -134,29 +142,22 @@ function TakeNote() {
             <div className="sidebar">
                 <Navbar listTask={listTask} setListTask={setListTask} setIdTask={setIdTask} idTask={idTask} />
             </div>
-
             <div className={cx('wrapper')}>
                 {editor && (
                     <div>
                         <div className={cx('menu-bar')}>
                             <button onClick={addTodo}>Add Todo</button>
-                            <button htmlFor="upload-image" className={cx('upload-button')}>
-                                <img src={img1} alt="" />
-                                Upload Image
-                            </button>
-                            <input
-                                id="upload-image"
-                                type="file"
-                                accept="image/*"
-                                style={{ display: 'none' }}
-                                onChange={(event) => {
-                                    const file = event.target.files[0];
-                                    if (file) {
-                                        const imageUrl = URL.createObjectURL(file);
-                                        editor.chain().focus().setImage({ src: imageUrl }).run();
-                                    }
-                                }}
-                            />
+                            <button><label htmlFor="upload-image" className={cx('upload-button')}>
+                            <img src={img1} alt="" />
+                            Upload Image
+                        </label></button>
+                        <input
+                            id="upload-image"
+                            type="file"
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            onChange={addLocalImage}
+                        />
                             <button onClick={handleShareClick}>Share</button>
                         </div>
 
