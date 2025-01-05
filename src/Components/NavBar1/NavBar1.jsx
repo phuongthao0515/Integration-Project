@@ -54,7 +54,7 @@ const NavBar1 = () => {
                     <Dropdown onAddNote={openNoteInput} onAddPlan={openPlanInput} />
                     <div className="nav-item">
                         <img src={homePic} alt="Home" className="nav-icon" />
-                        <Link to="/">Home</Link>
+                        <Link to="/home">Home</Link>
                     </div>
                     <div className="nav-item">
                         <img src={todayPic} alt="Today" className="nav-icon" />
