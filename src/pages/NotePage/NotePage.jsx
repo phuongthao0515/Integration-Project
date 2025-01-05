@@ -67,7 +67,7 @@ const NotePage = () => {
     return (
         <div className="note-page">
             <div className="editor-menu">
-                <Link to="/home" className="menu-button">
+                <Link to="/today" className="menu-button">
                     <img src={returnPic} alt="Return" className="return-icon" />
                     Return
                 </Link>
