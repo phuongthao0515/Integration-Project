@@ -4,8 +4,8 @@ import userIcon from '../../assets/user.png';
 
 const Setting = ({ isOpen, onClose }) => {
     const [profilePic, setProfilePic] = useState(userIcon);
-    const [name, setName] = useState('John Doe');
-    const [username, setUsername] = useState('chingchong');
+    const [name, setName] = useState('Real Dog');
+    const [email, setEmail] = useState('real.dog@example.com');
 
     if (!isOpen) return null;
 
@@ -72,13 +72,13 @@ const Setting = ({ isOpen, onClose }) => {
                                 />
                             </div>
                             <div className="form-control">
-                                <label htmlFor="username">Change Username</label>
+                                <label htmlFor="email">Change Email</label>
                                 <input
-                                    type="text"
-                                    id="username"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    placeholder="Enter new username"
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter new email"
                                 />
                             </div>
                         </div>

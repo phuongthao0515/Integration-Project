@@ -77,7 +77,6 @@ $font-color: black;
 .setting-content {
     display: flex;
     height: calc(100% - 40px);
-    /* Adjust height to account for padding */
 }
 
 .account-section {
@@ -152,7 +151,8 @@ h2 {
         display: none;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="email"] {
         @include input-styles;
     }
 }
