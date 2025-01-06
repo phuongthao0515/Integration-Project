@@ -5,6 +5,8 @@ import Skeleton from 'react-loading-skeleton'
 
 import { formatDistanceToNow } from 'date-fns';
 
+import card10 from '../../assets/card10.png';
+
 import NavBar from '../../Components/NavBar1/NavBar1';
 
 const cx = classNames.bind(styles);
@@ -50,15 +52,22 @@ function Dashboard() {
                 <section className={cx('recently-opened')}>
                     <h2>Recently notes</h2>
                     <div className={cx('cards')}>
-                        {notes?
-                            notes.map((note, index) => (
-                                index <= 3 && (<div className={cx('card')} key={index}>
-                                    
-                                    <img src={note.img || ''} alt="SQL" />
-                                    <p>{note.title}</p>
-                                    <span>{formatDistanceToNow(new Date(note.createddate), { addSuffix: true })}</span>
-                                </div>)
-                            )):(<Skeleton/>)}
+                        {notes ? (
+                            notes.map(
+                                (note, index) =>
+                                    index <= 3 && (
+                                        <div className={cx('card')} key={index}>
+                                            <img src={note.img || ''} alt="SQL" />
+                                            <p>{note.title}</p>
+                                            <span>
+                                                {formatDistanceToNow(new Date(note.createddate), { addSuffix: true })}
+                                            </span>
+                                        </div>
+                                    ),
+                            )
+                        ) : (
+                            <Skeleton />
+                        )}
 
                         {/* Add more cards as needed */}
                     </div>
@@ -94,59 +103,55 @@ function Dashboard() {
                         </div>
                     </div>
                 </section>
-    <h2>
-       <img src={upcoming} alt="Upcoming events" />
-        Upcoming events
-    </h2>
-    <div className={cx('events')}>
-        <div className={cx('event-day')}>
-        <div class="event-header">
-            <img src={card9} alt="Calendar Icon" class="icon"/>
-            <h3>January 9</h3>
-        </div>
-        <ul>
-            <li>
-                <input type="checkbox" id="task1"/>
-                <label for="task1">Work on frontend tasks</label>
-            </li>
-            <li>
-                <input type="checkbox" id="task2"/>
-                <label for="task2">Complete backend tasks</label>
-            </li>
-            <li>
-                <input type="checkbox" id="task2"/>
-                <label for="task3">Review report and improve system design</label>
-            </li>
-        </ul>
-        </div>
+                <section>
+                    <h2>
+                        <img src={''} alt="Upcoming events" />
+                        Upcoming events
+                    </h2>
+                    <div className={cx('events')}>
+                        <div className={cx('event-day')}>
+                            <div className="event-header">
+                                <img src={''} alt="Calendar Icon" className="icon" />
+                                <h3>January 9</h3>
+                            </div>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="task1" />
+                                    <label htmlFor="task1">Work on frontend tasks</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="task2" />
+                                    <label htmlFor="task2">Complete backend tasks</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="task2" />
+                                    <label htmlFor="task3">Review report and improve system design</label>
+                                </li>
+                            </ul>
+                        </div>
 
-        <div className={cx('event-day')}>
-        <div class="event-header">
-            <img src={card10} alt="Calendar Icon" class="icon"/>
-            <h3>January 10</h3>
-        </div>
-        <ul>
-            <li>
-                <input type="checkbox" id="task1"/>
-                <label for="task1">Read and take notes on academic materials</label>
-            </li>
-            <li>
-                <input type="checkbox" id="task2"/>
-                <label for="task2">Submit Assignment tasks</label>
-            </li>
-            <li>
-                <input type="checkbox" id="task2"/>
-                <label for="task3">Do light exercises</label>
-            </li>
-        </ul>
-        </div>
-   
-</section>
-
-
-
-                        
-              
+                        <div className={cx('event-day')}>
+                            <div className="event-header">
+                                <img src={card10} alt="Calendar Icon" className="icon" />
+                                <h3>January 10</h3>
+                            </div>
+                            <ul>
+                                <li>
+                                    <input type="checkbox" id="task1" />
+                                    <label htmlFor="task1">Read and take notes on academic materials</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="task2" />
+                                    <label htmlFor="task2">Submit Assignment tasks</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" id="task2" />
+                                    <label htmlFor="task3">Do light exercises</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
             </main>
         </div>
     );
