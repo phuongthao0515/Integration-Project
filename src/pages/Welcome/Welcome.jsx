@@ -3,7 +3,7 @@ import Header from "./header";
 import classNames from 'classnames/bind';
 import welcome from "./Welcome.module.scss";
 import bg1 from "../../assets/bg1.png";
-import bgnote from "../../assets/bgnote.png"
+import bg2 from "../../assets/bg2.png";
 
 const cx = classNames.bind(welcome);
 
@@ -13,6 +13,7 @@ const WelcomePage = () => {
       <Header/>
       <div className={cx('welcome_page')}>
 
+{/* note taking simple */}
       <section className={cx('note_taking_simple')}>
         <div className={cx('content')}>
           <h2>
@@ -28,12 +29,13 @@ const WelcomePage = () => {
       </section>
 
 
+{/* connect write note, plan, pomodoro, team, chat  */}
+<section className={cx('connect')}>
       <section className={cx('write_notes')}>
-      <div className={cx('content')}>
-        <h2>Write Notes</h2>
-        <p>Write any notes you want</p>
-      </div>
+      
       <div className = {cx('box')}>
+      <img src={bg2} alt="pen icon" className={cx('icon-bg2')} />
+  
       <div className={cx('card')}>
         <h3>Web Design</h3>
         <p>Web design is a process of making a website for the user.</p>
@@ -52,32 +54,46 @@ const WelcomePage = () => {
         </div>
       </div>
       </div>
+
+      <div className={cx('content')}>
+        <h2>Write Notes</h2>
+        <p>Write any notes you want</p>
+      </div>
     </section>
 
+    {/* Đường nối */}
+    <svg className={cx('connector')} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
+  <path d="M10 20 L50 50 L90 20" stroke="#F57C00" strokeWidth="2" fill="none" />
+  <polygon points="90,20 85,25 95,25" fill="#F57C00" /> {/* Arrowhead */}
+</svg>
 
-
-      <section>
-        <h2>Write Notes</h2>
-        <p>Keep your ideas organized and accessible.</p>
+  {/* Section Plan */}
+  <section className={cx('plan_day')}>
+    <div className={cx('content')}>
+      <h2>Plan your day</h2>
+      <p>Make sure your day is well planned</p>
+    </div>
+    <div className={cx('box')}>
+      <div className={cx('card')}>
+        <h3>Monday</h3>
+        <p>May, 3rd</p>
         <ul>
-          <li><span>Quick Notes:</span> Jot down ideas fast.</li>
-          <li><span>Task Manager:</span> Organize your day.</li>
+          <li>Do laundry</li>
+          <li>Call mom</li>
+          <li>Daily meeting</li>
         </ul>
-      </section>
-
-      <section>
-        <h2>Plan your day</h2>
-        <div className="features">
-          <div>
-            <h3>Kanban</h3>
-            <p>Visualize your workflow.</p>
-          </div>
-          <div>
-            <h3>Pomodoro</h3>
-            <p>Stay focused and productive.</p>
-          </div>
-        </div>
-      </section>
+      </div>
+      <div className={cx('card')}>
+        <h3>Other Tasks</h3>
+        <ul>
+          <li>Go to school</li>
+          <li>Study</li>
+          <li>Cooking</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</section>
 
       <section>
         <h2>Work with your team</h2>

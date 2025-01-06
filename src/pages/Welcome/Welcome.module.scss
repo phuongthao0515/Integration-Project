@@ -1,26 +1,29 @@
 .welcome_page {
   font-family: Arial, sans-serif;
   color: #333;
-  // background-color: #f9f9f9;
+  background-color: #fff6ec;
   padding: 20px;
 
   .note_taking_simple {
-    // margin: 20px auto;
-    // padding: 20px;
-    // background-color: #fff;
+    background-color: #F8EEE2;
     // border: 1px solid #ddd;
     // border-radius: 10px;
     // max-width: 800px;
     // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: center;
-    // gap: 20px;
+    margin: 0;
+    gap: 20px;
+    width: 100%;
+   
 
     .content {
       flex: 1;
-      padding-left:40px;
-      margin-right: 100px;
-      margin-left: 40px;
+      // padding-left:40px;
+      // margin-right: 100px;
+      // margin-left: 40px;
+      padding: 0 40px;
+      margin: 0;
       h2 {
         font-size: 5rem;
         line-height: 1.2;
@@ -62,8 +65,9 @@
     .image {
       flex: 1;
       text-align: right;
-      margin-right: 150px;
-      margin-left: 50px;
+      // margin-right: 150px;
+      // margin-left: 50px;
+      margin: 0;
       img {
         max-width: 100%;
         height: auto;
@@ -73,29 +77,45 @@
     }
   }
 
-
+.connect {
   .write_notes {
     display: flex;
-    flex-direction: row;
+    // flex-direction: row;
     // align-items: flex-start;
     justify-content: space-between;
     padding: 40px;
     margin: 0;
-    gap: 60px;
-    background-color: #fff6ec;
+    // gap: 20px;
+    // background-color: #fff6ec;
+    width: 100%;
   
     .box {
       flex: 1;
       display: flex;
       justify-content: flex-start;
-      margin-left: 20px;
+      // text-align: left;
+      position: relative;
+      margin-left: 350px;
+
+      .icon-bg2 {
+        position: absolute;
+        top: -35px; 
+        right: 15px; 
+        width: 80px; 
+        height: 80px; 
+        z-index: 1;
+      }
+
       .card {
         width: 400px;
         background-color: #ffffff;
         border-radius: 20px;
         box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
         padding: 30px;
-  
+        justify-content: flex-start;
+        text-align: left;
+        display: block;
+        
         h3 {
           font-size: 22px;
           color: #333333;
@@ -152,13 +172,15 @@
       }
     }
   
-    /* Content Section (Right Section) */
+    /* Content Section */
     .content {
       flex: 1;
       display: flex;
       flex-direction: column;
       align-items: flex-end; /* Align to the right */
-      justify-content: flex-start;
+      // position: relative;
+      margin-right: 350px;
+      margin-top: 80px;
   
       h2 {
         font-size: 3em;
@@ -169,12 +191,90 @@
   
       p {
         font-size: 1.5em;
-        color: #333333;
+        color: #4D2114;
         font-weight: 300;
       }
     }
   }
   
+//  connector arrow
+  .connector {
+    width: 100%;
+    height: 50px;
+    margin-top: 40px;
+    
+    path {
+      stroke: #4D2114; /* Change this to the color you want */
+      stroke-width: 3;
+    }
+
+    polygon {
+      fill: #4D2114; /* Change this to the color you want for the arrowhead */
+    }
+  }
+   // plan
+   .plan_day {
+    padding: 40px;
+
+    .content {
+      text-align: left;
+      margin-left: 150px;
+      h2 {
+        font-size: 3em;
+        color: #f57c00;
+        margin-bottom: 10px;
+        font-family: 'Red Hat Display', sans-serif;
+        font-weight: 300;
+      }
+
+      p {
+        font-size: 1.5em;
+        color: #4D2114;
+        font-weight: 300;
+      }
+    }
+
+    .box {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+
+      .card {
+        width: 45%;
+        background-color: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        
+        h3 {
+          font-size: 20px;
+          color: #333333;
+        }
+
+        p {
+          font-size: 16px;
+          color: #555555;
+        }
+
+        ul {
+          list-style: none;
+          padding-left: 0;
+
+          li {
+            font-size: 14px;
+            color: #333333;
+            margin-bottom: 8px;
+
+            &:before {
+              content: '✔️';
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
   
   section {
     margin: 40px 0;
