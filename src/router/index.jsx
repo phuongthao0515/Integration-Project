@@ -5,7 +5,7 @@ import UpcomingDayPage from '../pages/UpcomingPage/UpcomingDayPage';
 import UpcomingMonthPage from '../pages/UpcomingPage/UpcomingMonthPage';
 import Login from '../pages/Login/Login';
 import HomePage from '../pages/HomePage/HomePage';
-// import WelcomePage from '../pages/HomePage/Welcome';
+// import WelcomePage from '../pages/Welcome/Welcome';
 
 export const publicRoutes = [
     // { path: '/', component: <WelcomePage /> },

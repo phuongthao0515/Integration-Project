@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const cx = classNames.bind(styles);
 
-function Login({ userName, password, setUserName, setPassword, handleLogIn, errorMessage }) {
+function Login({ email, password, setUserName, setPassword, handleLogIn, errorMessage }) {
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -29,11 +29,11 @@ function Login({ userName, password, setUserName, setPassword, handleLogIn, erro
                     <h1 className={cx('title')}>LOGIN ACCOUNT</h1>
                     <div className={cx('form')}>
                         <label>
-                            Username
+                            Email
                             <input
                                 type="text"
-                                placeholder="Username"
-                                value={userName}
+                                placeholder="Email"
+                                value={email}
                                 onChange={(e) => setUserName(e.target.value)}
                             />
                         </label>
