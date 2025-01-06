@@ -6,7 +6,7 @@ import UpcomingMonthPage from '../pages/UpcomingPage/UpcomingMonthPage';
 import Login from '../pages/Login/Login';
 import HomePage from '../pages/HomePage/HomePage';
 import NotePage from '../pages/NotePage/NotePage';
-// import WelcomePage from '../pages/HomePage/Welcome';
+import WelcomePage from '../pages/HomePage/Welcome';
 
 export const publicRoutes = [
     // { path: '/', component: <WelcomePage /> },
@@ -16,8 +16,8 @@ export const publicRoutes = [
     { path: '/upcoming', component: <UpcomingMonthPage /> },
     { path: '/login', component: <Login /> },
     { path: '/home', component: <HomePage /> },
-    { path: '/note', component: <TakeNote /> },
-    { path: '/note/:id', component: <TakeNote /> },
-    { path: '/notes', component: <NotePage /> },
-    { path: '/notes/:id', component: <NotePage /> },
+    // { path: '/note', component: <TakeNote /> },
+    // { path: '/note/:id', component: <TakeNote /> },
+    { path: '/note', component: <NotePage /> },
+    { path: '/note/:id', component: <NotePage /> },
 ];
