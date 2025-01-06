@@ -45,3 +45,6 @@ class NoteResponseModel2(BaseModel):
 
     class Config:
             orm_mode = True
+
+class ChangeTitleModel(BaseModel):
+     title: str

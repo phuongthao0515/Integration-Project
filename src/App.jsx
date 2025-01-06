@@ -1,6 +1,6 @@
 import './App.css';
 import Main from './components/Main/Main';
-import Navbar from './components/Navbar/Navbar';
+import Navbar from './Components/NavBar/NavBar';
 
 import { useState } from 'react';
 

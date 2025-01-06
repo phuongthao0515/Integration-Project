@@ -1,18 +1,27 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
 import Skeleton from 'react-loading-skeleton'
 
 import { formatDistanceToNow } from 'date-fns';
 
+import blockchainIcon from '../../assets/blockchain.png';
+import sqlIcon from '../../assets/sql.png';
+import networkIcon from '../../assets/network.png';
+import upcoming from '../../assets/upcoming.png';
+import recently from '../../assets/recently.png';
+import pin from '../../assets/pin.png';
+import AIIcon from '../../assets/AI.png';
+import card9 from '../../assets/card9.png';
 import card10 from '../../assets/card10.png';
-
+import MLIcon from '../../assets/ML.png';
 import NavBar from '../../Components/NavBar1/NavBar1';
+import { GlobalContext } from '../../context';
 
 const cx = classNames.bind(styles);
 
 function Dashboard() {
-    const [notes,setNotes] = useState(null)
+    const {notes,setNotes} = useContext(GlobalContext);
         useEffect(() => {
             console.log('home');
             fetch('http://127.0.0.1:8000/api/v1/note/notes', {
@@ -55,7 +64,7 @@ function Dashboard() {
                         {notes ? (
                             notes.map(
                                 (note, index) =>
-                                    index <= 3 && (
+                                    index <= 2 && (
                                         <div className={cx('card')} key={index}>
                                             <img src={note.img || ''} alt="SQL" />
                                             <p>{note.title}</p>
@@ -73,45 +82,14 @@ function Dashboard() {
                     </div>
                 </section>
                 <section className={cx('upcoming-events')}>
-                    <h2>Upcoming events</h2>
-                    <div className={cx('events')}>
-                        <div className={cx('event-day')}>
-                            <h3>May 10</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Meeting</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Read paper</span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div className={cx('event-day')}>
-                            <h3>May 11</h3>
-                            <ul>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Write report</span>
-                                </li>
-                                <li>
-                                    <input type="checkbox" />
-                                    <span>Code FE, meeting</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-                <section>
                     <h2>
-                        <img src={''} alt="Upcoming events" />
+                        <img src={upcoming} alt="Upcoming events" />
                         Upcoming events
                     </h2>
                     <div className={cx('events')}>
                         <div className={cx('event-day')}>
                             <div className="event-header">
-                                <img src={''} alt="Calendar Icon" className="icon" />
+                                <img src={card9} alt="Calendar Icon" className="icon" />
                                 <h3>January 9</h3>
                             </div>
                             <ul>
@@ -129,7 +107,6 @@ function Dashboard() {
                                 </li>
                             </ul>
                         </div>
-
                         <div className={cx('event-day')}>
                             <div className="event-header">
                                 <img src={card10} alt="Calendar Icon" className="icon" />
@@ -149,6 +126,26 @@ function Dashboard() {
                                     <label htmlFor="task3">Do light exercises</label>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section className={cx('quick-access')}>
+                    <h2>
+                        <img src={pin} alt="shared note" />
+                        Shared Notes
+                    </h2>
+                    <div className={cx('pins')}>
+                        <div className={cx('pin1')}>
+                            <img src={blockchainIcon} alt="BlockChain" />
+                            <p>BlockChain</p>
+                            <span>a distributed ledger ...</span>
+                        </div>
+                        {/* Add more pins */}
+                        <div className={cx('pin2')}>
+                            <img src={MLIcon} alt="ML" />
+                            <p>Machine Learning</p>
+                            <span>Decision tree ...</span>
                         </div>
                     </div>
                 </section>

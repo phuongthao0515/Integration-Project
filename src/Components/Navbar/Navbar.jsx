@@ -15,7 +15,6 @@ import img7 from '../../assets/images/image11.png';
 import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
