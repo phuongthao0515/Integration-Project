@@ -14,7 +14,12 @@ login_helper = LoginService()
 
 
 @auth_router.post('/login')
-async def login_user(user: UserLoginModel, session: AsyncSession = Depends(get_session)):
+async def login_user(user:UserLoginModel,session:AsyncSession = Depends(get_session)):
+    """
+    Example user data:
+    username: alice@example.com
+    password: password123
+    """
     try: 
         login = await login_helper.login(user, session)
         return login

@@ -1,9 +1,11 @@
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlmodel import text
 from fastapi import HTTPException
-from .schemas import NoteCreateModel, Note, NoteResponseModel
+from .schemas import NoteCreateModel, Note, NoteResponseModel, PermissionEnum, NoteResponseModel2
 from datetime import datetime
+from ..models import Users
 class NoteService: 
+
     async def get_note(self,note_id:int,user_id:int,session:AsyncSession):
         try:
             print('hi')  # Ensure this print is placed before query execution
@@ -12,15 +14,41 @@ class NoteService:
             note = result.fetchone()
             if note:
                 note = dict(note) if isinstance(note, tuple) else note
-                if note.userid != user_id:
+                if note.userid != user_id and note.visibility == False:
                     raise HTTPException(status_code=401, detail='UnAuthorized')
-                return {
+                elif note.userid != user_id:
+                    shared_query = text("""
+                        SELECT permission 
+                        FROM note_shares 
+                        WHERE NoteID = :note_id AND SharedWithUserID = :user_id
+                    """)
+                    shared_result = await session.execute(shared_query, {'note_id': note_id, 'user_id': user_id})
+                    shared = shared_result.fetchone()
+                    print(shared)
+                    if shared:
+                        permission = shared.permission
+                        return {
                             'created_date': note.createddate,
                             'content': note.content,
                             'title': note.title,
                             'document': note.document,
-                            'updated_date': note.updateddate
-                }
+                            'updated_date': note.updateddate,
+                            'visibility': note.visibility,
+                            'permission': permission,
+                            'is_shared': True
+                        }
+                    else:
+                        raise HTTPException(status_code=401, detail='UnAuthorized')
+                else:
+                    return {
+                        'created_date': note.createddate,
+                        'content': note.content,
+                        'title': note.title,
+                        'document': note.document,
+                        'updated_date': note.updateddate,
+                        'visibility': note.visibility,
+                        'is_shared': False
+                    }
             else:
                 raise HTTPException(status_code=404, detail='Not found')
         except Exception as e:
@@ -35,8 +63,10 @@ class NoteService:
                 createddate=datetime.utcnow()
             )
             session.add(new_note)
+        
             await session.commit()
             await session.refresh(new_note)
+        
             return {"note_id": new_note.pageid}
         
         except Exception as e:
@@ -49,7 +79,7 @@ class NoteService:
             results = await session.execute(query,{'id':user_id})
             rows = results.mappings().all()
             notes = [
-                NoteResponseModel(pageid=row['pageid'], title=row['title'], createddate=row['createddate'])
+                NoteResponseModel(pageid=row['pageid'], title=row['title'], createddate=row['createddate'], visibility=row['visibility'])
                 for row in rows
             ]
             return notes
@@ -57,6 +87,8 @@ class NoteService:
             print(f"Error in get all notes: {e}")  
             raise e  
         
+
+
     async def delete_note(self,user_id:int,note_id:int,session:AsyncSession):
         try: 
             query = text('DELETE FROM NOTE WHERE pageid = :note_id AND USERID = :user_id')
@@ -120,8 +152,18 @@ class NoteService:
             if not note:
                 raise HTTPException(status_code=404, detail="Note not found.")
             note = dict(note) if isinstance(note, tuple) else note
-            if note['userid'] != user_id:
+            if note.userid != user_id and note.visibility == False:
                 raise HTTPException(status_code=401, detail="Unauthorized to update this note.")
+            elif note.userid != user_id:
+                shared_query = text("""
+                    SELECT permission 
+                    FROM note_shares 
+                    WHERE NoteID = :note_id AND SharedWithUserID = :user_id
+                """)
+                shared_result = await session.execute(shared_query, {'note_id': note_id, 'user_id': user_id})
+                shared = shared_result.fetchone()
+                if not shared or shared.permission != 'update':
+                    raise HTTPException(status_code=401, detail='Unauthorized to update this note.')
             update_query = text("""
                 UPDATE NOTE 
                 SET Content = :new_content, UpdatedDate = :updated_date
@@ -150,10 +192,18 @@ class NoteService:
                 raise HTTPException(status_code=404, detail="Note not found.")
 
             note = dict(note) if isinstance(note, tuple) else note
-            if note['userid'] != user_id:
+            if note.userid != user_id and note.visibility == False:
                 raise HTTPException(status_code=401, detail="Unauthorized to update this note.")
-
-            # Update the title and updated_date
+            elif note.userid != user_id:
+                shared_query = text("""
+                    SELECT permission 
+                    FROM note_shares 
+                    WHERE NoteID = :note_id AND SharedWithUserID = :user_id
+                """)
+                shared_result = await session.execute(shared_query, {'note_id': note_id, 'user_id': user_id})
+                shared = shared_result.fetchone()
+                if not shared or shared.permission != 'update':
+                    raise HTTPException(status_code=401, detail='Unauthorized to update this note.')
             update_query = text("""
                 UPDATE NOTE 
                 SET Title = :new_title, UpdatedDate = :updated_date

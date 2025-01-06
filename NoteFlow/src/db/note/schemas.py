@@ -1,15 +1,12 @@
 from datetime import datetime
 from typing import Optional
 from sqlmodel import SQLModel, Field
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey,Boolean
 from sqlalchemy.orm import relationship
 from pydantic import BaseModel
-
-class Users(SQLModel, table=True):
-    userid: int = Field(sa_column=Column(Integer, primary_key=True, autoincrement=True))
-    name: str = Field(sa_column=Column(String(255), nullable=False))
-    password: str = Field(sa_column=Column(String(255), nullable=False))
-    email: str = Field(sa_column=Column(String(255), nullable=False, unique=True))
+from ..models import Users
+from sqlalchemy import Enum
+import enum
 
 
 class Note(SQLModel, table=True): 
@@ -20,7 +17,11 @@ class Note(SQLModel, table=True):
     document: Optional[str] = Field(sa_column=Column(Text, nullable=True)) 
     updateddate: Optional[datetime] = Field(sa_column=Column(DateTime, nullable=True)) 
     userid: int = Field(sa_column=Column(Integer, ForeignKey("users.userid"), nullable=False))
-    
+    visibility: bool = Field(default=False, sa_column=Column(Boolean, nullable=False, default=False))
+
+class PermissionEnum(str, enum.Enum):
+    view = "view"
+    update = "update"
 
 
 class NoteCreateModel(BaseModel):
@@ -30,7 +31,17 @@ class NoteResponseModel(BaseModel):
     pageid: int
     title: str
     createddate: datetime
+    visibility: bool
 
     class Config:
-        orm_mode = True
+            orm_mode = True
 
+class NoteResponseModel2(BaseModel):
+    pageid: int
+    title: str
+    createddate: datetime
+    permission: PermissionEnum
+    visibility: bool
+
+    class Config:
+            orm_mode = True
