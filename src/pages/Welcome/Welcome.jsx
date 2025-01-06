@@ -3,6 +3,7 @@ import Header from "./header";
 import classNames from 'classnames/bind';
 import welcome from "./Welcome.module.scss";
 import bg1 from "../../assets/bg1.png";
+import bgnote from "../../assets/bgnote.png"
 
 const cx = classNames.bind(welcome);
 
@@ -14,15 +15,46 @@ const WelcomePage = () => {
 
       <section className={cx('note_taking_simple')}>
         <div className={cx('content')}>
-          <h2>Note taking made simple</h2>
+          <h2>
+          <span className={cx('highlight')}>Note</span> taking <br/>made simple
+          </h2>
           <p>Passionately made by students.</p>
           <p>Noted, the all in one note taking website.</p>
         </div>
 
-        <div className="image">
+        <div className={cx('image')}>
           <img src={bg1} alt="Note Taking" />
         </div>
       </section>
+
+
+      <section className={cx('write_notes')}>
+      <div className={cx('content')}>
+        <h2>Write Notes</h2>
+        <p>Write any notes you want</p>
+      </div>
+      <div className = {cx('box')}>
+      <div className={cx('card')}>
+        <h3>Web Design</h3>
+        <p>Web design is a process of making a website for the user.</p>
+
+        <div className={cx('goals')}>
+          <h3>🎯 Goals</h3>
+          <p>The goal is to make the website easy to use for the user and drive the necessary growth.</p>
+        </div>
+
+        <div className={cx('what_to_do')}>
+          <h3>🏃 What to do?</h3>
+          <ul>
+            <li>Conduct Research</li>
+            <li>Develop wireframes</li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </section>
+
+
 
       <section>
         <h2>Write Notes</h2>
