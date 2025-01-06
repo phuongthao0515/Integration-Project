@@ -1,0 +1,176 @@
+.welcome_page {
+  font-family: Arial, sans-serif;
+  color: #333;
+  // background-color: #f9f9f9;
+  padding: 20px;
+
+  .note_taking_simple {
+    // margin: 20px auto;
+    // padding: 20px;
+    // background-color: #fff;
+    // border: 1px solid #ddd;
+    // border-radius: 10px;
+    // max-width: 800px;
+    // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    // gap: 20px;
+
+    .content {
+      flex: 1;
+
+      h2 {
+        font-size: 4rem;
+        line-height: 1.2;
+        margin-bottom: 10px;
+        color:#f57c00;
+        font-family: 'Red Hat Display', sans-serif;
+        font-weight: 100;
+        word-break: break-word;
+
+        span {
+          color: #f57c00; // Orange for 'note'
+          font-weight: bold;
+        }
+
+        .highlight {
+          color: #705C53; // Brown for other text
+        }
+      }
+
+      p {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 10px;
+          font-size: 1rem;
+
+          span {
+            font-weight: bold;
+            color: #f57c00;
+          }
+        }
+      }
+    }
+
+    .image {
+      flex: 1;
+      text-align: right;
+      margin-right: 40px;
+
+      img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+
+      }
+    }
+  }
+
+  section {
+    margin: 40px 0;
+
+    h2 {
+      font-size: 1.8rem;
+      color: #f57c00;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 10px 0;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin: 5px 0;
+
+        span {
+          font-weight: bold;
+        }
+      }
+    }
+
+    .features {
+      display: flex;
+      gap: 20px;
+
+      div {
+        background-color: #fff;
+        padding: 10px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        text-align: center;
+      }
+    }
+  }
+
+  .cta {
+    text-align: center;
+
+    h3 {
+      font-size: 1.5rem;
+
+      span {
+        color: #f57c00;
+      }
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #f57c00;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e67e22;
+      }
+    }
+
+    .contact-form {
+      margin-top: 30px;
+
+      h4 {
+        font-size: 1.2rem;
+      }
+
+      form {
+        margin-top: 15px;
+
+        input,
+        textarea {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #ddd;
+          border-radius: 5px;
+        }
+
+        button {
+          background-color: #f57c00;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          cursor: pointer;
+
+          &:hover {
+            background-color: #e67e22;
+          }
+        }
+      }
+    }
+  }
+}
