@@ -94,27 +94,59 @@ function Dashboard() {
                         </div>
                     </div>
                 </section>
+    <h2>
+       <img src={upcoming} alt="Upcoming events" />
+        Upcoming events
+    </h2>
+    <div className={cx('events')}>
+        <div className={cx('event-day')}>
+        <div class="event-header">
+            <img src={card9} alt="Calendar Icon" class="icon"/>
+            <h3>January 9</h3>
+        </div>
+        <ul>
+            <li>
+                <input type="checkbox" id="task1"/>
+                <label for="task1">Work on frontend tasks</label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2"/>
+                <label for="task2">Complete backend tasks</label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2"/>
+                <label for="task3">Review report and improve system design</label>
+            </li>
+        </ul>
+        </div>
 
-                <section className={cx('quick-access')}>
-                    <h2>Pin to home for quickly access</h2>
-                    <div className={cx('pins')}>
-                        <div className={cx('pin')}>
-                            <h3>Blockchain</h3>
-                            <p>Some description about Blockchain</p>
-                        </div>
-                        {/* Add more pins */}
-                    </div>
-                </section>
-                <section className={cx('new-ideas')}>
-                    <h2>New ideas</h2>
-                    <ul>
-                        <li>
-                            <h3>Title Here</h3>
-                            <p>Create a mobile app UI Kit...</p>
-                        </li>
-                        {/* Add more ideas */}
-                    </ul>
-                </section>
+        <div className={cx('event-day')}>
+        <div class="event-header">
+            <img src={card10} alt="Calendar Icon" class="icon"/>
+            <h3>January 10</h3>
+        </div>
+        <ul>
+            <li>
+                <input type="checkbox" id="task1"/>
+                <label for="task1">Read and take notes on academic materials</label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2"/>
+                <label for="task2">Submit Assignment tasks</label>
+            </li>
+            <li>
+                <input type="checkbox" id="task2"/>
+                <label for="task3">Do light exercises</label>
+            </li>
+        </ul>
+        </div>
+   
+</section>
+
+
+
+                        
+              
             </main>
         </div>
     );

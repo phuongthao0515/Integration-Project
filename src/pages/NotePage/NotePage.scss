@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;700&display=swap');
+
+$n1-color: #F8EDE3;
+$n2-color: #DFD3C3;
+$n3-color: #D0B8A8;
+$n4-color: #8D493A;
+$n5-color: #d2c2ac;
+$font-family: "Roboto Flex",
+sans-serif;
+
+.note-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: $n1-color;
+    height: 100vh;
+    font-family: $font-family;
+}
+
+.editor-menu {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 10px;
+
+    .upload-button,
+    .menu-button {
+        background-color: $n2-color;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-family: $font-family;
+        font-size: 16px;
+        color: $n4-color;
+        transition: background-color 0.3s;
+        margin-right: 10px;
+        display: inline-block;
+        text-align: center;
+        line-height: 1.5;
+        text-decoration: none;
+
+        &:hover {
+            background-color: $n3-color;
+        }
+    }
+
+    .return-icon {
+        width: 14px;
+        height: 14px;
+        margin-right: 10px;
+    }
+}
+
+.editor-content {
+    width: 100%;
+    max-width: 80%;
+    background-color: $n2-color;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-family: $font-family;
+    font-size: 24px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.popup-content {
+    background: $n1-color;
+    padding: 30px;
+    border-radius: 10px;
+    width: 700px;
+    font-size: 20px;
+    height: 500px;
+    text-align: center;
+    line-height: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.popup-content label {
+    font-size: 30px;
+    margin-top: 40px;
+    color: $n4-color;
+}
+
+.popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.popup input,
+.popup select {
+    margin-top: 30px;
+    padding: 5px;
+    width: 100%;
+    font-size: 20px;
+    border: 1px solid $n3-color;
+    border-radius: 5px;
+}
+
+.popup button {
+    padding: 10px 20px;
+    background-color: $n4-color;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: $n1-color;
+}
+
+.popup button:hover {
+    background-color: $n3-color;
+}
+
+.popup label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.popup-email {
+    margin-top: 20px;
+}
+
+.email-list {
+    list-style-type: none;
+    padding: 0;
+    margin-top: 10px;
+    color: $n4-color;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid $n3-color;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.email-list::-webkit-scrollbar {
+    display: none;
+}
+
+.email-list li {
+    margin-bottom: 10px;
+    padding: 5px;
+    border-bottom: 1px solid $n3-color;
+}
+
+.email-list li:last-child {
+    border-bottom: none;
+}
+
+.popup-role {
+    margin-top: 50px;
+}

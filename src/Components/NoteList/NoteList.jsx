@@ -5,9 +5,14 @@ import closePic from '../../assets/close.png';
 import deletePic from '../../assets/delete.png';
 import morePic from '../../assets/more.png';
 import plusPic from '../../assets/add-task.png';
+import { Link } from 'react-router-dom';
 
 const NoteList = () => {
-    const [notes, setNotes] = useState([]);
+    const [notes, setNotes] = useState([
+        { id: 1, name: 'Note 1', content: '<h1>Note 1 Content</h1>' },
+        { id: 2, name: 'Note 2', content: '<h1>Note 2 Content</h1>' },
+        { id: 3, name: 'Note 3', content: '<h1>Note 3 Content</h1>' },
+    ]);
     const [newNoteName, setNewNoteName] = useState('');
     const [editNoteId, setEditNoteId] = useState(null);
     const [newName, setNewName] = useState('');
@@ -17,9 +22,12 @@ const NoteList = () => {
         const newNote = {
             id: notes.length + 1,
             name: newNoteName || 'New Note',
+            content: '<h1>New Note Content</h1>',
         };
         setNotes([...notes, newNote]);
         setNewNoteName('');
+        setEditNoteId(newNote.id); // Set the editNoteId to the new note's ID
+        setNewName(''); // Clear the newName state
     };
 
     const updateName = (id) => {
@@ -60,15 +68,9 @@ const NoteList = () => {
                                     className="name"
                                 />
                             ) : (
-                                <div
-                                    className="note-title"
-                                    onDoubleClick={() => {
-                                        setEditNoteId(note.id);
-                                        setNewName(note.name);
-                                    }}
-                                >
+                                <Link to={`/notes/${note.id}`} className="note-title">
                                     {note.name || 'New Note'}
-                                </div>
+                                </Link>
                             )}
                         </div>
                         <button className="btn" onClick={() => handleModalToggle(note.id)}>

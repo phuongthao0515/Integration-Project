@@ -73,13 +73,13 @@ const Setting = ({ isOpen, onClose }) => {
                                 />
                             </div>
                             <div className="form-control">
-                                <label htmlFor="username">Change Username</label>
+                                <label htmlFor="email">Change Email</label>
                                 <input
-                                    type="text"
-                                    id="username"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    placeholder="Enter new username"
+                                    type="email"
+                                    id="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    placeholder="Enter new email"
                                 />
                             </div>
                         </div>

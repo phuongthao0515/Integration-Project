@@ -90,6 +90,7 @@ function Login() {
                     <div className={cx('form')}>
                         <label>
                             Email
+                            Email
                             <input
                                 type="email"
                                 placeholder="Email"
