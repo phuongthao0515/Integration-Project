@@ -1,26 +1,11 @@
 from typing import Optional
 from datetime import datetime
-from sqlmodel import SQLModel, Field, Column, Integer, String, Text, DateTime, ForeignKey
-
-class Users(SQLModel, table=True):
-    userid: int = Field(
-        sa_column=Column(Integer, primary_key=True, autoincrement=True)
-    )
-    name: str = Field(
-        sa_column=Column(String(255), nullable=False)
-    )
-    password: str = Field(
-        sa_column=Column(String(255), nullable=False)
-    )
-    email: str = Field(
-        sa_column=Column(String(255), nullable=False, unique=True)
-    )
-
+from sqlmodel import SQLModel, Field
+from ..models import Users
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean
 
 class Plan(SQLModel, table=True):
-    planid: Optional[int] = Field(
-        default=None, primary_key=True
-    )
+    planid: int = Field(sa_column=Column(Integer, primary_key=True, autoincrement=True)) 
     userid: int = Field(
         sa_column=Column(Integer, ForeignKey("users.userid"), nullable=False)
     )
@@ -34,7 +19,10 @@ class Plan(SQLModel, table=True):
     content: Optional[str] = Field(
         sa_column=Column(Text, nullable=True)
     )
-
+    importance: bool = Field(
+        default=False, 
+        sa_column=Column(Boolean, nullable=False)
+    )
 
 class PlanCreateModel(SQLModel):
     """
@@ -44,22 +32,41 @@ class PlanCreateModel(SQLModel):
     {
       "createDate": "1/9/2004",
       "dueDate": "2025-01-03T10:00:00",
-      "content": "jifnfnf.txt"
+      "content": "jifnfnf.txt",
+      "importance": true
     }
     """
-    createDate: datetime
+    createddate: datetime
     dueDate: Optional[datetime]
     content: Optional[str]
+    importance: Optional[bool] = False
 
+    def to_naive(self):
+        self.createddate = self.createddate.replace(tzinfo=None) if self.createddate.tzinfo else self.createddate
+        if self.dueDate:
+            self.dueDate = self.dueDate.replace(tzinfo=None) if self.dueDate.tzinfo else self.dueDate
 
 class PlanUpdateModel(SQLModel):
+    """
+    Used for partial updates of the Plan.
+    Example JSON:
+    {
+      "dueDate": "2025-01-03T10:00:00",
+      "content": "new_content.txt",
+      "importance": false
+    }
+    """
     dueDate: Optional[datetime]
     content: Optional[str]
+    importance: Optional[bool]
 
-
+    def to_naive(self):
+        if self.dueDate:
+            self.dueDate = self.dueDate.replace(tzinfo=None) if self.dueDate.tzinfo else self.dueDate
 
 class PlanResponseModel(SQLModel):
     planId: int
     createDate: datetime
     dueDate: Optional[datetime]
     content: Optional[str]
+    importance: bool

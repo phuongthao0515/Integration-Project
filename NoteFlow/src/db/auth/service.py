@@ -18,7 +18,7 @@ pwd_context = CryptContext(
 
 class LoginService: 
     async def login(self,userdata:UserLoginModel,session:AsyncSession): 
-        query = text('SELECT * FROM USERS WHERE EMAIL = :email')
+        query = text('SELECT * FROM public."users" WHERE EMAIL = :email')
         results = await session.execute(query,{'email':userdata.email})
         user = results.fetchone()
         if not user: 
@@ -46,8 +46,8 @@ class LoginService:
                 return JSONResponse(
                     content={
                         "message": "Log in successful",
-                        "access_token": access_token.decode("utf-8"),
-                        "refresh_token": refresh_token.decode("utf-8"),
+                        "access_token": access_token,
+                        "refresh_token": refresh_token,
                         "user":{
                             'user_id': user.userid,
                         }
