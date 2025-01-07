@@ -27,7 +27,7 @@ const WelcomePage = () => {
           <span className={cx('highlight')}>Note</span> taking <br/>made simple
           </h2>
           <p>Passionately made by students.</p>
-          <p>Noted, the all in one note taking website.</p>
+          <p>NoteFlow, the all in one note taking website.</p>
         </div>
 
         <div className={cx('image')}>
