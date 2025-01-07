@@ -4,6 +4,9 @@ import classNames from 'classnames/bind';
 import welcome from "./Welcome.module.scss";
 import bg1 from "../../assets/bg1.png";
 import bg2 from "../../assets/bg2.png";
+import cal from "../../assets/cal.png";
+import plan1 from "../../assets/plan1.png";
+import bg4 from "../../assets/bg4.png";
 
 const cx = classNames.bind(welcome);
 
@@ -60,12 +63,11 @@ const WelcomePage = () => {
         <p>Write any notes you want</p>
       </div>
     </section>
-
-    {/* Đường nối */}
-    <svg className={cx('connector')} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-  <path d="M10 20 L50 50 L90 20" stroke="#F57C00" strokeWidth="2" fill="none" />
-  <polygon points="90,20 85,25 95,25" fill="#F57C00" /> {/* Arrowhead */}
-</svg>
+{/* 
+  <svg width="200" height="100" class="connector">
+  <path d="M 0 50 Q 100 0 200 50" stroke="#4D2114" fill="transparent" stroke-width="2"/>
+  <polygon points="300,50 190,45 190,55" fill="#4D2114"/> 
+</svg>  */}
 
   {/* Section Plan */}
   <section className={cx('plan_day')}>
@@ -73,26 +75,57 @@ const WelcomePage = () => {
       <h2>Plan your day</h2>
       <p>Make sure your day is well planned</p>
     </div>
-    <div className={cx('box')}>
-      <div className={cx('card')}>
-        <h3>Monday</h3>
-        <p>May, 3rd</p>
-        <ul>
-          <li>Do laundry</li>
-          <li>Call mom</li>
-          <li>Daily meeting</li>
-        </ul>
+
+     <div className={cx('boxes')}>
+     
+      <div className = {cx('card', 'original')}>
+      <div className={cx('icon_bg3')}>
+    <img src={cal} alt="Calendar Icon" />
+  </div>
+  <h3>Monday</h3>
+  <p>May, 15th</p>
+  <div className={cx('icon_plan')}>
+    <img src={plan1} alt="Plan Icon" />
+  </div>
       </div>
-      <div className={cx('card')}>
-        <h3>Other Tasks</h3>
-        <ul>
-          <li>Go to school</li>
-          <li>Study</li>
-          <li>Cooking</li>
-        </ul>
-      </div>
+      
+      <div className={cx('task_row')}>
+    <div className={cx('card', 'primary')}>
+      <ul>
+        <li>Do laundry</li>
+        <li>Morning run</li>
+        <li>Call parents</li>
+        <li>Go to work</li>
+        <li>Daily meeting</li>
+        <li>Buy dinner</li>
+      </ul>
     </div>
+    <div className={cx('card', 'secondary')}>
+      <ul>
+        <li>Go to school</li>
+        <li>Study</li>
+        <li>Do homework</li>
+        <li>Cooking</li>
+        <li>Play sport</li>
+        <li>Code</li>
+      </ul>
+    </div>
+  </div>
+  </div>
   </section>
+
+  <section className={cx('time')}>
+  <div className={cx('content')}>
+      <h2>Pomodoro</h2>
+      <p>It keeps your mind sharp</p>
+    </div>
+    
+  <div className={cx('pomo_image')}>
+  <img src={bg4} alt="pomodoro Icon" />
+    </div>  
+  </section>
+
+
 </section>
 
       <section>

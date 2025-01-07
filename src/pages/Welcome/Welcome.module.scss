@@ -96,6 +96,7 @@
       // text-align: left;
       position: relative;
       margin-left: 350px;
+      // border: 2px solid #4D2114;
 
       .icon-bg2 {
         position: absolute;
@@ -199,9 +200,13 @@
   
 //  connector arrow
   .connector {
-    width: 100%;
-    height: 50px;
-    margin-top: 40px;
+  position: absolute; /* Để định vị chính xác */
+  top: 50%; /* Căn giữa theo chiều dọc */
+  left: 0;
+  width: 100px; /* Độ dài của connector */
+  height: 2px; /* Độ dày của connector */
+  background-color: #4D2114; /* Màu nâu đậm */
+  transform: translateY(-50%); /* Căn chỉnh chính xác */
     
     path {
       stroke: #4D2114; /* Change this to the color you want */
@@ -214,11 +219,15 @@
   }
    // plan
    .plan_day {
+    display: flex;
+    align-items: flex-start;
     padding: 40px;
+    justify-content: space-between;
 
     .content {
+      flex: 1;
       text-align: left;
-      margin-left: 150px;
+      margin-left: 350px;
       h2 {
         font-size: 3em;
         color: #f57c00;
@@ -234,47 +243,129 @@
       }
     }
 
-    .box {
+    .boxes {
+      text-align: center; /* Đảm bảo nội dung trong boxes được căn giữa */
+      margin-right: 0; /* Không cần margin-right vì nó đã ở bên phải */
+      width: 400px; /* Đặt kích thước cụ thể cho boxes */
+      padding: 20px;
+      background-color: #fff6ec;
+      border-radius: 16px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
       display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      margin-right: 250px;
+      // flex: 1;
+    
       .card {
-        width: 45%;
-        background-color: #ffffff;
-        border-radius: 15px;
-        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        
+        border-radius: 12px;
+        padding: 16px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+
         h3 {
-          font-size: 20px;
+          font-size: 1.5em;
           color: #333333;
+          margin-bottom: 5px;
         }
-
+  
         p {
-          font-size: 16px;
-          color: #555555;
+          font-size: 1em;
+          color: #777777;
+          margin-bottom: 15px;
         }
-
+  
         ul {
           list-style: none;
-          padding-left: 0;
-
+          padding: 0;
+  
           li {
-            font-size: 14px;
-            color: #333333;
-            margin-bottom: 8px;
-
+            font-size: 1em;
+            color: #404040;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+  
             &:before {
-              content: '✔️';
+              content: "○";
+              color: #f48024; // Adjust color of the icon
               margin-right: 10px;
             }
           }
         }
+    
+        &.original {
+          width: 100%;
+          background-color: #fffdf7;
+          border: 2px solid #4D2114;
+          text-align: left;
+          position: relative;
+
+          .icon_bg3 {
+            position: absolute;
+            top: -40px; /* Điều chỉnh vị trí */
+            left: -40px; /* Điều chỉnh vị trí */
+            width: 70px; /* Kích thước hình ảnh */
+            height: 70px;
+            z-index: 1;
+            img {
+              width: 100%; /* Đảm bảo hình ảnh tuân theo kích thước container */
+              height: auto;
+            }
+          }
+        
+          .icon_plan {
+            position: absolute; /* Nếu cần định vị */
+            bottom: 10px; /* Điều chỉnh vị trí */
+            right: 10px; /* Điều chỉnh vị trí */
+            width: 50px; /* Kích thước hình ảnh */
+            height: 50px;
+            img {
+              width: 100%; /* Đảm bảo hình ảnh tuân theo kích thước container */
+              height: auto;
+            }
+          }
+        }
+    
+        &.primary,
+        &.secondary {
+          width: 48%; /* Chiếm 48% mỗi card */
+          background-color: #fffdf7;
+          border: 2px solid #4D2114;
+        }
       }
+    
+      .task_row {
+        display: flex;
+        justify-content: space-between; 
+        width: 100%; 
+      }     
     }
   }
-}
+
+  .time {
+    .content {
+      flex: 1;
+      text-align: right;
+      margin-right: 350px;
+      h2 {
+        font-size: 3em;
+        color: #f57c00;
+        margin-bottom: 10px;
+        font-family: 'Red Hat Display', sans-serif;
+        font-weight: 300;
+      }
+
+      p {
+        font-size: 1.5em;
+        color: #4D2114;
+        font-weight: 300;
+      }
+    }
+
+  }
+ 
   
   section {
     margin: 40px 0;
@@ -316,63 +407,65 @@
     }
   }
 
-  .cta {
-    text-align: center;
+//   .cta {
+//     text-align: center;
 
-    h3 {
-      font-size: 1.5rem;
+//     h3 {
+//       font-size: 1.5rem;
 
-      span {
-        color: #f57c00;
-      }
-    }
+//       span {
+//         color: #f57c00;
+//       }
+//     }
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #f57c00;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+//     button {
+//       margin-top: 20px;
+//       padding: 10px 20px;
+//       font-size: 1rem;
+//       background-color: #f57c00;
+//       color: #fff;
+//       border: none;
+//       border-radius: 5px;
+//       cursor: pointer;
 
-      &:hover {
-        background-color: #e67e22;
-      }
-    }
+//       &:hover {
+//         background-color: #e67e22;
+//       }
+//     }
 
-    .contact-form {
-      margin-top: 30px;
+//     .contact-form {
+//       margin-top: 30px;
 
-      h4 {
-        font-size: 1.2rem;
-      }
+//       h4 {
+//         font-size: 1.2rem;
+//       }
 
-      form {
-        margin-top: 15px;
+//       form {
+//         margin-top: 15px;
 
-        input,
-        textarea {
-          width: 100%;
-          padding: 10px;
-          margin-bottom: 10px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
-        }
+//         input,
+//         textarea {
+//           width: 100%;
+//           padding: 10px;
+//           margin-bottom: 10px;
+//           border: 1px solid #ddd;
+//           border-radius: 5px;
+//         }
 
-        button {
-          background-color: #f57c00;
-          color: #fff;
-          border: none;
-          padding: 10px 20px;
-          cursor: pointer;
+//         button {
+//           background-color: #f57c00;
+//           color: #fff;
+//           border: none;
+//           padding: 10px 20px;
+//           cursor: pointer;
 
-          &:hover {
-            background-color: #e67e22;
-          }
-        }
-      }
-    }
-  }
+//           &:hover {
+//             background-color: #e67e22;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+}
 }
