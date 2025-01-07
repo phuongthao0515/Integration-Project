@@ -19,7 +19,7 @@ const WelcomePage = () => {
 
 {/* note taking simple */}
       <section className={cx('note_taking_simple')}>
-        <div className={cx('content')}>
+        <div className={cx('contentt')}>
           <h2>
           <span className={cx('highlight')}>Note</span> taking <br/>made simple
           </h2>

@@ -1,5 +1,5 @@
 .welcome_page {
-  font-family: Arial, sans-serif;
+  font-family: 'Red Hat Display' , sans-serif;
   color: #333;
   background-color: #fff6ec;
   padding: 20px;
@@ -17,13 +17,14 @@
     width: 100%;
    
 
-    .content {
+    .contentt {
       flex: 1;
       // padding-left:40px;
       // margin-right: 100px;
       // margin-left: 40px;
       padding: 0 40px;
       margin: 0;
+      font-family: 'Red Hat Display', sans-serif;
       h2 {
         font-size: 5rem;
         line-height: 1.2;
