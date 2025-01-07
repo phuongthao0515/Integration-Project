@@ -3,6 +3,7 @@ import {BlockNoteView} from "@blocknote/mantine"
 import {useCreateBlockNote} from "@blocknote/react"
 
 import "@blocknote/mantine/style.css"
+import { useState } from "react"
 
 
 const Editor = ( {onChange, initialContent ,editable}) => {
