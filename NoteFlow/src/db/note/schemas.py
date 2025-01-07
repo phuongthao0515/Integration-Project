@@ -48,3 +48,9 @@ class NoteResponseModel2(BaseModel):
 
 class ChangeTitleModel(BaseModel):
      title: str
+
+class ChangeVisibilityModel(BaseModel):
+     visibility: bool
+
+class ChangeContentModel(BaseModel):
+     content: str

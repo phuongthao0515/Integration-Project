@@ -90,6 +90,7 @@ $link-hover-color: $n4-color;
     background: $n5-color;
     padding: 12px;
     border-radius: 8px;
+
 }
 
 .item {
@@ -97,6 +98,7 @@ $link-hover-color: $n4-color;
     align-items: center;
     cursor: pointer;
     width: 100%;
+    
 }
 
 .item .icon {
@@ -175,4 +177,10 @@ $link-hover-color: $n4-color;
 
 .actions-list button span {
     margin-left: 5px;
+}
+.active {
+    .note-title{
+        color: white;
+    }
+  background-color: #7d654f;
 }

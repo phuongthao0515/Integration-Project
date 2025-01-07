@@ -69,7 +69,9 @@ function Dashboard() {
                                             <img src={note.img || ''} alt="SQL" />
                                             <p>{note.title}</p>
                                             <span>
-                                                {formatDistanceToNow(new Date(note.createddate), { addSuffix: true })}
+                                                {formatDistanceToNow(new Date(note.createddate.split('.')[0]), {
+                                                    addSuffix: true,
+                                                })}
                                             </span>
                                         </div>
                                     ),

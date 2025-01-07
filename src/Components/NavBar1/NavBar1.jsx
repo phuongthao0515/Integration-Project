@@ -54,25 +54,25 @@ const NavBar1 = () => {
                     <Dropdown onAddNote={openNoteInput} onAddPlan={openPlanInput} />
 
                     <div className="nav-item">
-                        <Link to="/home">
+                        <Link to="/home" className="flex gap-3">
                             <img src={homePic} alt="Home" className="nav-icon" />
                             <Link to="/home">Home</Link>
                         </Link>
                     </div>
                     <div className="nav-item">
-                        <Link to="/today">
+                        <Link to="/today" className="flex gap-3">
                             <img src={todayPic} alt="Today" className="nav-icon" />
                             <Link to="/today">Today</Link>
                         </Link>
                     </div>
                     <div className="nav-item">
-                        <Link to="/upcoming">
+                        <Link to="/upcoming" className="flex gap-3">
                             <img src={upcomingPic} alt="Upcoming" className="nav-icon" />
                             <Link to="/upcoming">Upcoming</Link>
                         </Link>
                     </div>
                     <div className="nav-item">
-                        <Link to="/inbox">
+                        <Link to="/inbox" className="flex gap-3">
                             <img src={inboxPic} alt="Inbox" className="nav-icon" />
                             <Link to="/inbox">Inbox</Link>
                         </Link>

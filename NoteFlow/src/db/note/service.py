@@ -28,6 +28,7 @@ class NoteService:
                     if shared:
                         permission = shared.permission
                         return {
+                            'pageid': note.pageid,
                             'created_date': note.createddate,
                             'content': note.content,
                             'title': note.title,
@@ -41,6 +42,7 @@ class NoteService:
                         raise HTTPException(status_code=401, detail='UnAuthorized')
                 else:
                     return {
+                        'pageid': note.pageid,
                         'created_date': note.createddate,
                         'content': note.content,
                         'title': note.title,
@@ -219,4 +221,26 @@ class NoteService:
             return {"message": f"Note {note_id} title updated successfully."}
         except Exception as e:
             print(f"Error in update_title: {e}")
+            raise e
+    async def update_note_visibility(self, user_id: int, note_id: int, session: AsyncSession, visibility: bool):
+        """update a note visibility."""
+        try:
+            query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+
+            if note.userid != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to change visibility of this note.")
+
+            update_query = text("UPDATE NOTE SET Visibility = :visibility WHERE PageID = :note_id")
+            await session.execute(update_query, {'visibility': visibility, 'note_id': note_id})
+            await session.commit()
+
+            return {"message": f"Note {note_id} visibility updated to {visibility}."}
+
+        except Exception as e:
+            print(f"Error in share_note: {e}")
             raise e
