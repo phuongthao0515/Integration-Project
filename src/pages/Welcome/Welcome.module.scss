@@ -581,8 +581,107 @@
   }
 }
 
-
-
-
 }
+
+.contact {
+  .container {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #705C53; // Màu nền tổng quan
+    padding: 3rem 1rem;
+    border-radius: 30px;
+
+    .get_touch {
+      flex-basis: 40%; // Chiều rộng cụ thể của hình chữ nhật (60% container)
+      margin-left: auto; // Đẩy sang phải
+      background-color: #fff; // Hình chữ nhật trắng
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      align-items: right;
+      border: 1px solid #4D2114;
+
+      h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #000000;
+        font-family: 'Red Hat Display', sans-serif;
+        font-weight: 600;
+      }
+
+      p {
+        margin-bottom: 1.5rem;
+        color: #666;
+        font-size: 1rem;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        input,
+        textarea {
+          margin-bottom: 1rem;
+          padding: 0.75rem;
+          border: 1px solid #ccc;
+          border-radius: 10px;
+          font-size: 1rem;
+          border: 1.5px solid #4D2114;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+          &:focus {
+            outline: none;
+            border-color: #e67e22;
+          }
+        }
+
+        button {
+          background-color: #e67e22;
+          color: #fff;
+          padding: 0.75rem;
+          border-radius: 10px;
+          font-size: 1rem;
+          cursor: pointer;
+          border: 1.5px solid #4D2114;
+
+          &:hover {
+            background-color: #d35400;
+          }
+        }
+      }
+    }
+
+    .content {
+      flex: 1;
+      align-items: left;
+      h4 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-family: 'Red Hat Display', sans-serif;
+        color: #FFFFFF;
+        font-weight: 50;
+      }
+
+      p {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+        color: #FFFFFF;
+        font-weight: 200;
+      }
+
+      a {
+        color: #e67e22;
+        text-decoration: underline;
+
+        &:hover {
+          color: #d35400;
+        }
+      }
+    }
+  }
+}
+
 }

@@ -190,16 +190,32 @@ const WelcomePage = () => {
 
 </section>
 
-
-
-        <div className="contact-form">
-          <h4>We are always ready to help you and answer your question</h4>
+<section className={cx('contact')}>
+      <section className={cx('container')}>
+       
+        <section className={cx('get_touch')}>
+          <h2>Get in Touch</h2>
+          <p>Tell us your goals and what note taking means to you</p>
           <form>
-            <input type="email" placeholder="Your email" />
-            <textarea placeholder="Your question"></textarea>
+            <input type="text" placeholder="Name" required />
+            <input type="email" placeholder="Email" required />
+            <textarea placeholder="Message" required></textarea>
             <button type="submit">Submit</button>
           </form>
-        </div>
+        </section>
+
+       
+        <section className={cx('content')}>
+          <h4>We are always ready to help you and answer your question</h4>
+          <p>Email us anytime or connect with us on our social networks.</p>
+          <a href="mailto:example@gmail.com">NoteFlow@gmail.com</a>
+        </section>
+      </section>
+    </section>
+
+
+
+
       </div>
     </div>
   );
