@@ -1,34 +1,29 @@
-import { BlockNoteView } from '@blocknote/mantine';
-import { useCreateBlockNote } from '@blocknote/react';
-import '@blocknote/mantine/style.css';
-import { useState, useEffect } from 'react';
 
-const Editor = ({ onChange, initialContent, editable }) => {
-    const [editorContent, setEditorContent] = useState(initialContent);
+import {BlockNoteView} from "@blocknote/mantine"
+import {useCreateBlockNote} from "@blocknote/react"
 
-    useEffect(() => {
-        setEditorContent(initialContent);
-    }, [initialContent]);
+import "@blocknote/mantine/style.css"
+import { useState } from "react"
 
-    const handleUpload = (file) => {
-        // Handle file upload logic if needed
-    };
 
-    const editor = useCreateBlockNote({
-        initialContent: editorContent ? JSON.parse(editorContent) : undefined,
-        uploadFile: handleUpload,
-    });
+const Editor = ( {onChange, initialContent ,editable}) => {
 
-    return (
-        <div>
-            <BlockNoteView
-                key={editorContent} // Triggers re-mount when content changes
-                editor={editor}
-                editable={editable}
-                onChange={() => onChange(JSON.stringify(editor.document, null, 2))}
-            />
-        </div>
-    );
-};
+  const handleUpload =  (File)=>{
+    
+  }
+  console.log()
+  const editor= useCreateBlockNote({
+    initialContent: initialContent
+      ? (JSON.parse(initialContent))
+      : undefined,
+    uploadFile:handleUpload
+  })
+ 
+  return (
+    <div>
+      <BlockNoteView editor={editor} editable={editable} onChange={()=>onChange(JSON.stringify(editor.document,null,2))}/>
+    </div>
+  )
+}
 
-export default Editor;
+export default Editor

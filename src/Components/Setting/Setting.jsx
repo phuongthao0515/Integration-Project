@@ -7,6 +7,7 @@ const Setting = ({ isOpen, onClose }) => {
     const [profilePic, setProfilePic] = useState(userIcon);
     const [name, setName] = useState(user.username);
     const [username, setUsername] = useState('');
+    const [email,setEmail] = useState('');
 
     if (!isOpen) return null;
 
