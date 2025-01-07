@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
-=======
-import { useState } from 'react';
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
 import { Link } from 'react-router-dom';
 import './NavBar1.scss';
 
@@ -22,7 +18,6 @@ const NavBar1 = () => {
     const [isNoteInputOpen, setIsNoteInputOpen] = useState(false);
     const [isPlanInputOpen, setIsPlanInputOpen] = useState(false);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
-<<<<<<< HEAD
     const [name, setName] = useState('');
     const [profilePicState, setProfilePic] = useState(defaultProfilePic);
 
@@ -30,9 +25,6 @@ const NavBar1 = () => {
         fetchUserData();
     }, []);
 
-=======
-    const user = JSON.parse(localStorage.getItem('user'));
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
     const openNoteInput = () => {
         setIsNoteInputOpen(true);
     };
@@ -85,13 +77,8 @@ const NavBar1 = () => {
         <div className="navbar-container">
             <header className="header">
                 <div className="profile" onClick={openSetting}>
-<<<<<<< HEAD
                     <img src={profilePicState} alt="Profile" className="profile-pic" />
                     <span className="profile-name">{name}</span>
-=======
-                    <img src={profilePic} alt="Profile" className="profile-pic" />
-                    <span className="profile-name">{user.username}</span>
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
                 </div>
                 <nav className="navbar">
                     <Dropdown onAddNote={openNoteInput} onAddPlan={openPlanInput} />
