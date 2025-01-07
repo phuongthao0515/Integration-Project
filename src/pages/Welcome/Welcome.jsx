@@ -150,6 +150,7 @@ const WelcomePage = () => {
       <img src={team3} alt="Team Icon" />
     </div>
   </div>
+  
   <div className={cx('team_image')}>
       <img src={team} alt="Team Icon" />
     </div>
@@ -167,7 +168,7 @@ const WelcomePage = () => {
     </div>
   </div>
 
-  <div className={cx('team_image')}>
+  <div className={cx('chat_image')}>
       <img src={team} alt="Team Icon" />
     </div>
   </section>
