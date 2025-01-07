@@ -6,13 +6,14 @@ import UpcomingMonthPage from '../pages/UpcomingPage/UpcomingMonthPage';
 import Login from '../pages/Login/Login';
 import HomePage from '../pages/HomePage/HomePage';
 import NotePage from '../pages/NotePage/NotePage';
-import WelcomePage from '../pages/HomePage/Welcome';
+import WelcomePage from '../pages/Welcome/Welcome';
 import Header from '../pages/Welcome/header';
+import NoteID from '../pages/HomePage/NoteID';
 
 
 export const publicRoutes = [
     { path: '/header', component: <Header /> },
-    { path: '/', component: <WelcomePage /> },
+       { path: '/', component: <WelcomePage /> },
     { path: '/signup', component: <SignUp /> },
     { path: '/today', component: <TodayPage /> },
     { path: '/upcoming-day', component: <UpcomingDayPage /> },
