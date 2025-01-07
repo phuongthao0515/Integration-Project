@@ -13,6 +13,7 @@ import team2 from "../../assets/team2.png";
 import team3 from "../../assets/team3.png";
 import chat from "../../assets/bg7.jpg";
 import chat1 from "../../assets/chat1.png";
+import ready from "../../assets/bg8.png";
 
 
 const cx = classNames.bind(welcome);
@@ -176,13 +177,20 @@ const WelcomePage = () => {
     </div>
   </section>
 
+<section className={cx('ready')}>
+  <div className={cx('content')}>
+  <div className={cx('ready_image')}>
+      <img src={ready} alt="Ready Icon" />
+    </div>
+    <h2>Ready to take your <span className={cx('highlight')}>notes</span> <br/> to the next level?</h2>
+    <button className={cx('button')}>Try Now</button>
+  </div>
 </section>
 
 
+</section>
 
-      <div className="cta">
-        <h3>Ready to take your <span>notes</span> to the next level?</h3>
-        <button>Get Started</button>
+
 
         <div className="contact-form">
           <h4>We are always ready to help you and answer your question</h4>
@@ -193,7 +201,6 @@ const WelcomePage = () => {
           </form>
         </div>
       </div>
-    </div>
     </div>
   );
 };
