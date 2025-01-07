@@ -42,8 +42,9 @@ const TodayPage = () => {
                         return {
                             id: p.planId,
                             content: p.content,
-                            dueDate: dateObj.toISOString().split('T')[0],
+                            dueDate: p.dueDate.split('T')[0],
                             dueTime: dateObj.toTimeString().slice(0, 5),
+
                             importance: p.importance,
                         };
                     });
@@ -125,6 +126,7 @@ const TodayPage = () => {
         setEditedDueDate(plan.dueDate);
         setEditedDueTime(plan.dueTime);
         setEditedImportance(plan.importance);
+        console.log(plan.dueDate);
     };
 
     const saveEdit = async (id, wasImportant) => {
