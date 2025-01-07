@@ -24,6 +24,7 @@
       // margin-left: 40px;
       padding: 0 40px;
       margin: 0;
+      font-family: 'Red Hat Display', sans-serif;
       h2 {
         font-size: 5rem;
         line-height: 1.2;
@@ -198,25 +199,25 @@
     }
   }
   
-//  connector arrow
-  .connector {
-  position: absolute; /* Để định vị chính xác */
-  top: 50%; /* Căn giữa theo chiều dọc */
-  left: 0;
-  width: 100px; /* Độ dài của connector */
-  height: 2px; /* Độ dày của connector */
-  background-color: #4D2114; /* Màu nâu đậm */
-  transform: translateY(-50%); /* Căn chỉnh chính xác */
+// //  connector arrow
+//   .connector {
+//   position: absolute; /* Để định vị chính xác */
+//   top: 50%; /* Căn giữa theo chiều dọc */
+//   left: 0;
+//   width: 100px; /* Độ dài của connector */
+//   height: 2px; /* Độ dày của connector */
+//   background-color: #4D2114; /* Màu nâu đậm */
+//   transform: translateY(-50%); /* Căn chỉnh chính xác */
     
-    path {
-      stroke: #4D2114; /* Change this to the color you want */
-      stroke-width: 3;
-    }
+//     path {
+//       stroke: #4D2114; /* Change this to the color you want */
+//       stroke-width: 3;
+//     }
 
-    polygon {
-      fill: #4D2114; /* Change this to the color you want for the arrowhead */
-    }
-  }
+//     polygon {
+//       fill: #4D2114; /* Change this to the color you want for the arrowhead */
+//     }
+//   }
    // plan
    .plan_day {
     display: flex;
@@ -351,11 +352,66 @@
     align-items: flex-start;
     padding: 40px;
     justify-content: space-between;
- 
+
+    .pomo_image {
+      flex: 1;
+      text-align: left;
+      margin-left: 320px;
+      display: flex;
+      align-items: flex-start;
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+     
+    }
+
     .content {
       flex: 1;
       text-align: right;
       margin-right: 200px;
+      margin-top: 70px;
+      display: flex;
+      align-items: flex-end;
+      gap: 15px;
+    }
+    
+    .image-container img {
+      width: 80px; /* Kích thước ảnh, có thể tùy chỉnh */
+      height: 80px;
+    }
+    
+    .text-container {
+      text-align: right; /* Căn chữ sang phải */
+    }
+    
+    .text-container h2 {
+      font-size: 3em;
+      color: #f57c00;
+      margin-bottom: 2px;
+      font-family: 'Red Hat Display', sans-serif;
+      font-weight: 300;
+    }
+    
+    .text-container p {
+      font-size: 1.5em;
+      color: #4D2114;
+      font-weight: 300;
+    }
+  }
+  // team 
+  .team {
+    display: flex; 
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    gap: 20px; /* Khoảng cách giữa content và image */
+    margin-top: 50px; 
+    .content {
+      flex: 1;
+      // display: flex;
+      text-align: center;
+     
       h2 {
         font-size: 3em;
         color: #f57c00;
@@ -369,22 +425,15 @@
         color: #4D2114;
         font-weight: 300;
       }
-      image {
-        
-      }
     }
 
-    .pomo_image {
-      flex: 1;
-      // display: flex;
-      align-items: left;
-      margin-left: 200px;
+    .team_image {
+      height: auto;
+      display: block;
       img {
-
-      }
-     
+      border-radius: 25px;
     }
-
+  }
   }
  
   

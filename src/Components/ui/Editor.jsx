@@ -9,7 +9,7 @@ import { useState } from "react"
 const Editor = ( {onChange, initialContent ,editable}) => {
 
   const handleUpload =  (File)=>{
-    return response.url;
+    // return response.url;
   }
   console.log()
   const editor= useCreateBlockNote({
