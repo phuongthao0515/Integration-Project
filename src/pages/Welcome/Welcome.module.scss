@@ -226,8 +226,10 @@
 
     .content {
       flex: 1;
+      // display: flex;
       text-align: left;
       margin-left: 350px;
+      margin-top: 80px;
       h2 {
         font-size: 3em;
         color: #f57c00;
@@ -345,10 +347,15 @@
   }
 
   .time {
+    display: flex;
+    align-items: flex-start;
+    padding: 40px;
+    justify-content: space-between;
+ 
     .content {
       flex: 1;
       text-align: right;
-      margin-right: 350px;
+      margin-right: 200px;
       h2 {
         font-size: 3em;
         color: #f57c00;
@@ -362,6 +369,20 @@
         color: #4D2114;
         font-weight: 300;
       }
+      image {
+        
+      }
+    }
+
+    .pomo_image {
+      flex: 1;
+      // display: flex;
+      align-items: left;
+      margin-left: 200px;
+      img {
+
+      }
+     
     }
 
   }

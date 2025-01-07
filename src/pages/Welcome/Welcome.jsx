@@ -7,6 +7,7 @@ import bg2 from "../../assets/bg2.png";
 import cal from "../../assets/cal.png";
 import plan1 from "../../assets/plan1.png";
 import bg4 from "../../assets/bg4.png";
+import clock from "../../assets/clock.png";
 
 const cx = classNames.bind(welcome);
 
@@ -115,9 +116,13 @@ const WelcomePage = () => {
   </section>
 
   <section className={cx('time')}>
+    
   <div className={cx('content')}>
       <h2>Pomodoro</h2>
       <p>It keeps your mind sharp</p>
+      
+    <img src={clock} alt="Clock Icon" className={cx('image')}/>
+   
     </div>
     
   <div className={cx('pomo_image')}>
