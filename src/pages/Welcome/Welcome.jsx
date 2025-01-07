@@ -11,6 +11,9 @@ import clock from "../../assets/clock.png";
 import team from "../../assets/teambg.png";
 import team2 from "../../assets/team2.png";
 import team3 from "../../assets/team3.png";
+import chat from "../../assets/bg7.jpg";
+import chat1 from "../../assets/chat1.png";
+
 
 const cx = classNames.bind(welcome);
 
@@ -164,12 +167,12 @@ const WelcomePage = () => {
     </div>
 
     <div className={cx('image_right')}>
-      <img src={team3} alt="Chat Icon" />
+      <img src={chat1} alt="Chat Icon" />
     </div>
   </div>
 
   <div className={cx('chat_image')}>
-      <img src={team} alt="Team Icon" />
+      <img src={chat} alt="Team Icon" />
     </div>
   </section>
 
