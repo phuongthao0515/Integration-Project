@@ -6,7 +6,6 @@ import SuccessPopup from '../popUp/SuccessPopup';
 const Setting = ({ isOpen, onClose }) => {
     const user = JSON.parse(localStorage.getItem('user'));
     const [profilePic, setProfilePic] = useState(userIcon);
-<<<<<<< HEAD
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [showSuccess, setShowSuccess] = useState(false);
@@ -15,12 +14,6 @@ const Setting = ({ isOpen, onClose }) => {
             fetchUserData();
         }
     }, [isOpen]);
-=======
-    const [name, setName] = useState(user.username);
-    const [username, setUsername] = useState('');
-    const [email,setEmail] = useState('');
-
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
     if (!isOpen) return null;
     const fetchUserData = async () => {
         try {

@@ -18,11 +18,7 @@ function Login() {
 
     const handleLogIn = (e) => {
         e.preventDefault();
-<<<<<<< HEAD
         setErrorMessage('');
-=======
-        setErrorMessage(''); 
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
 
         fetch('http://127.0.0.1:8000/api/v1/auth/login', {
             method: 'POST',
@@ -33,7 +29,6 @@ function Login() {
         })
             .then((response) => {
                 if (!response.ok) {
-<<<<<<< HEAD
                     return response.json().then((errorData) => {
                         const errorMsg = errorData.detail || 'Login failed. Please try again.';
                         setErrorMessage(errorMsg);
@@ -41,22 +36,11 @@ function Login() {
                     });
                 }
 
-=======
-             
-                    return response.json().then((errorData) => {
-                        const errorMsg = errorData.detail || 'Login failed. Please try again.';
-                        setErrorMessage(errorMsg);
-                        throw new Error(errorMsg); 
-                    });
-                }
-       
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
                 return response.json();
             })
             .then((data) => {
                 console.log('Login successful:', data);
 
-<<<<<<< HEAD
                 if (data && data.user) {
                     const userName = data.user.username;
                     toast.success(`Welcome back, ${userName}!`);
@@ -71,23 +55,6 @@ function Login() {
                     localStorage.setItem('access_token', data.access_token);
                     localStorage.setItem('refresh_token', data.refresh_token);
                     navigate('/home');
-=======
-               
-                if (data && data.user) {
-                    const userName = data.user.username; 
-                    toast.success(`Welcome back, ${userName}!`);
-                    setErrorMessage(''); 
-                    const userData = {
-                        id: data.user.user_id,
-                        username: data.user.username,
-                        timestamp: new Date().toISOString()
-                    };
-                    localStorage.setItem('user',JSON.stringify(userData));
-
-                    localStorage.setItem('access_token',data.access_token);
-                    localStorage.setItem('refresh_token',data.refresh_token);
-                    navigate('/home'); 
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
                 } else {
                     setErrorMessage('Unexpected response format.');
                 }
@@ -98,12 +65,7 @@ function Login() {
     };
 
     const [showPassword, setShowPassword] = useState(false);
-<<<<<<< HEAD
     useEffect(() => {}, [errorMessage]);
-=======
-    useEffect(() => {
-    }, [errorMessage]);
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -124,12 +86,7 @@ function Login() {
                     <h1 className={cx('title')}>LOGIN ACCOUNT</h1>
                     <div className={cx('form')}>
                         <label>
-<<<<<<< HEAD
                             Email Email
-=======
-                            Email
-                            Email
->>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
                             <input
                                 type="email"
                                 placeholder="Email"
