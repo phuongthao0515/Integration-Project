@@ -153,10 +153,28 @@ const WelcomePage = () => {
   <div className={cx('team_image')}>
       <img src={team} alt="Team Icon" />
     </div>
+  </section>
 
+<section className={cx('chatting')}>
+<div className={cx('images_wrapper')}>
+    <div className={cx('content')}>
+    <h2>Chatting</h2>
+    <p>Chat in Real-Time and Keep Ideas Flowing</p>
+    </div>
+
+    <div className={cx('image_right')}>
+      <img src={team3} alt="Chat Icon" />
+    </div>
+  </div>
+
+  <div className={cx('team_image')}>
+      <img src={team} alt="Team Icon" />
+    </div>
   </section>
 
 </section>
+
+
 
       <div className="cta">
         <h3>Ready to take your <span>notes</span> to the next level?</h3>

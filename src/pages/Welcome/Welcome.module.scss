@@ -406,41 +406,41 @@
     flex-direction: column;
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa theo chiều ngang */
-    gap: 20px; 
+    gap: 15px; 
     margin-top: 50px; 
 
-    .content {
-      flex: 1;
-      // display: flex;
-      text-align: center;
-     
-      h2 {
-        font-size: 3em;
-        color: #f57c00;
-        margin-bottom: 10px;
-        font-family: 'Red Hat Display', sans-serif;
-        font-weight: 300;
-      }
-
-      p {
-        font-size: 1.5em;
-        color: #4D2114;
-        font-weight: 300;
-      }
-    }
-
     .team_image {
-      width: 50%; /* Ảnh chính chiếm nửa chiều rộng */
+      width: 40%; /* Ảnh chính chiếm nửa chiều rộng */
       display: block;
+     
       img {
         width: 100%; /* Đảm bảo ảnh co giãn đúng chiều */
         height: auto;
-        border-radius: 30px; /* Bo góc ảnh */
+        border-radius: 40px; /* Bo góc ảnh */
         display: block;
       }
     }
 
     .images_wrapper {
+      .content {
+        flex: 1;
+        // display: flex;
+        text-align: center;
+       
+        h2 {
+          font-size: 3em;
+          color: #f57c00;
+          margin-bottom: 10px;
+          font-family: 'Red Hat Display', sans-serif;
+          font-weight: 300;
+        }
+  
+        p {
+          font-size: 1.5em;
+          color: #4D2114;
+          font-weight: 300;
+        }
+      }
       display: flex;
       justify-content: center; /* Căn giữa toàn bộ ảnh */
       align-items: center;
