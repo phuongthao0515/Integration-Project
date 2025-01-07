@@ -8,6 +8,9 @@ import cal from "../../assets/cal.png";
 import plan1 from "../../assets/plan1.png";
 import bg4 from "../../assets/bg4.png";
 import clock from "../../assets/clock.png";
+import team from "../../assets/teambg.png";
+import team2 from "../../assets/team2.png";
+import team3 from "../../assets/team3.png";
 
 const cx = classNames.bind(welcome);
 
@@ -19,7 +22,7 @@ const WelcomePage = () => {
 
 {/* note taking simple */}
       <section className={cx('note_taking_simple')}>
-        <div className={cx('contentt')}>
+        <div className={cx('content')}>
           <h2>
           <span className={cx('highlight')}>Note</span> taking <br/>made simple
           </h2>
@@ -117,26 +120,42 @@ const WelcomePage = () => {
 
   <section className={cx('time')}>
     
-  <div className={cx('content')}>
-      <h2>Pomodoro</h2>
-      <p>It keeps your mind sharp</p>
-      
-    <img src={clock} alt="Clock Icon" className={cx('image')}/>
-   
-    </div>
-    
   <div className={cx('pomo_image')}>
   <img src={bg4} alt="pomodoro Icon" />
-    </div>  
+    </div> 
+
+    <div className={cx('content')}>
+    <div className={cx('image-container')}>
+      <img src={clock} alt="Clock Icon" />
+    </div>
+    <div className={cx('text-container')}>
+      <h2>Pomodoro</h2>
+      <p>It keeps your mind sharp</p>
+    </div>
+  </div> 
   </section>
 
+  <section className={cx('team')}>
+  <div className={cx('content')}>
+    <h2>Work with your team</h2>
+    <p>Never miss a meeting or deadline for team project</p>
+    </div>
+
+  <div className={cx('team_image')}>
+  <img src={team} alt="Team Icon" />
+  </div> 
+  
+  <div className={cx('image_right')}>
+  <img src={team2} alt="Team Icon" />
+  </div>
+
+  <div className={cx('image_left')}>
+  <img src={team3} alt="Team Icon" />
+  </div>
+
+  </section>
 
 </section>
-
-      <section>
-        <h2>Work with your team</h2>
-        <p>Collaborate in real time with built-in chat.</p>
-      </section>
 
       <div className="cta">
         <h3>Ready to take your <span>notes</span> to the next level?</h3>
