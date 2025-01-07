@@ -1,5 +1,5 @@
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, status, HTTPException
 from src.db.auth.schemas import UserLoginModel, UserSignupModel
 from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.main import get_session
@@ -21,10 +21,13 @@ async def login_user(user:UserLoginModel,session:AsyncSession = Depends(get_sess
     password: password123
     """
     try: 
-        login = await login_helper.login(user,session)
+        login = await login_helper.login(user, session)
         return login
-    except Exception as e: 
-        return e
+    except HTTPException as e:
+        raise e
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
     
 @auth_router.get('/logout')
 async def logout(token_details: dict = Depends(AccessTokenBearer())):
@@ -44,9 +47,12 @@ async def logout(token_details: dict = Depends(AccessTokenBearer())):
 async def signup(user:UserSignupModel,session:AsyncSession = Depends(get_session),status_code=status.HTTP_201_CREATED):
      try:
           new_user = await login_helper.create_new_user(user,session)
-          return {'user_id':new_user}
-     except Exception as e: 
-          return e
+          return new_user
+     except HTTPException as e:
+        raise e
+     except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
     
      
 

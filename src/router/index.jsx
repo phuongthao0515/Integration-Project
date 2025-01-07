@@ -8,10 +8,12 @@ import HomePage from '../pages/HomePage/HomePage';
 import NotePage from '../pages/NotePage/NotePage';
 import WelcomePage from '../pages/Welcome/Welcome';
 import Header from '../pages/Welcome/header';
+import NoteID from '../pages/HomePage/NoteID';
+
 
 export const publicRoutes = [
     { path: '/header', component: <Header /> },
-    { path: '/', component: <WelcomePage /> },
+       { path: '/', component: <WelcomePage /> },
     { path: '/signup', component: <SignUp /> },
     { path: '/today', component: <TodayPage /> },
     { path: '/upcoming-day', component: <UpcomingDayPage /> },
@@ -19,7 +21,6 @@ export const publicRoutes = [
     { path: '/login', component: <Login /> },
     { path: '/home', component: <HomePage /> },
     // { path: '/note', component: <TakeNote /> },
-    // { path: '/note/:id', component: <TakeNote /> },
+    { path: '/note/:pageid', component: <NoteID/>},
     { path: '/note', component: <NotePage /> },
-    { path: '/note/:id', component: <NotePage /> },
 ];

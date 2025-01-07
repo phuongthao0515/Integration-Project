@@ -1,43 +1,155 @@
-import React, { useState } from 'react';
+import  { useContext, useEffect, useState } from 'react';
 import './NoteList.scss';
 import docPic from '../../assets/doc.png';
 import closePic from '../../assets/close.png';
 import deletePic from '../../assets/delete.png';
 import morePic from '../../assets/more.png';
 import plusPic from '../../assets/add-task.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { GlobalContext } from '../../context';
 
 const NoteList = () => {
-    const [notes, setNotes] = useState([
-        { id: 1, name: 'Note 1', content: '<h1>Note 1 Content</h1>' },
-        { id: 2, name: 'Note 2', content: '<h1>Note 2 Content</h1>' },
-        { id: 3, name: 'Note 3', content: '<h1>Note 3 Content</h1>' },
-    ]);
+    const { notes, setNotes, chosenNote, setChosenNote } = useContext(GlobalContext);
+    const navigate = useNavigate();
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/api/v1/note/notes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((errorData) => {
+                        const errorMsg = errorData.detail || 'Error fetching notes.';
+                        throw new Error(errorMsg);
+                    });
+                }
+                return res.json();
+            })
+            .then((datas) => {
+                if (datas) {
+                    setNotes(datas);
+
+                    // Ensure the chosenNote persists on updates
+                    if (chosenNote) {
+                        const updatedNote = datas.find((n) => n.pageid === chosenNote.pageid);
+                        if (updatedNote) {
+                            setChosenNote(updatedNote);
+                        }
+                    }
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, []); // Empty dependency array ensures this runs only on mount
+
     const [newNoteName, setNewNoteName] = useState('');
     const [editNoteId, setEditNoteId] = useState(null);
     const [newName, setNewName] = useState('');
     const [idModal, setIdModal] = useState(null);
+    const [chosenId, setChosenId] = useState(null);
+    useEffect(() => {
+        console.log('Chosen note updated:', chosenNote);
 
+        setChosenId(chosenNote?.pageid);
+    }, [chosenNote]);
     const addNote = () => {
         const newNote = {
-            id: notes.length + 1,
-            name: newNoteName || 'New Note',
-            content: '<h1>New Note Content</h1>',
+            pageid: notes.length + 1,
+            name: newNoteName || 'Untitled',
+            content: '',
         };
-        setNotes([...notes, newNote]);
-        setNewNoteName('');
-        setEditNoteId(newNote.id); // Set the editNoteId to the new note's ID
-        setNewName(''); // Clear the newName state
+        fetch(`http://127.0.0.1:8000/api/v1/note/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+            body: JSON.stringify({ title: 'Untitled' }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((errorData) => {
+                        const errorMsg = errorData.detail || 'Failed to delete the note. Please try again.';
+                        throw new Error(errorMsg);
+                    });
+                }
+
+                return res.json();
+            })
+            .then((data) => {
+                newNote.pageid = data?.note_id;
+
+                setNotes([...notes, newNote]);
+
+                setEditNoteId(newNote.pageid);
+                setNewName(newNote.name);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        setNewNoteName(''); // Clear the newName state
     };
 
     const updateName = (id) => {
-        setNotes(notes.map((note) => (note.id === id ? { ...note, name: newName } : note)));
+        console.log('Note id: ', id);
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/title/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+            body: JSON.stringify({ title: newName }),
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((errorData) => {
+                        const errorMsg = errorData.detail || 'Failed to delete the note. Please try again.';
+                        throw new Error(errorMsg);
+                    });
+                }
+
+                return res.text().then((text) => (text ? JSON.parse(text) : {}));
+            })
+            .then(() => {
+                setNotes(notes.map((note) => (note.pageid === id ? { ...note, title: newName } : note)));
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+
         setEditNoteId(null);
     };
 
     const handleDelete = (id) => {
-        setNotes(notes.filter((note) => note.id !== id));
-        setIdModal(null);
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((errorData) => {
+                        const errorMsg = errorData.detail || 'Failed to delete the note. Please try again.';
+                        throw new Error(errorMsg);
+                    });
+                }
+
+                return res.text().then((text) => (text ? JSON.parse(text) : {}));
+            })
+            .then(() => {
+                setNotes((prevNotes) => prevNotes.filter((note) => note.pageid !== id));
+                setChosenNote(null);
+                navigate('/home')
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     };
 
     const handleModalToggle = (id) => {
@@ -53,36 +165,59 @@ const NoteList = () => {
                 </button>
             </div>
             <ul>
-                {notes.map((note) => (
-                    <li key={note.id} className="note-item">
+                {notes?.map((note) => (
+                    <li
+                        key={note.pageid}
+                        className={`note-item ${note.pageid === chosenId ? 'active' : ''}`}
+                        onClick={() => {
+                            setChosenNote(note);
+                            setChosenId(note.pageid);
+                        }} // Set chosenNote to the clicked note
+                    >
                         <div className="item">
-                            <img src={docPic} alt={note.name || 'New Note'} className="icon" />
-                            {editNoteId === note.id ? (
+                            <img src={docPic} alt={note.title || 'Untitled'} className="icon" />
+                            {editNoteId === note.pageid ? (
                                 <input
                                     autoFocus
                                     type="text"
                                     value={newName}
                                     onChange={(e) => setNewName(e.target.value)}
-                                    onBlur={() => updateName(note.id)}
-                                    onKeyDown={(e) => e.key === 'Enter' && updateName(note.id)}
-                                    className="name"
+                                    onBlur={() => updateName(note.pageid)}
+                                    onKeyDown={(e) => e.key === 'Enter' && updateName(note.pageid)}
+                                    className="name outline-none rounded-md"
                                 />
                             ) : (
-                                <Link to={`/notes/${note.id}`} className="note-title">
-                                    {note.name || 'New Note'}
+                                <Link to={`/note/${note.pageid}`} className="note-title">
+                                    {note.pageid === chosenNote?.pageid ? chosenNote.title : note.title || 'Untitled'}
                                 </Link>
                             )}
                         </div>
-                        <button className="btn" onClick={() => handleModalToggle(note.id)}>
+                        <button
+                            className="btn"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleModalToggle(note.pageid);
+                            }}
+                        >
                             <img src={morePic} alt="More" className="icon" />
                         </button>
-                        {idModal === note.id && (
+                        {idModal === note.pageid && (
                             <div className="actions-list">
-                                <button onClick={() => setIdModal(null)}>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setIdModal(null);
+                                    }}
+                                >
                                     <img src={closePic} alt="Close" className="icon" />
                                     <span>Close</span>
                                 </button>
-                                <button onClick={() => handleDelete(note.id)}>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleDelete(note.pageid);
+                                    }}
+                                >
                                     <img src={deletePic} alt="Delete" className="icon" />
                                     <span>Delete</span>
                                 </button>

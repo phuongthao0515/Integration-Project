@@ -28,6 +28,7 @@ class NoteService:
                     if shared:
                         permission = shared.permission
                         return {
+                            'pageid': note.pageid,
                             'created_date': note.createddate,
                             'content': note.content,
                             'title': note.title,
@@ -41,6 +42,7 @@ class NoteService:
                         raise HTTPException(status_code=401, detail='UnAuthorized')
                 else:
                     return {
+                        'pageid': note.pageid,
                         'created_date': note.createddate,
                         'content': note.content,
                         'title': note.title,
@@ -101,6 +103,51 @@ class NoteService:
             print(f"Error in delete notes: {e}")  
             raise e  
     
+<<<<<<< HEAD
+=======
+    async def share_note(self, user_id:int, note_id:int, session:AsyncSession, visibility: str):
+        try:
+            query = text('SELECT * FROM NOTE WHERE pageid = :note_id')
+            result = await session.execute(query, {'note_id'})
+            note =result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['userid'] != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to share this note.")
+            update_query = text("UPDATE NOTE SET Visibility = :visibility WHERE PageID = :note_id")
+            await session.execute(update_query, {'visibility': visibility, 'note_id': note_id})
+            await session.commit()
+            return {"message": f"Note {note_id} visibility updated to {visibility}."}
+            
+        except Exception as e:
+            print(f"Error in share note: {e}")
+            raise e
+        
+    async def get_share_note(self, note_id: int, session: AsyncSession):
+        try:
+            query = text("SELECT * FROM NOTE WHERE pageid = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+            if note['visibility'] != 'public':
+                raise HTTPException(status_code=403, detail="This note is not public.")
+            return {
+                "page_id": note['pageid'],
+                "title": note['title'],
+                "content": note['content'],
+                "document": note['document'],
+                "created_date": note['createddate'],
+                "updated_date": note.get('updateddate'),
+            }
+
+        except Exception as e:
+            print(f"Error in get_share_note: {e}")
+            raise e
+    
+>>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
     async def update_note_content(self, user_id: int, note_id: int, new_content: str, session:AsyncSession):
         try:
             query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
@@ -141,6 +188,10 @@ class NoteService:
         
     async def update_title(self, user_id: int, note_id: int, new_title: str, session: AsyncSession):
         try:
+<<<<<<< HEAD
+=======
+            # Fetch the note to ensure it exists and belongs to the user
+>>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
             query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
             result = await session.execute(query, {'note_id': note_id})
             note = result.fetchone()
@@ -177,11 +228,6 @@ class NoteService:
         except Exception as e:
             print(f"Error in update_title: {e}")
             raise e
-
-
-
-
-
     async def update_note_visibility(self, user_id: int, note_id: int, session: AsyncSession, visibility: bool):
         """update a note visibility."""
         try:
@@ -204,6 +250,7 @@ class NoteService:
         except Exception as e:
             print(f"Error in share_note: {e}")
             raise e
+<<<<<<< HEAD
 
  
 
@@ -274,3 +321,5 @@ class NoteService:
         except Exception as e:
             print(f"Error in get_shared_notes: {e}")  
             raise e  
+=======
+>>>>>>> a20eac1272754fe002af5116d1024da9480f29a5
