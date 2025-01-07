@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './PlanInput.scss';
-import SuccessPopup from './SuccessPopup';
+import SuccessPopup from '../popUp/SuccessPopup';
 
 const PlanInput = ({ isOpen, onClose }) => {
     const [importance, setImportance] = useState(false);

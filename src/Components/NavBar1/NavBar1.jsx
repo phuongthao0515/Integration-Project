@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar1.scss';
 
-import profilePic from '../../assets/profile-pic.jpeg';
+import defaultProfilePic from '../../assets/profile-pic.jpeg';
 import homePic from '../../assets/home.png';
 import todayPic from '../../assets/today.png';
 import upcomingPic from '../../assets/upcoming.png';
@@ -18,6 +18,12 @@ const NavBar1 = () => {
     const [isNoteInputOpen, setIsNoteInputOpen] = useState(false);
     const [isPlanInputOpen, setIsPlanInputOpen] = useState(false);
     const [isSettingOpen, setIsSettingOpen] = useState(false);
+    const [name, setName] = useState('');
+    const [profilePicState, setProfilePic] = useState(defaultProfilePic);
+
+    useEffect(() => {
+        fetchUserData();
+    }, []);
 
     const openNoteInput = () => {
         setIsNoteInputOpen(true);
@@ -41,14 +47,38 @@ const NavBar1 = () => {
 
     const closeSetting = () => {
         setIsSettingOpen(false);
+        fetchUserData();
+    };
+
+    const fetchUserData = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch('http://127.0.0.1:8000/api/v1/user/user', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch user data: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            setName(data.name);
+            setProfilePic(data.profilePic || defaultProfilePic);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
     };
 
     return (
         <div className="navbar-container">
             <header className="header">
                 <div className="profile" onClick={openSetting}>
-                    <img src={profilePic} alt="Profile" className="profile-pic" />
-                    <span className="profile-name">Phuc Tran</span>
+                    <img src={profilePicState} alt="Profile" className="profile-pic" />
+                    <span className="profile-name">{name}</span>
                 </div>
                 <nav className="navbar">
                     <Dropdown onAddNote={openNoteInput} onAddPlan={openPlanInput} />

@@ -5,6 +5,7 @@ from .db.main import init_db
 from .db.auth.routes import auth_router
 from .db.note.routes import note_router
 from .db.plan.routes import plan_router
+from .db.user.routes import user_router
 @asynccontextmanager
 async def life_span(app:FastAPI):
     print(f"Server is starting...")
@@ -35,3 +36,4 @@ app.add_middleware(
 app.include_router(auth_router,prefix=f"/api/{version}/auth",tags=['auth'])
 app.include_router(note_router,prefix=f"/api/{version}/note",tags=['note'])
 app.include_router(plan_router,prefix=f"/api/{version}/plan",tags=['plan'])
+app.include_router(user_router,prefix=f"/api/{version}/user",tags=['user'])

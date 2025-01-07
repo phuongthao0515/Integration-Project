@@ -1,13 +1,41 @@
 import React, { useState } from 'react';
 import './Setting.scss';
 import userIcon from '../../assets/user.png';
-
+import { useEffect } from 'react';
+import SuccessPopup from '../popUp/SuccessPopup';
 const Setting = ({ isOpen, onClose }) => {
     const [profilePic, setProfilePic] = useState(userIcon);
-    const [name, setName] = useState('Real Dog');
-    const [email, setEmail] = useState('real.dog@example.com');
-
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [showSuccess, setShowSuccess] = useState(false);
+    useEffect(() => {
+        if (isOpen) {
+            fetchUserData();
+        }
+    }, [isOpen]);
     if (!isOpen) return null;
+    const fetchUserData = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch('http://127.0.0.1:8000/api/v1/user/user', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to fetch user data: ${response.statusText}`);
+            }
+
+            const data = await response.json();
+            setName(data.name);
+            setEmail(data.email);
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
+    };
 
     const handleProfilePicChange = (e) => {
         setProfilePic(URL.createObjectURL(e.target.files[0]));
@@ -17,13 +45,64 @@ const Setting = ({ isOpen, onClose }) => {
         document.getElementById('profile-pic').click();
     };
 
-    const handleSave = () => {
-        // Handle save logic here
-        onClose();
+    const handleSave = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+
+            // Update username
+            const usernameResponse = await fetch('http://127.0.0.1:8000/api/v1/user/user/username', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ username: name }),
+            });
+
+            if (!usernameResponse.ok) {
+                throw new Error(`Failed to update username: ${usernameResponse.statusText}`);
+            }
+
+            // Update email
+            const emailResponse = await fetch('http://127.0.0.1:8000/api/v1/user/user/email', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify({ email: email }),
+            });
+
+            if (!emailResponse.ok) {
+                throw new Error(`Failed to update email: ${emailResponse.statusText}`);
+            }
+
+            setShowSuccess(true);
+            // Optionally, you can delay closing the modal to allow users to see the success message
+            // setTimeout(() => {
+            //     setShowSuccess(false);
+            //     onClose();
+            // }, 2000);
+        } catch (error) {
+            console.error('Error updating user:', error);
+        }
     };
 
-    const handleDeleteAccount = () => {
-        // Handle delete account logic here
+    const handleDeleteAccount = async () => {
+        const token = localStorage.getItem('access_token');
+        try {
+            await fetch('http://127.0.0.1:8000/api/v1/user/user', {
+                method: 'DELETE',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            localStorage.removeItem('access_token');
+            window.location.href = '/login';
+        } catch (error) {
+            console.error('Error deleting user:', error);
+        }
     };
 
     return (
@@ -93,6 +172,7 @@ const Setting = ({ isOpen, onClose }) => {
                     </div>
                 </div>
             </div>
+            {showSuccess && <SuccessPopup message="Update successfully!" onClose={() => setShowSuccess(false)} />}
         </div>
     );
 };
