@@ -399,14 +399,16 @@
       font-weight: 300;
     }
   }
+
   // team 
   .team {
     display: flex; 
     flex-direction: column;
     align-items: center; /* Căn giữa theo chiều dọc */
     justify-content: center; /* Căn giữa theo chiều ngang */
-    gap: 20px; /* Khoảng cách giữa content và image */
+    gap: 20px; 
     margin-top: 50px; 
+
     .content {
       flex: 1;
       // display: flex;
@@ -428,12 +430,38 @@
     }
 
     .team_image {
-      height: auto;
+      width: 50%; /* Ảnh chính chiếm nửa chiều rộng */
       display: block;
       img {
-      border-radius: 25px;
+        width: 100%; /* Đảm bảo ảnh co giãn đúng chiều */
+        height: auto;
+        border-radius: 30px; /* Bo góc ảnh */
+        display: block;
+      }
     }
-  }
+
+    .images_wrapper {
+      display: flex;
+      justify-content: center; /* Căn giữa toàn bộ ảnh */
+      align-items: center;
+      width: 100%;
+      max-width: 1200px; /* Giới hạn chiều rộng */
+      gap: 20px; /* Khoảng cách giữa các ảnh */
+
+  
+      .image_left, .image_right {
+        width: 20%; /* Các ảnh bên trái và phải có kích thước nhỏ hơn */
+        display: block;
+      }
+  
+      img {
+        width: 100%; /* Đảm bảo ảnh co giãn đúng chiều */
+        height: auto;
+        border-radius: 25px; /* Bo góc ảnh */
+        display: block;
+      }
+    }
+
   }
  
   
