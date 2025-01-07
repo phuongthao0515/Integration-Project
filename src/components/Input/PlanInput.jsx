@@ -5,18 +5,63 @@ const PlanInput = ({ isOpen, onClose }) => {
     const [importance, setImportance] = useState(false);
     const [expirationDate, setExpirationDate] = useState('');
     const [expirationTime, setExpirationTime] = useState('');
+    const [content, setContent] = useState('');
 
     if (!isOpen) return null;
+
+    const handleSavePlan = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                console.warn('No token in localStorage');
+                return;
+            }
+            const dueDateObj = new Date(`${expirationDate}T${expirationTime}`);
+            const localDueDateObj = new Date(dueDateObj.getTime() - dueDateObj.getTimezoneOffset() * 60000);
+            const bodyData = {
+                createddate: new Date().toISOString(),
+                dueDate: localDueDateObj.toISOString(),
+                content,
+                importance,
+            };
+            console.log('token:', token);
+            console.log('bodyData:', bodyData);
+            const response = await fetch('http://localhost:8000/api/v1/plan/plans', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(bodyData),
+            });
+            if (!response.ok) {
+                throw new Error(`Failed: ${response.status}, ${response.statusText}`);
+            }
+            // Optionally handle success here
+        } catch (error) {
+            console.error('Error creating plan:', error);
+        }
+    };
+
+    const handleClose = () => {
+        onClose();
+        window.location.reload();
+    };
 
     return (
         <div className="plan-input-overlay">
             <div className="plan-input-container">
-                <button className="close-button" onClick={onClose}>
+                <button className="close-button" onClick={handleClose}>
                     &times;
                 </button>
                 <h2>New Plan</h2>
                 <div className="form-control">
-                    <textarea placeholder="Content" required></textarea>
+                    <textarea
+                        placeholder="Content"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        required
+                    ></textarea>
                 </div>
                 <div className="form-control expiration-container">
                     <div>
@@ -51,7 +96,9 @@ const PlanInput = ({ isOpen, onClose }) => {
                     </label>
                     <div className="importance-label">{importance ? 'Important' : 'Not Important'}</div>
                 </div>
-                <button className="submit-button">Save Plan</button>
+                <button className="submit-button" onClick={handleSavePlan}>
+                    Save Plan
+                </button>
             </div>
         </div>
     );

@@ -4,52 +4,58 @@ import './UpcomingMonthPage.scss';
 import NavBar from '../../Components/NavBar1/NavBar1';
 import UpcomingDayPage from './UpcomingDayPage';
 
-// Mock data for important and not important notes and plans
-const mockImportantNotes = [
-    { id: 1, content: 'Important Note 1', dueDate: '2025-01-01' },
-    { id: 2, content: 'Important Note 2', dueDate: '2025-01-05' },
-];
-
-const mockImportantPlans = [
-    { id: 1, content: 'Important Plan 1', dueDate: '2025-01-03' },
-    {
-        id: 2,
-        content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.',
-        dueDate: '2025-11-10',
-    },
-];
-
-const mockNotImportantNotes = [
-    { id: 1, content: 'Not Important Note 1', dueDate: '2025-01-15' },
-    { id: 2, content: 'Not Important Note 2', dueDate: '2025-01-20' },
-];
-
-const mockNotImportantPlans = [
-    { id: 1, content: 'Not Important Plan 1', dueDate: '2025-01-25' },
-    {
-        id: 2,
-        content:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.',
-        dueDate: '2025-11-30',
-    },
-];
-
 const UpcomingMonthPage = () => {
-    const [importantNotes, setImportantNotes] = useState([]);
     const [importantPlans, setImportantPlans] = useState([]);
-    const [notImportantNotes, setNotImportantNotes] = useState([]);
     const [notImportantPlans, setNotImportantPlans] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [view, setView] = useState('month'); // State to switch between month and day view
+    const [view, setView] = useState('month');
     const [selectedDate, setSelectedDate] = useState(null);
 
     useEffect(() => {
-        setImportantNotes(mockImportantNotes);
-        setImportantPlans(mockImportantPlans);
-        setNotImportantNotes(mockNotImportantNotes);
-        setNotImportantPlans(mockNotImportantPlans);
-    }, []);
+        const fetchPlansForMonth = async () => {
+            const token = localStorage.getItem('access_token');
+            if (!token) {
+                console.warn('No token found in localStorage');
+                return;
+            }
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth() + 1;
+            try {
+                const response = await fetch(`http://localhost:8000/api/v1/plan/plans/month/${year}/${month}`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch plans: ${response.status} ${response.statusText}`);
+                }
+                const data = await response.json();
+                const newImportant = data
+                    .filter((p) => p.importance)
+                    .map((p) => ({
+                        id: p.planId,
+                        content: p.content,
+                        dueDate: p.dueDate,
+                        importance: p.importance,
+                    }));
+                const newNotImportant = data
+                    .filter((p) => !p.importance)
+                    .map((p) => ({
+                        id: p.planId,
+                        content: p.content,
+                        dueDate: p.dueDate,
+                        importance: p.importance,
+                    }));
+                setImportantPlans(newImportant);
+                setNotImportantPlans(newNotImportant);
+            } catch (error) {
+                console.error('Error fetching monthly plans:', error);
+            }
+        };
+
+        fetchPlansForMonth();
+    }, [currentDate, selectedDate, view]);
 
     const getFormattedDate = () => {
         const options = { month: 'long', year: 'numeric' };
@@ -85,28 +91,18 @@ const UpcomingMonthPage = () => {
         }
 
         for (let day = 1; day <= daysInMonth; day++) {
-            const date = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
-            const notes = importantNotes
-                .filter((note) => note.dueDate === date)
-                .concat(notImportantNotes.filter((note) => note.dueDate === date));
+            const dateObj = new Date(year, month, day);
             const plans = importantPlans
-                .filter((plan) => plan.dueDate === date)
-                .concat(notImportantPlans.filter((plan) => plan.dueDate === date));
+                .filter((plan) => new Date(plan.dueDate).getDate() === day)
+                .concat(notImportantPlans.filter((plan) => new Date(plan.dueDate).getDate() === day));
 
             calendar.push(
-                <div key={date} className="calendar-day" onClick={() => handleDayClick(date)}>
+                <div key={day} className="calendar-day" onClick={() => handleDayClick(date)}>
                     <div className="date">{day}</div>
-                    <div className="notes">
-                        {notes.map((note) => (
-                            <div key={note.id} className="note">
-                                {note.content}
-                            </div>
-                        ))}
-                    </div>
                     <div className="plans">
                         {plans.map((plan) => (
                             <div key={plan.id} className="plan">
-                                {plan.content}
+                                {plan.content.length > 15 ? `${plan.content.substring(0, 15)}...` : plan.content}
                             </div>
                         ))}
                     </div>
@@ -151,7 +147,14 @@ const UpcomingMonthPage = () => {
                         {renderCalendar()}
                     </div>
                 ) : (
-                    <UpcomingDayPage date={selectedDate} onBack={handleBackToMonth} />
+                    <UpcomingDayPage
+                        date={selectedDate}
+                        onBack={handleBackToMonth}
+                        importantPlans={importantPlans}
+                        setImportantPlans={setImportantPlans}
+                        notImportantPlans={notImportantPlans}
+                        setNotImportantPlans={setNotImportantPlans}
+                    />
                 )}
             </div>
         </div>

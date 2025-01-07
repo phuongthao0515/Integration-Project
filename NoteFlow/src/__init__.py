@@ -20,7 +20,7 @@ app = FastAPI(
     lifespan=life_span
 )
 origins = [
-    "*" 
+    "*"
 ]
 
 app.add_middleware(

@@ -79,8 +79,45 @@ class PlanService:
         except Exception as e:
             print(f"Error in get_plans_by_specific_week: {e}")
             raise e
+    async def get_plans_today(
+        self, user_id: int, year: int, month: int, day: int, session: AsyncSession
+    ):
+        try:
+            query = text("""
+                SELECT *
+                FROM plan
+                WHERE userid = :user_id
+                AND EXTRACT(YEAR FROM duedate) = :year
+                AND EXTRACT(MONTH FROM duedate) = :month
+                AND EXTRACT(DAY FROM duedate) = :day
+            """)
 
+            results = await session.execute(
+                query,
+                {
+                    "user_id": user_id,
+                    "year": year,
+                    "month": month,
+                    "day": day
+                }
+            )
+            rows = results.mappings().all()
 
+            plans = [
+                PlanResponseModel(
+                    planId=row["planid"],
+                    createDate=row["createddate"],
+                    dueDate=row["duedate"],
+                    content=row["content"],
+                    importance=row["importance"]
+                )
+                for row in rows
+            ]
+            return plans
+
+        except Exception as e:
+            print(f"Error in get_plans_today: {e}")
+            raise e
     async def get_plans_by_specific_month(
         self, user_id: int, year: int, month: int, session: AsyncSession
     ):

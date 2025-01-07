@@ -4,6 +4,7 @@ from src.db.main import get_session
 from .service import PlanService
 from src.db.auth.dependencies import AccessTokenBearer
 from .schemas import PlanCreateModel, PlanUpdateModel
+from datetime import datetime
 
 plan_router = APIRouter()
 plan_helper = PlanService()
@@ -11,6 +12,30 @@ access_token_bearer = AccessTokenBearer()
 
 # Example: user_details might look like:
 # {"user": {"user_id": 1}, "exp": 1735550010, "refresh": False, "jti": "some-uuid"}
+
+@plan_router.get("/plans/today")
+async def get_plans_for_today(
+    session: AsyncSession = Depends(get_session),
+    user_details=Depends(access_token_bearer)
+):
+    """
+    e.g. GET /plans/today → Plans for today
+    """
+    try:
+        user_id = int(user_details["user"]["user_id"])
+        print('ajsdkasdjk')
+        today = datetime.today()
+        plans = await plan_helper.get_plans_today(
+            user_id=user_id,
+            year=today.year,
+            month=today.month,
+            day=today.day,
+            session=session
+        )
+        return plans
+    except Exception as e:
+        return {"error": str(e)}
+
 
 @plan_router.get('/plans/{plan_id}')
 async def get_plan_by_id(
@@ -27,31 +52,6 @@ async def get_plan_by_id(
             return result
     except Exception as e:
         return e
-
-
-@plan_router.get("/plans/week/{year}/{month}/{week_number}")
-async def get_plans_for_specific_week(
-    year: int,
-    month: int,
-    week_number: int,
-    session: AsyncSession = Depends(get_session),
-    user_details=Depends(access_token_bearer)
-):
-    """
-    e.g. GET /plans/week/2025/2/2  → second week of February 2025
-    """
-    try:
-        user_id = int(user_details["user"]["user_id"])
-        plans = await plan_helper.get_plans_by_specific_week(
-            user_id=user_id,
-            year=year,
-            month=month,
-            week_number=week_number,
-            session=session
-        )
-        return plans
-    except Exception as e:
-        return {"error": str(e)}
 
 
 @plan_router.get("/plans/month/{year}/{month}")
