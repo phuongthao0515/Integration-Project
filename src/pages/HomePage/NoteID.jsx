@@ -20,7 +20,7 @@ const NoteID = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://127.0.0.1:8000/api/v1/note/notes/${pageid}`, {
+        fetch(`http://127.0.0.1:8001/api/v1/note/notes/${pageid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,6 +28,7 @@ const NoteID = () => {
             },
         })
             .then((res) => {
+    
                 if (!res.ok) {
                     return res.json().then((errorData) => {
                         const errorMsg = errorData.detail || 'Login failed. Please try again.';
@@ -49,7 +50,7 @@ const NoteID = () => {
     }, [pageid, setChosenNote]);
 
     const onChange = (content) => {
-        fetch(`http://127.0.0.1:8000/api/v1/note/notes/content/${pageid}`, {
+        fetch(`http://127.0.0.1:8001/api/v1/note/notes/content/${pageid}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

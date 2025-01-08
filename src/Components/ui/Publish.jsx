@@ -13,7 +13,7 @@ const Publish = ({ id }) => {
     const [copied, setCopied] = useState(false);
 
     const onCopy = () => {
-        navigator.clipboard.writeText(`http://localhost:3001/note/${id}`);
+        navigator.clipboard.writeText(`http://localhost:3001/note/shared/${id}`);
         setCopied(true);
         setTimeout(() => {
             setCopied(false);
@@ -29,7 +29,7 @@ const Publish = ({ id }) => {
     };
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8000/api/v1/note/notes/visibility/${id}`, {
+        fetch(`http://127.0.0.1:8001/api/v1/note/notes/visibility/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ const Publish = ({ id }) => {
                         <div className="flex items-center w-[100%]">
                             <input
                                 disabled
-                                value={`http://localhost:3001/note/${id}`}
+                                value={`http://localhost:3001/note/shared/${id}`}
                                 className="px-2 text-xs border rounded-l-md h-8 bg-muted truncate flex-grow"
                             />
                             <button

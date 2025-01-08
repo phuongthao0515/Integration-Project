@@ -44,7 +44,7 @@ const NavBar1 = () => {
     };
 
     return (
-        <div className="navbar-container">
+        <div className="navbar-container h-[100vh] overflow-scroll overflow-x-hidden">
             <header className="header">
                 <div className="profile" onClick={openSetting}>
                     <img src={profilePic} alt="Profile" className="profile-pic" />

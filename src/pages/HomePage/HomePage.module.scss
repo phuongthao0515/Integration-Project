@@ -185,3 +185,33 @@
         
     }
 }
+.cursor {
+    position: relative;
+    width: 24em;
+    margin: 0 auto;
+    border-right: 2px solid rgba(255, 255, 255, 0.75);
+    font-size: 30px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    transform: translateY(-50%);
+    margin-top: 20px;    
+}
+
+/* Animation */
+.typewriter-animation {
+  animation: 
+    typewriter 5s steps(50) infinite normal both, /* Changed to infinite */
+    blinkingCursor 500ms steps(50) infinite normal;
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 24em; } /* Ensures the full width is visible */
+}
+
+@keyframes blinkingCursor {
+  from { border-right-color: rgba(255, 255, 255, 0.75); }
+  to { border-right-color: transparent; }
+}
+
