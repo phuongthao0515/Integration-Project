@@ -20,7 +20,7 @@ const NoteID = () => {
 
     useEffect(() => {
         setLoading(true);
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/${pageid}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/${pageid}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -28,7 +28,6 @@ const NoteID = () => {
             },
         })
             .then((res) => {
-    
                 if (!res.ok) {
                     return res.json().then((errorData) => {
                         const errorMsg = errorData.detail || 'Login failed. Please try again.';
@@ -50,7 +49,7 @@ const NoteID = () => {
     }, [pageid, setChosenNote]);
 
     const onChange = (content) => {
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/content/${pageid}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/content/${pageid}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,8 +79,9 @@ const NoteID = () => {
         <div className={cx('dashboard')}>
             <NavBar1 />
             <main className="flex-1">
-                {loading? <Skeleton/>:
-                chosenNote ? (
+                {loading ? (
+                    <Skeleton />
+                ) : chosenNote ? (
                     <div className="bg-white h-full">
                         <div className="w-full h-10 bg-white flex items-center px-3 justify-between">
                             <Title id={pageid} size="small" />

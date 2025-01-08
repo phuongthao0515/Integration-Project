@@ -1,4 +1,4 @@
-import  { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './NoteList.scss';
 import docPic from '../../assets/doc.png';
 import closePic from '../../assets/close.png';
@@ -12,7 +12,7 @@ const NoteList = () => {
     const { notes, setNotes, chosenNote, setChosenNote } = useContext(GlobalContext);
     const navigate = useNavigate();
     useEffect(() => {
-        fetch('http://127.0.0.1:8001/api/v1/note/notes', {
+        fetch('http://127.0.0.1:8000/api/v1/note/notes', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const NoteList = () => {
             name: newNoteName || 'Untitled',
             content: '',
         };
-        fetch(`http://127.0.0.1:8001/api/v1/note/create`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -96,7 +96,7 @@ const NoteList = () => {
 
     const updateName = (id) => {
         console.log('Note id: ', id);
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/title/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/title/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const NoteList = () => {
     };
 
     const handleDelete = (id) => {
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -145,7 +145,7 @@ const NoteList = () => {
             .then(() => {
                 setNotes((prevNotes) => prevNotes.filter((note) => note.pageid !== id));
                 setChosenNote(null);
-                navigate('/home')
+                navigate('/home');
             })
             .catch((error) => {
                 console.error('Error:', error);

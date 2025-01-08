@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
-import Skeleton from 'react-loading-skeleton'
+import Skeleton from 'react-loading-skeleton';
 import profilePic from '../../assets/profile-pic.jpeg';
 
 import { formatDistanceToNow } from 'date-fns';
@@ -34,54 +34,54 @@ import cov12 from '../../assets/cover/cover12.jpg';
 const cx = classNames.bind(styles);
 
 function Dashboard() {
-    const {notes,setNotes} = useContext(GlobalContext);
-     const coverImages = {
-            1: cov1,
-            2: cov2,
-            3: cov3,
-            4: cov4,
-            5: cov5,
-            6: cov6,
-            7: cov7,
-            8: cov8,
-            9: cov9,
-            10: cov10,
-            11: cov11,
-            12: cov12,
-        };
-        useEffect(() => {
-            console.log('home');
-            fetch('http://127.0.0.1:8001/api/v1/note/notes', {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-                },
-            })
-                .then((res) => {
-                    if (!res.ok) {
-                        return res.json().then((errorData) => {
-                            const errorMsg = errorData.detail || 'Login failed. Please try again.';
-                            throw new Error(errorMsg);
-                        });
-                    }
+    const { notes, setNotes } = useContext(GlobalContext);
+    const coverImages = {
+        1: cov1,
+        2: cov2,
+        3: cov3,
+        4: cov4,
+        5: cov5,
+        6: cov6,
+        7: cov7,
+        8: cov8,
+        9: cov9,
+        10: cov10,
+        11: cov11,
+        12: cov12,
+    };
+    useEffect(() => {
+        console.log('home');
+        fetch('http://127.0.0.1:8000/api/v1/note/notes', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+            },
+        })
+            .then((res) => {
+                if (!res.ok) {
+                    return res.json().then((errorData) => {
+                        const errorMsg = errorData.detail || 'Login failed. Please try again.';
+                        throw new Error(errorMsg);
+                    });
+                }
 
-                    return res.json();
-                })
-                .then((datas) => {
-                    if(datas){
-                        console.log('Data: ',datas)
-                        setNotes(datas);
-                    }
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-                });;
-        }, []);
+                return res.json();
+            })
+            .then((datas) => {
+                if (datas) {
+                    console.log('Data: ', datas);
+                    setNotes(datas);
+                }
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }, []);
     return (
         <div className={cx('dashboard')}>
             <NavBar />
-            <main className={cx('main','h-[100vh] overflow-scroll overflow-x-hidden')} >
+            <main className={cx('main', 'h-[100vh] overflow-scroll overflow-x-hidden')}>
                 <header className={cx('greeting')}>
                     <h1 className={cx('cursor', 'typewriter-animation')}>
                         Welcome, {JSON.parse(localStorage.getItem('user')).username}
