@@ -199,25 +199,6 @@
     }
   }
   
-// //  connector arrow
-//   .connector {
-//   position: absolute; /* Để định vị chính xác */
-//   top: 50%; /* Căn giữa theo chiều dọc */
-//   left: 0;
-//   width: 100px; /* Độ dài của connector */
-//   height: 2px; /* Độ dày của connector */
-//   background-color: #4D2114; /* Màu nâu đậm */
-//   transform: translateY(-50%); /* Căn chỉnh chính xác */
-    
-//     path {
-//       stroke: #4D2114; /* Change this to the color you want */
-//       stroke-width: 3;
-//     }
-
-//     polygon {
-//       fill: #4D2114; /* Change this to the color you want for the arrowhead */
-//     }
-//   }
    // plan
    .plan_day {
     display: flex;

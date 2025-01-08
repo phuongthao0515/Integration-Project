@@ -4,17 +4,24 @@
 
 .header {
     height: 60px;
-    width: 100%;
-    border-bottom: 1.2px solid var(--brown, #4d2114);
-    background: #705c53;
-    display: flex;
-    align-items: center;
-    padding-left: 40px;
-    h1 {
-        color: #fff;
-        text-decoration: underline #ff7801 1px;
-        font-weight: 300;
-    }
+  width: 100%;
+  border-bottom: 1.2px solid var(--brown, #4d2114);
+  background: #705c53;
+  display: flex;
+
+  align-items: center;
+  padding-left: 40px;
+  gap: 6px;
+  h1 {
+      color: #fff;
+      text-decoration: underline #ff7801 1px;
+      font-weight: 300;
+      font-size: 25px;
+  }
+  image {
+    width: 16px; /* Kích thước icon */
+    height: 16px; 
+  }
 }
 
 .body {

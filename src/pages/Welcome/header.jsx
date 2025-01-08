@@ -14,7 +14,7 @@ const Header = () => {
               NoteFlow
           </h1>
           <img src={vector} alt="" className = {cx('image')}/>
-          <div className={cx('auth-buttons')}>
+          <div className={cx('auth_buttons')}>
               <Link to="/signup">
                   <button className={cx('sign_up')}>Sign Up</button>
               </Link>

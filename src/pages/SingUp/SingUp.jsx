@@ -70,9 +70,10 @@ function SingUp() {
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-                <h1>
-                    NoteFlow <img src={vector} alt="" />
-                </h1>
+                 <h1>
+                              NoteFlow
+                          </h1>
+                          <img src={vector} alt="" className = {cx('image')}/>
             </header>
             <div className={cx('inner')}>
                 <h1>SIGN UP</h1>

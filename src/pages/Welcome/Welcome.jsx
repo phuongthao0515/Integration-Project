@@ -208,7 +208,7 @@ const WelcomePage = () => {
         <section className={cx('content')}>
           <h4>We are always ready to help you and answer your question</h4>
           <p>Email us anytime or connect with us on our social networks.</p>
-          <a href="mailto:example@gmail.com">NoteFlow@gmail.com</a>
+          <a href="mailto:example@gmail.com">Email: noteFlow@gmail.com</a>
         </section>
       </section>
     </section>

@@ -78,8 +78,9 @@ function Login() {
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
                 <h1>
-                    NoteFlow <img src={vector} alt="" />
+                    NoteFlow
                 </h1>
+                <img src={vector} alt="" className = {cx('image')}/>
             </header>
             <div className={cx('body')}>
                 <div className={cx('left')}>
@@ -89,7 +90,6 @@ function Login() {
                     <h1 className={cx('title')}>LOGIN ACCOUNT</h1>
                     <div className={cx('form')}>
                         <label>
-                            Email
                             Email
                             <input
                                 type="email"

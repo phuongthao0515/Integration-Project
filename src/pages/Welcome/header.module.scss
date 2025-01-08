@@ -19,11 +19,12 @@
     height: 16px; 
   }
 
-  .auth-buttons {
+  .auth_buttons {
     margin-left: auto;
     display: flex;
     gap: 15px;
     padding-right: 30px;
+    align-items: center;
 
     .sign_up {
       background-color: #FF7801; /* Orange button */
