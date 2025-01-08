@@ -22,8 +22,13 @@ function SingUp() {
         if (!username || !password || !email) {
             setErr('All fields must be filled');
             return;
+<<<<<<< HEAD
         } else {
             fetch('http://127.0.0.1:8000/api/v1/auth/signup', {
+=======
+        }else{
+            fetch('http://127.0.0.1:8001/api/v1/auth/signup',{
+>>>>>>> e9d5ebb2800755fd51a0a432d20ae6547c3e9f07
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -71,9 +76,10 @@ function SingUp() {
     return (
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
-                <h1>
-                    NoteFlow <img src={vector} alt="" />
-                </h1>
+                 <h1>
+                              NoteFlow
+                          </h1>
+                          <img src={vector} alt="" className = {cx('image')}/>
             </header>
             <div className={cx('inner')}>
                 <h1>SIGN UP</h1>

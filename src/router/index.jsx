@@ -9,6 +9,7 @@ import NotePage from '../pages/NotePage/NotePage';
 import WelcomePage from '../pages/Welcome/Welcome';
 import Header from '../pages/Welcome/header';
 import NoteID from '../pages/HomePage/NoteID';
+import ShareNote from '../Components/ui/ShareNote';
 
 
 export const publicRoutes = [
@@ -23,4 +24,5 @@ export const publicRoutes = [
     // { path: '/note', component: <TakeNote /> },
     { path: '/note/:pageid', component: <NoteID/>},
     { path: '/note', component: <NotePage /> },
+    {path:'/note/shared/:pageid',component:<ShareNote/>}
 ];

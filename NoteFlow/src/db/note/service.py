@@ -81,7 +81,7 @@ class NoteService:
             results = await session.execute(query,{'id':user_id})
             rows = results.mappings().all()
             notes = [
-                NoteResponseModel(pageid=row['pageid'], title=row['title'], createddate=row['createddate'], visibility=row['visibility'])
+                NoteResponseModel(pageid=row['pageid'], title=row['title'], createddate=row['createddate'], visibility=row['visibility'],document=row['document'])
                 for row in rows
             ]
             return notes
@@ -243,4 +243,78 @@ class NoteService:
 
         except Exception as e:
             print(f"Error in share_note: {e}")
+            raise e
+
+    async def update_note_cover(self, user_id: int, note_id: int, session: AsyncSession, coverid: int):
+        """update a note visibility."""
+        try:
+            query = text("SELECT * FROM NOTE WHERE PageID = :note_id")
+            result = await session.execute(query, {'note_id': note_id})
+            note = result.fetchone()
+            if not note:
+                raise HTTPException(status_code=404, detail="Note not found.")
+            note = dict(note) if isinstance(note, tuple) else note
+
+            if note.userid != user_id:
+                raise HTTPException(status_code=401, detail="Unauthorized to change visibility of this note.")
+
+            update_query = text("UPDATE NOTE SET document = :document WHERE PageID = :note_id")
+            await session.execute(update_query, {'document': coverid, 'note_id': note_id})
+            await session.commit()
+
+            return {"message": f"Note {note_id} cover updated to {coverid}."}
+
+        except Exception as e:
+            print(f"Error in share_note: {e}")
+            raise e
+    
+    async def get_shared_note(self,note_id:int,session:AsyncSession):
+        try:
+            query = text('SELECT * FROM NOTE WHERE pageid = :id')
+            res = await session.execute(query,{'id':note_id})
+            note = res.fetchone()
+            if not note: 
+                raise HTTPException(status_code=404,detail='Note not found.')
+            
+            note = dict(note) if isinstance(note,tuple) else note 
+
+            print('Note: ',note)
+            if not note.visibility: 
+                raise HTTPException(status_code=401,detail='Unauthorized to access this note')
+            
+            return {
+                 'pageid': note.pageid,
+                        'created_date': note.createddate,
+                        'content': note.content,
+                        'title': note.title,
+                        'document': note.document,
+                        'updated_date': note.updateddate,
+                        'visibility': note.visibility,
+                        'document': note.document
+            }
+        except Exception as e:
+            print(f"Error in get specific shared note: {e}")
+            raise e
+    
+    async def get_note_owner(self,note_id:int,session:AsyncSession): 
+        try:
+            query = text('SELECT * FROM NOTE WHERE PAGEID = :note_id')
+            res = await session.execute(query,{'note_id':note_id})
+            user = res.fetchone()
+            if not user: 
+                raise HTTPException(status_code=404,detail='User not found.')
+                
+            user = dict(user) if isinstance(user,tuple) else user 
+            user_id = user.userid
+
+            query = text('SELECT * FROM USERS WHERE USERID = :user_id')
+            res = await session.execute(query,{'user_id':user_id})
+            user = res.fetchone()
+
+            if not user: 
+                raise HTTPException(status_code=404,detail='User not found.')
+            
+            return {'email':user.email}
+        except Exception as e:
+            print(f"Error in finding note owner: {e}")
             raise e

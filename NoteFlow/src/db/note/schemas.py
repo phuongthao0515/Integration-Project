@@ -32,6 +32,7 @@ class NoteResponseModel(BaseModel):
     title: str
     createddate: datetime
     visibility: bool
+    document: int
 
     class Config:
             orm_mode = True
@@ -42,7 +43,7 @@ class NoteResponseModel2(BaseModel):
     createddate: datetime
     permission: PermissionEnum
     visibility: bool
-
+    
     class Config:
             orm_mode = True
 
@@ -54,3 +55,5 @@ class ChangeVisibilityModel(BaseModel):
 
 class ChangeContentModel(BaseModel):
      content: str
+class ChangeCoverModel(BaseModel):
+     cover: int

@@ -3,7 +3,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 from src.db.main import get_session
 from .service import NoteService
 from src.db.auth.dependencies import AccessTokenBearer
-from .schemas import NoteCreateModel,PermissionEnum, ChangeTitleModel, ChangeVisibilityModel,ChangeContentModel
+from .schemas import NoteCreateModel,PermissionEnum, ChangeTitleModel, ChangeVisibilityModel,ChangeContentModel, ChangeCoverModel
 
 note_router = APIRouter()
 note_helper = NoteService()
@@ -78,6 +78,15 @@ async def update_note_visibility(note_id:int,obj:ChangeVisibilityModel,session:A
     except Exception as e:
         return e
     
+@note_router.put('/notes/cover/{note_id}',status_code=status.HTTP_200_OK)
+async def update_note_cover(note_id:int,obj:ChangeCoverModel,session:AsyncSession=Depends(get_session),user_details=Depends(access_token_bearer)):
+    try:
+        user_id = int(user_details['user']['user_id'])
+        note = await note_helper.update_note_cover(user_id,note_id,session,obj.cover)
+        return note
+    except Exception as e:
+        return e
+    
 
 
 #Share note with user
@@ -108,4 +117,18 @@ async def get_all_shared_notes(session:AsyncSession=Depends(get_session),user_de
         return e
 
 
-    
+@note_router.get('/shared/{note_id}')
+async def get_publish_note(note_id:int,session:AsyncSession=Depends(get_session)): 
+    try:
+        notes = await note_helper.get_shared_note(note_id,session)
+        return notes
+    except Exception as e:
+        return e
+
+@note_router.get('/owner/{note_id}')
+async def get_note_owner(note_id:int,session:AsyncSession=Depends(get_session)): 
+    try:
+        user = await note_helper.get_note_owner(note_id,session)
+        return user
+    except Exception as e:
+        return e

@@ -2,29 +2,56 @@ import { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
 import Skeleton from 'react-loading-skeleton'
+import profilePic from '../../assets/profile-pic.jpeg';
 
 import { formatDistanceToNow } from 'date-fns';
 
 import blockchainIcon from '../../assets/blockchain.png';
-import sqlIcon from '../../assets/sql.png';
-import networkIcon from '../../assets/network.png';
+
 import upcoming from '../../assets/upcoming.png';
-import recently from '../../assets/recently.png';
+
 import pin from '../../assets/pin.png';
-import AIIcon from '../../assets/AI.png';
+
 import card9 from '../../assets/card9.png';
 import card10 from '../../assets/card10.png';
 import MLIcon from '../../assets/ML.png';
 import NavBar from '../../Components/NavBar1/NavBar1';
 import { GlobalContext } from '../../context';
+import cover1 from '../../assets/images/cover.jpg';
+import cov1 from '../../assets/cover/cover1.jpg';
+import cov2 from '../../assets/cover/cover2.jpg';
+import cov3 from '../../assets/cover/cover3.jpg';
+import cov4 from '../../assets/cover/cover4.jpg';
+import cov5 from '../../assets/cover/cover5.jpg';
+import cov6 from '../../assets/cover/cover6.jpg';
+import cov7 from '../../assets/cover/cover7.jpg';
+import cov8 from '../../assets/cover/cover8.jpg';
+import cov9 from '../../assets/cover/cover9.jpg';
+import cov10 from '../../assets/cover/cover10.jpg';
+import cov11 from '../../assets/cover/cover11.jpg';
+import cov12 from '../../assets/cover/cover12.jpg';
 
 const cx = classNames.bind(styles);
 
 function Dashboard() {
     const {notes,setNotes} = useContext(GlobalContext);
+     const coverImages = {
+            1: cov1,
+            2: cov2,
+            3: cov3,
+            4: cov4,
+            5: cov5,
+            6: cov6,
+            7: cov7,
+            8: cov8,
+            9: cov9,
+            10: cov10,
+            11: cov11,
+            12: cov12,
+        };
         useEffect(() => {
             console.log('home');
-            fetch('http://127.0.0.1:8000/api/v1/note/notes', {
+            fetch('http://127.0.0.1:8001/api/v1/note/notes', {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,9 +81,11 @@ function Dashboard() {
     return (
         <div className={cx('dashboard')}>
             <NavBar />
-            <main className={cx('main')}>
+            <main className={cx('main','h-[100vh] overflow-scroll overflow-x-hidden')} >
                 <header className={cx('greeting')}>
-                    <h1>Good Morning, </h1>
+                    <h1 className={cx('cursor', 'typewriter-animation')}>
+                        Welcome, {JSON.parse(localStorage.getItem('user')).username}
+                    </h1>
                 </header>
                 <section className={cx('recently-opened')}>
                     <h2>Recently notes</h2>
@@ -64,15 +93,27 @@ function Dashboard() {
                         {notes ? (
                             notes.map(
                                 (note, index) =>
-                                    index <= 2 && (
+                                    index <= 5 && (
                                         <div className={cx('card')} key={index}>
-                                            <img src={note.img || ''} alt="SQL" />
-                                            <p>{note.title}</p>
-                                            <span>
-                                                {formatDistanceToNow(new Date(note.createddate.split('.')[0]), {
-                                                    addSuffix: true,
-                                                })}
-                                            </span>
+                                            <img
+                                                src={coverImages[note.document] || ''}
+                                                alt={note.document}
+                                                className="w-full h-20 object-cover"
+                                            />
+                                            <p className="mt-6 text-left text-xl">{note.title}</p>
+                                            <div className="text-left mt-4 flex items-center gap-4">
+                                                <div>
+                                                    <img
+                                                        src={profilePic}
+                                                        className="w-8 h-8 rounded-full border-2 border-gray-500"
+                                                    />
+                                                </div>
+                                                <span className="text-gray-600 text-sm">
+                                                    {formatDistanceToNow(new Date(note.createddate.split('.')[0]), {
+                                                        addSuffix: true,
+                                                    })}
+                                                </span>
+                                            </div>
                                         </div>
                                     ),
                             )
@@ -137,17 +178,25 @@ function Dashboard() {
                         <img src={pin} alt="shared note" />
                         Shared Notes
                     </h2>
-                    <div className={cx('pins')}>
-                        <div className={cx('pin1')}>
-                            <img src={blockchainIcon} alt="BlockChain" />
-                            <p>BlockChain</p>
-                            <span>a distributed ledger ...</span>
+                    <div className={cx('pins', 'mt-4')}>
+                        <div
+                            className={cx('pin1', 'w-40 p-2 rounded-md bg-white')}
+                            style={{
+                                boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+                            }}
+                        >
+                            <img src={cov2} alt="BlockChain" className="w-44 h-20 object-cover " />
+                            <p className="mt-2 text-left">BlockChain: a distributed ledger ...</p>
                         </div>
-                        {/* Add more pins */}
-                        <div className={cx('pin2')}>
-                            <img src={MLIcon} alt="ML" />
-                            <p>Machine Learning</p>
-                            <span>Decision tree ...</span>
+
+                        <div
+                            className={cx('pin2', 'w-40 p-2 rounded-md bg-white')}
+                            style={{
+                                boxShadow: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+                            }}
+                        >
+                            <img src={cov1} alt="ML" className="w-44 h-20 object-cover" />
+                            <p className="mt-2 text-left">Machine Learning: Decision tree ...</p>
                         </div>
                     </div>
                 </section>

@@ -11,9 +11,10 @@ const Header = () => {
   return (
       <header className={cx('header')}>
           <h1>
-              NoteFlow <img src={vector} alt="" />
+              NoteFlow
           </h1>
-          <div className={cx('auth-buttons')}>
+          <img src={vector} alt="" className = {cx('image')}/>
+          <div className={cx('auth_buttons')}>
               <Link to="/signup">
                   <button className={cx('sign_up')}>Sign Up</button>
               </Link>

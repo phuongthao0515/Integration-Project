@@ -20,7 +20,7 @@ function Login() {
         e.preventDefault();
         setErrorMessage('');
 
-        fetch('http://127.0.0.1:8000/api/v1/auth/login', {
+        fetch('http://127.0.0.1:8001/api/v1/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -75,8 +75,9 @@ function Login() {
         <div className={cx('wrapper')}>
             <header className={cx('header')}>
                 <h1>
-                    NoteFlow <img src={vector} alt="" />
+                    NoteFlow
                 </h1>
+                <img src={vector} alt="" className = {cx('image')}/>
             </header>
             <div className={cx('body')}>
                 <div className={cx('left')}>
@@ -86,7 +87,11 @@ function Login() {
                     <h1 className={cx('title')}>LOGIN ACCOUNT</h1>
                     <div className={cx('form')}>
                         <label>
+<<<<<<< HEAD
                             Email Email
+=======
+                            Email
+>>>>>>> e9d5ebb2800755fd51a0a432d20ae6547c3e9f07
                             <input
                                 type="email"
                                 placeholder="Email"

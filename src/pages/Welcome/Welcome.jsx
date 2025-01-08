@@ -11,6 +11,10 @@ import clock from "../../assets/clock.png";
 import team from "../../assets/teambg.png";
 import team2 from "../../assets/team2.png";
 import team3 from "../../assets/team3.png";
+import chat from "../../assets/bg7.jpg";
+import chat1 from "../../assets/chat1.png";
+import ready from "../../assets/bg8.png";
+
 
 const cx = classNames.bind(welcome);
 
@@ -136,41 +140,83 @@ const WelcomePage = () => {
   </section>
 
   <section className={cx('team')}>
-  <div className={cx('content')}>
+
+  <div className={cx('images_wrapper')}>
+    <div className={cx('image_left')}>
+      <img src={team2} alt="Team Icon" />
+    </div>
+    <div className={cx('content')}>
     <h2>Work with your team</h2>
     <p>Never miss a meeting or deadline for team project</p>
     </div>
 
-  <div className={cx('team_image')}>
-  <img src={team} alt="Team Icon" />
-  </div> 
+    <div className={cx('image_right')}>
+      <img src={team3} alt="Team Icon" />
+    </div>
+  </div>
   
-  <div className={cx('image_right')}>
-  <img src={team2} alt="Team Icon" />
-  </div>
-
-  <div className={cx('image_left')}>
-  <img src={team3} alt="Team Icon" />
-  </div>
-
+  <div className={cx('team_image')}>
+      <img src={team} alt="Team Icon" />
+    </div>
   </section>
+
+<section className={cx('chatting')}>
+<div className={cx('images_wrapper')}>
+    <div className={cx('content')}>
+    <h2>Chatting</h2>
+    <p>Chat in Real-Time and Keep Ideas Flowing</p>
+    </div>
+
+    <div className={cx('image_right')}>
+      <img src={chat1} alt="Chat Icon" />
+    </div>
+  </div>
+
+  <div className={cx('chat_image')}>
+      <img src={chat} alt="Team Icon" />
+    </div>
+  </section>
+
+<section className={cx('ready')}>
+  <div className={cx('content')}>
+  <div className={cx('ready_image')}>
+      <img src={ready} alt="Ready Icon" />
+    </div>
+    <h2>Ready to take your <span className={cx('highlight')}>notes</span> <br/> to the next level?</h2>
+    <button className={cx('button')}>Try Now</button>
+  </div>
+</section>
+
 
 </section>
 
-      <div className="cta">
-        <h3>Ready to take your <span>notes</span> to the next level?</h3>
-        <button>Get Started</button>
-
-        <div className="contact-form">
-          <h4>We are always ready to help you and answer your question</h4>
+<section className={cx('contact')}>
+      <section className={cx('container')}>
+       
+        <section className={cx('get_touch')}>
+          <h2>Get in Touch</h2>
+          <p>Tell us your goals and what note taking means to you</p>
           <form>
-            <input type="email" placeholder="Your email" />
-            <textarea placeholder="Your question"></textarea>
+            <input type="text" placeholder="Name" required />
+            <input type="email" placeholder="Email" required />
+            <textarea placeholder="Message" required></textarea>
             <button type="submit">Submit</button>
           </form>
-        </div>
+        </section>
+
+       
+        <section className={cx('content')}>
+          <h4>We are always ready to help you and answer your question</h4>
+          <p>Email us anytime or connect with us on our social networks.</p>
+          <a href="mailto:example@gmail.com">Email: noteFlow@gmail.com</a>
+        </section>
+      </section>
+    </section>
+
+
+
+
       </div>
-    </div>
     </div>
   );
 };
