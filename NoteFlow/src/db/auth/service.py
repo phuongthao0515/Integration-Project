@@ -56,8 +56,8 @@ class LoginService:
                 status_code=status.HTTP_200_OK,
                 content={
                     "message": "Log in successful",
-                    "access_token": access_token.decode("utf-8"),
-                    "refresh_token": refresh_token.decode("utf-8"),
+                    "access_token": access_token,
+                    "refresh_token": refresh_token,
                     "user": {
                         'user_id': user.userid,
                         'username': user.name
