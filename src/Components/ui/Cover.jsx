@@ -118,7 +118,7 @@ const Cover = ({ id,data }) => {
                 // Skeleton loader
                 <div className="w-[100%] h-[25vh] bg-gray-200 animate-pulse"></div>
             ) : (
-                <img src={coverImg} className="w-[100%] h-[25vh] object-cover" alt="Cover" />
+                coverImg?<img src={coverImg} className="w-[100%] h-[25vh] object-cover" alt="Cover" />:<div className="w-[100%] h-[25vh]"></div>
             )}
 
             <div className="absolute bottom-[-20px] ml-2">

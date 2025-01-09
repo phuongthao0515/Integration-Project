@@ -14,7 +14,7 @@ class Note(SQLModel, table=True):
     createddate: datetime = Field(default_factory=datetime.utcnow, sa_column=Column(DateTime, nullable=False)) 
     content: Optional[str] = Field(sa_column=Column(Text, nullable=True)) 
     title: str = Field(sa_column=Column(String(255), nullable=False)) 
-    document: Optional[str] = Field(sa_column=Column(Text, nullable=True)) 
+    document: Optional[int] = Field(sa_column=Column(Integer, nullable=True)) 
     updateddate: Optional[datetime] = Field(sa_column=Column(DateTime, nullable=True)) 
     userid: int = Field(sa_column=Column(Integer, ForeignKey("users.userid"), nullable=False))
     visibility: bool = Field(default=False, sa_column=Column(Boolean, nullable=False, default=False))
@@ -32,7 +32,7 @@ class NoteResponseModel(BaseModel):
     title: str
     createddate: datetime
     visibility: bool
-    document: int
+    document: Optional[int]
 
     class Config:
             orm_mode = True

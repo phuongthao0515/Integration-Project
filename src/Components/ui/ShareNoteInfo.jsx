@@ -18,7 +18,7 @@ const ShareNoteInfo = ({ id, data }) => {
     };
     useEffect(()=>{
         const getOwner = ()=>{
-            fetch(`http://127.0.0.1:8001/api/v1/note/owner/${id}`, {
+            fetch(`http://127.0.0.1:8000/api/v1/note/owner/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
