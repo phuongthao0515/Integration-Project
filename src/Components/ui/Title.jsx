@@ -1,8 +1,8 @@
 import { useContext, useRef, useState, useEffect } from 'react';
 import { GlobalContext } from '../../context';
-import { FaRegNoteSticky } from "react-icons/fa6";
+import { FaRegNoteSticky } from 'react-icons/fa6';
 
-const Title = ({ id,size }) => {
+const Title = ({ id, size }) => {
     const inputRef = useRef(null);
     const { setNotes, chosenNote, setChosenNote } = useContext(GlobalContext);
     const [isEditing, setIsEditing] = useState(false);
@@ -31,7 +31,7 @@ const Title = ({ id,size }) => {
         setTitle(updatedTitle);
         setChosenNote({ ...chosenNote, title: updatedTitle });
 
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/title/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/title/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -61,7 +61,6 @@ const Title = ({ id,size }) => {
             });
     };
 
-
     const onKeyDown = (event) => {
         if (event.key === 'Enter') {
             disableInput();
@@ -72,9 +71,11 @@ const Title = ({ id,size }) => {
         <div className={`flex items-center gap-x-2 text-lg ${size === 'big' && 'mt-8 ml-12'}`}>
             {size === 'small' &&
                 (chosenNote?.icon ? <p>{chosenNote?.icon}</p> : <FaRegNoteSticky className="text-2xl" />)}
-            {(isEditing ? (
+            {isEditing ? (
                 <input
-                    className={`${size==='small' &&'h-7'} px-2 focus-visible:ring-transparent outline-none ${size==='big' && 'text-4xl font-bold py-2'}`}
+                    className={`${size === 'small' && 'h-7'} px-2 focus-visible:ring-transparent outline-none ${
+                        size === 'big' && 'text-4xl font-bold py-2'
+                    }`}
                     ref={inputRef}
                     onBlur={disableInput}
                     onChange={onChange}
@@ -85,7 +86,7 @@ const Title = ({ id,size }) => {
                 <button onClick={enableInput} className="font-normal h-auto p-1 outline-none">
                     <span className={`truncate ${size === 'big' && 'text-4xl font-bold'}`}>{title}</span>
                 </button>
-            ))}
+            )}
         </div>
     );
 };

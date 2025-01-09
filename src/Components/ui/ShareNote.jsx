@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import Error from "./Error";
-import Title from "./Title";
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import Error from './Error';
+import Title from './Title';
 
-import Editor from "./Editor";
-import SharedCover from "./ShareNoteCover";
-import ShareTitle from "./ShareTitle";
-import ShareNoteInfo from "./ShareNoteInfo";
+import Editor from './Editor';
+import SharedCover from './ShareNoteCover';
+import ShareTitle from './ShareTitle';
+import ShareNoteInfo from './ShareNoteInfo';
 
 const ShareNote = () => {
     const { pageid } = useParams();
@@ -15,34 +15,33 @@ const ShareNote = () => {
 
     useEffect(() => {
         const fetchNote = async () => {
-            setSharedNote(null)
+            setSharedNote(null);
             try {
-                const res = await fetch(`http://127.0.0.1:8001/api/v1/note/shared/${pageid}`, {
-                    method: "GET",
+                const res = await fetch(`http://127.0.0.1:8000/api/v1/note/shared/${pageid}`, {
+                    method: 'GET',
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json',
                     },
                 });
 
                 if (!res.ok) {
                     const errorData = await res.json();
-                    
-                    setErr(errorData.detail || "An unexpected error occurred.");
-                    return; 
+
+                    setErr(errorData.detail || 'An unexpected error occurred.');
+                    return;
                 }
 
                 const data = await res.json();
-                if(data.status_code){
+                if (data.status_code) {
                     setErr(data.detail);
-                    setSharedNote(null)
+                    setSharedNote(null);
                     return;
                 }
-                setErr(null); 
+                setErr(null);
                 setSharedNote(data);
-                
             } catch (err) {
-                console.error("Network error:", err);
-                setErr("A network error occurred. Please try again.");
+                console.error('Network error:', err);
+                setErr('A network error occurred. Please try again.');
             }
         };
 
@@ -75,7 +74,7 @@ const ShareNote = () => {
                     </div>
 
                     <div>
-                        <ShareNoteInfo id={sharedNote?.pageid} data={sharedNote}/>
+                        <ShareNoteInfo id={sharedNote?.pageid} data={sharedNote} />
                     </div>
                 </div>
             )}

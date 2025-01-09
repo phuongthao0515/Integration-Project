@@ -5,7 +5,7 @@ import { CiUser } from 'react-icons/ci';
 
 const ShareNoteInfo = ({ id, data }) => {
     console.log(data);
-    const [owner,setOwner] = useState(null)
+    const [owner, setOwner] = useState(null);
     const formatDateTime = (dateTimeString) => {
         if (!dateTimeString) return;
         const date = new Date(dateTimeString);
@@ -16,9 +16,9 @@ const ShareNoteInfo = ({ id, data }) => {
 
         return `${formattedDate} ${formattedTime}`;
     };
-    useEffect(()=>{
-        const getOwner = ()=>{
-            fetch(`http://127.0.0.1:8001/api/v1/note/owner/${id}`, {
+    useEffect(() => {
+        const getOwner = () => {
+            fetch(`http://127.0.0.1:8000/api/v1/note/owner/${id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -38,10 +38,10 @@ const ShareNoteInfo = ({ id, data }) => {
                 })
                 .catch((error) => {
                     console.error('Error:', error);
-                });;
-        }
+                });
+        };
         getOwner();
-    })
+    });
     return (
         <div className="flex gap-4 m-6">
             <div
