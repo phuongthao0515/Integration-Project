@@ -38,6 +38,28 @@ const Setting = ({ isOpen, onClose }) => {
         }
     };
 
+    const handleLogout = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+            const response = await fetch('http://127.0.0.1:8000/api/v1/auth/logout', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.ok) {
+                localStorage.removeItem('access_token');
+                window.location.href = '/login';
+            } else {
+                throw new Error('Logout failed');
+            }
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
+
     const handleProfilePicChange = (e) => {
         setProfilePic(URL.createObjectURL(e.target.files[0]));
     };
@@ -77,13 +99,14 @@ const Setting = ({ isOpen, onClose }) => {
             if (!emailResponse.ok) {
                 throw new Error(`Failed to update email: ${emailResponse.statusText}`);
             }
-
+            const existingUser = JSON.parse(localStorage.getItem('user'));
+            const userData = {
+                id: existingUser.id,
+                username: name,
+                timestamp: existingUser.timestamp,
+            };
+            localStorage.setItem('user', JSON.stringify(userData));
             setShowSuccess(true);
-            // Optionally, you can delay closing the modal to allow users to see the success message
-            // setTimeout(() => {
-            //     setShowSuccess(false);
-            //     onClose();
-            // }, 2000);
         } catch (error) {
             console.error('Error updating user:', error);
         }
@@ -120,7 +143,9 @@ const Setting = ({ isOpen, onClose }) => {
                         </div>
                         <div className="account-details">
                             <button className="account-button">Profile</button>
-                            <button className="account-button">Log Out</button>
+                            <button className="account-button" onClick={handleLogout}>
+                                Log Out
+                            </button>
                         </div>
                     </div>
                     <div className="setting-main">
