@@ -16,9 +16,7 @@ const ShareNoteInfo = ({ id, data }) => {
 
         return `${formattedDate} ${formattedTime}`;
     };
-    useEffect(()=>{
-        const getOwner = ()=>{
-            fetch(`http://127.0.0.1:8000/api/v1/note/owner/${id}`, {
+
     useEffect(() => {
         const getOwner = () => {
             fetch(`http://127.0.0.1:8000/api/v1/note/owner/${id}`, {
