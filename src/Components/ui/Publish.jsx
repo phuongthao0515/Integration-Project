@@ -5,7 +5,6 @@ import { GlobalContext } from '../../context';
 import { FaCheck } from 'react-icons/fa6';
 import { LuCopy } from 'react-icons/lu';
 
-
 const Publish = ({ id }) => {
     const [toggle, setToggle] = useState(false);
     const { chosenNote, setChosenNote, setNotes } = useContext(GlobalContext);
@@ -29,7 +28,7 @@ const Publish = ({ id }) => {
     };
 
     useEffect(() => {
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/visibility/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/visibility/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -121,4 +120,3 @@ const Publish = ({ id }) => {
 };
 
 export default Publish;
-

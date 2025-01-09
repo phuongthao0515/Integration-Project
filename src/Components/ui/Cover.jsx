@@ -19,13 +19,13 @@ import { CiImageOn } from 'react-icons/ci';
 import { IoClose } from 'react-icons/io5';
 import EmojiPicker from 'emoji-picker-react';
 
-const Cover = ({ id,data }) => {
+const Cover = ({ id, data }) => {
     const { chosenNote, setChosenNote } = useContext(GlobalContext);
     const [coverImg, setCoverImg] = useState(null);
     const [icon, setIcon] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(true); // Add a loading state
-    console.log('hello cover: ',data)
+    console.log('hello cover: ', data);
     const coverImages = {
         1: cov1,
         2: cov2,
@@ -52,7 +52,7 @@ const Cover = ({ id,data }) => {
         setCoverImg(coverImages[random] || cover1);
         setIsLoading(true); // Start loading
 
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/cover/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/cover/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ const Cover = ({ id,data }) => {
         setChosenNote({ ...chosenNote, icon: data.emoji });
 
         // Send the updated icon to the backend
-        fetch(`http://127.0.0.1:8001/api/v1/note/notes/icon/${id}`, {
+        fetch(`http://127.0.0.1:8000/api/v1/note/notes/icon/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
