@@ -6,7 +6,7 @@
 The project combines front-end, back-end, and external system components to provide a comprehensive tool for individuals and teams to stay organized and achieve their goals effectively.
 
 ---
-## Team Members:
+## Team Members - Group 5:
 1. Lê Thị Phương Thảo - 2252757
 2. Huỳnh Nguyễn Ngọc Anh - 2252022
 3. Trần Hoàng Phúc - 2252647
