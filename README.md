@@ -54,7 +54,7 @@ The project follows a layered architecture with distinct components for front-en
 ---
 
 ### Steps to Run the Project
-To run the appv1.2 branch of this project, follow these steps:
+To run the planForFE branch of this project, follow these steps:
 1. Clone the repository using git clone https://github.com/your-username/integration-project-noteflow.git
 2. Navigate to the project directory with cd integration-project-noteflow.
 3. Switch to the appv1.2 branch by running git checkout appv1.2.
